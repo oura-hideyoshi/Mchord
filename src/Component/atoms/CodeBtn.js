@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button'
+import Button from '@mui/material/Button'
 
 const CodeBtn = ({ rootKey, relDeg }) => {
 
-    const dic = {
+    const absDeg2ToneNameDic = {
         1: "C",
         2: "C♯",
         3: "D",
@@ -21,7 +21,7 @@ const CodeBtn = ({ rootKey, relDeg }) => {
 
     const deg2Tone = (_rootKey, _relDeg) => {
         const absDeg = 1 + (parseInt(_rootKey) + parseInt(_relDeg) - 1) % 12; // 入力を1~12に抑える
-        return dic[absDeg];
+        return absDeg2ToneNameDic[absDeg];
     }
 
     const [rootTone, setRootTone] = useState(deg2Tone(rootKey, relDeg));

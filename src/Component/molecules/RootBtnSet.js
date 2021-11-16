@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import CodeBtn from "../atoms/CodeBtn";
 import KeySelector from '../atoms/KeySelector';
+import ToneAndDegSwitch from '../atoms/ToneAndDegSwitch';
 
 const RootBtnSet = () => {
     const initialKey = 1;
     const [rootKey, setRootKey] = useState(initialKey);
+    const [isToneName, setIsToneName] = useState(true);
 
     return (
         <div>

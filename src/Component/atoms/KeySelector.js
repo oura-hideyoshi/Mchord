@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { NativeSelect, InputLabel } from "@material-ui/core";
+import React from 'react';
+import NativeSelect from "@mui/material/NativeSelect";
+import InputLabel from "@mui/material/InputLabel"
 
 const KeySelector = ({ initialKey, rootKey, setRootKey }) => {
     // const [key, setKey] = useState(initialKey);
