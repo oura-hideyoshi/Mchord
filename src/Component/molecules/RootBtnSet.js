@@ -5,20 +5,20 @@ import KeySelector from '../atoms/KeySelector';
 
 const RootBtnSet = () => {
     const initialKey = 1;
-    const [key, setKey] = useState(initialKey);
+    const [rootKey, setRootKey] = useState(initialKey);
 
     return (
         <div>
             <div>
-                <CodeBtn initName="C"></CodeBtn>
-                <CodeBtn initName="D"></CodeBtn>
-                <CodeBtn initName="E"></CodeBtn>
-                <CodeBtn initName="F"></CodeBtn>
-                <CodeBtn initName="G"></CodeBtn>
-                <CodeBtn initName="A"></CodeBtn>
-                <CodeBtn initName="B"></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={0}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={2}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={4}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={5}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={7}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={9}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={11}></CodeBtn>
             </div>
-            <KeySelector initialKey={initialKey} key={key} setKey={setKey}></KeySelector>
+            <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey}></KeySelector>
         </div>
     )
 }

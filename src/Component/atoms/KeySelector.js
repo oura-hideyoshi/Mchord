@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { NativeSelect, InputLabel } from "@material-ui/core";
 
-const KeySelector = ({ initialKey }) => {
-    const [key, setKey] = useState(initialKey);
+const KeySelector = ({ initialKey, rootKey, setRootKey }) => {
+    // const [key, setKey] = useState(initialKey);
 
     const _onChange = (event) => {
-        setKey(event.target.value);
-        console.log(key);
+        setRootKey(event.target.value);
+        console.log(rootKey);
     };
 
     return (
         <>
             <InputLabel>Key</InputLabel>
             <NativeSelect
-                defaultValue={1}
+                defaultValue={initialKey}
                 onChange={_onChange}
             >
                 <option value={1}>C</option>
