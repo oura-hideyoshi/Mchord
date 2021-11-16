@@ -21,6 +21,7 @@ const RootBtnSet = () => {
                 <CodeBtn rootKey={rootKey} relDeg={11}></CodeBtn>
             </div>
             <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey}></KeySelector>
+            <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName}></ToneAndDegSwitch>
         </div>
     )
 }
