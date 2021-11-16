@@ -7,16 +7,17 @@ const ToneAndDegSwitch = ({ isToneName, setIsToneName }) => {
 
     const _onChane = () => {
         setIsToneName(!isToneName);
+        console.log(isToneName);
     }
 
     return (
         <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>Off</Typography>
+            <Typography>I</Typography>
             <Switch
                 checked={isToneName}
                 onChange={_onChane}
             />
-            <Typography>On</Typography>
+            <Typography>C</Typography>
         </Stack>
     )
 }

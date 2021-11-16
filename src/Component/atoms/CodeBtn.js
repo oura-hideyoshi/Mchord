@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@mui/material/Button'
 
-const CodeBtn = ({ rootKey, relDeg }) => {
+const CodeBtn = ({ rootKey, relDeg, isToneName }) => {
 
     const absDeg2ToneNameDic = {
         1: "C",
@@ -19,19 +19,34 @@ const CodeBtn = ({ rootKey, relDeg }) => {
         12: "B",
     }
 
+    const relDeg2DegNameDic = {
+        1: "I",
+        2: "I♯",
+        3: "II",
+        4: "II♯",
+        5: "III",
+        6: "IV",
+        7: "IV♯",
+        8: "V",
+        9: "V♯",
+        10: "VI",
+        11: "VI♯",
+        12: "VII",
+    }
+
     const deg2Tone = (_rootKey, _relDeg) => {
         const absDeg = 1 + (parseInt(_rootKey) + parseInt(_relDeg) - 1) % 12; // 入力を1~12に抑える
-        return absDeg2ToneNameDic[absDeg];
+        return isToneName ? absDeg2ToneNameDic[absDeg] : relDeg2DegNameDic[_relDeg + 1];
     }
 
     const [rootTone, setRootTone] = useState(deg2Tone(rootKey, relDeg));
 
     /**
-     * rootToneに変更があったとき実行される
+     * 特定の変数に変更があったとき実行される
      */
     useEffect(() => {
         setRootTone(deg2Tone(rootKey, relDeg));
-    }, [rootKey])
+    }, [rootKey, isToneName])
 
     const _onClick = () => {
         console.log("clicked : " + rootTone);

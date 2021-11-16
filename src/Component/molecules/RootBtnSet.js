@@ -12,17 +12,17 @@ const RootBtnSet = () => {
     return (
         <div>
             <div>
-                <CodeBtn rootKey={rootKey} relDeg={0}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={2}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={4}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={5}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={7}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={9}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={11}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={0} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={2} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={4} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={5} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={7} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={9} isToneName={isToneName}></CodeBtn>
+                <CodeBtn rootKey={rootKey} relDeg={11} isToneName={isToneName}></CodeBtn>
             </div>
             <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey}></KeySelector>
             <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName}></ToneAndDegSwitch>
-        </div>
+        </div >
     )
 }
 
