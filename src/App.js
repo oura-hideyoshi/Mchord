@@ -1,10 +1,10 @@
 
-import RootBtnSet from "./Component/molecules/RootBtnSet";
+import { InputChordSet } from "./Component/organisms/index";
 
 function App() {
   return (
     <>
-      <RootBtnSet></RootBtnSet>
+      <InputChordSet></InputChordSet>
     </>
   );
 }
