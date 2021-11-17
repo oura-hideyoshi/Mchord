@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import CodeBtn from "../atoms/CodeBtn";
-import KeySelector from '../atoms/KeySelector';
-import ToneAndDegSwitch from '../atoms/ToneAndDegSwitch';
+import { CodeBtn, KeySelector, ToneAndDegSwitch } from "../atoms/index";
 
 const RootBtnSet = () => {
     const initialKey = 1;
