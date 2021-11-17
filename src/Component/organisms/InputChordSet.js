@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { KeySelector, ToneAndDegSwitch, MajAndMinSwitch } from "../atoms/index";
-import { RootBtnSet, ChordBtnSet } from "../molecules/index";
+import { NoteBtnSet, ChordBtnSet } from "../molecules/index";
 import { Note, Key, Tonal, Chord } from "@tonaljs/tonal";
 
 const InputChordSet = () => {
@@ -24,7 +24,7 @@ const InputChordSet = () => {
             <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName} ></ToneAndDegSwitch>
             <MajAndMinSwitch isMajKey={isMajKey} setIsMajKey={setIsMajKey} rootKey={rootKey} setRootKey={setRootKey}></MajAndMinSwitch>
             <div>
-                <RootBtnSet rootKey={rootKey} isToneName={isToneName}></RootBtnSet>
+                <NoteBtnSet rootKey={rootKey} isToneName={isToneName}></NoteBtnSet>
             </div>
         </div >
     )
