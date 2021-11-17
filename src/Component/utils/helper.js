@@ -28,7 +28,18 @@ export const relDeg2DegNameDic = {
     12: "VII",
 }
 
+/**
+ * 
+ * @param {number} _rootKey ルートキー [1 ~ 12]
+ * @param {number} _relDeg 相対度数 [0 ~ 11]
+ * @param {boolean} _isToneName 
+ * @returns 
+ */
 export const deg2Tone = (_rootKey, _relDeg, _isToneName) => {
-    const absDeg = 1 + (parseInt(_rootKey) + parseInt(_relDeg) - 1) % 12; // 入力を1~12に抑える
+    if (_rootKey < 1 || 12 < _rootKey)
+        throw new Error(_rootKey + "must be 1 or more and 12 or less");
+    if (_rolDeg < 0 || 11 < _relDeg)
+        throw new Error(_relDeg + "must be 0 or more and 11 or less");
+    const absDeg = 1 + (parseInt(_rootKey) + parseInt(_relDeg) - 1) % 12; // 絶対度数
     return _isToneName ? absDeg2ToneNameDic[absDeg] : relDeg2DegNameDic[_relDeg + 1];
 }
