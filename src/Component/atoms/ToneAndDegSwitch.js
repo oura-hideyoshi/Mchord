@@ -7,7 +7,6 @@ const ToneAndDegSwitch = ({ isToneName, setIsToneName }) => {
 
     const _onChane = () => {
         setIsToneName(!isToneName);
-        console.log(isToneName);
     }
 
     return (
