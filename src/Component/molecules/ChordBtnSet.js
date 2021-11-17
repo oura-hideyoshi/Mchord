@@ -1,18 +1,13 @@
 import { ChordBtn } from "../atoms/index";
+import { Chord } from "@tonaljs/tonal";
 
 const ChordBtnSet = ({ isToneName, rootKey }) => {
     return (
         <>
-            {isToneName ?
-                rootKey.chords.map((e) => (
-                    <ChordBtn chord={e}></ChordBtn>
+            {
+                rootKey.chords.map((e, idx) => (
+                    <ChordBtn chord={Chord.get(e)} isToneName={isToneName} grade={rootKey.grades[idx]}></ChordBtn>
                 ))
-                : (
-                    rootKey.grades.map((e, idx) =>
-                    (
-                        <ChordBtn chord={rootKey.chords[idx].replace(rootKey.scale[idx], e)}></ChordBtn>
-                    )
-                    ))
             }
         </>
     )

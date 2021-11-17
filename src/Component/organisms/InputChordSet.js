@@ -8,6 +8,7 @@ const InputChordSet = () => {
     const [rootKey, setRootKey] = useState(initialKey);
     const [isToneName, setIsToneName] = useState(true);
     const [isMajKey, setIsMajKey] = useState(true);
+    console.log(Note.get("C"));
 
     // debug
     useEffect(() => {
