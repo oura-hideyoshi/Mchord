@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { CodeBtn, KeySelector, ToneAndDegSwitch } from "../atoms/index";
+import { NoteBtn, KeySelector, ToneAndDegSwitch } from "../atoms/index";
+import { Note, Key, Tonal } from "@tonaljs/tonal";
 
 const RootBtnSet = () => {
-    const initialKey = 1;
+    const initialKey = Key.majorKey("Cb");
     const [rootKey, setRootKey] = useState(initialKey);
     const [isToneName, setIsToneName] = useState(true);
 
     return (
         <div>
             <div>
-                <CodeBtn rootKey={rootKey} relDeg={0} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={2} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={4} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={5} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={7} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={9} isToneName={isToneName}></CodeBtn>
-                <CodeBtn rootKey={rootKey} relDeg={11} isToneName={isToneName}></CodeBtn>
+                {isToneName ?
+                    rootKey.scale.map((e) => (
+                        <NoteBtn note={e}></NoteBtn>
+                    ))
+                    :
+                    rootKey.grades.map((e) => (
+                        <NoteBtn note={e}></NoteBtn>
+                    ))
+                }
             </div>
             <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey}></KeySelector>
             <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName}></ToneAndDegSwitch>

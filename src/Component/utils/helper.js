@@ -37,9 +37,9 @@ export const relDeg2DegNameDic = {
  */
 export const deg2Tone = (_rootKey, _relDeg, _isToneName) => {
     if (_rootKey < 1 || 12 < _rootKey)
-        throw new Error(_rootKey + "must be 1 or more and 12 or less");
-    if (_rolDeg < 0 || 11 < _relDeg)
-        throw new Error(_relDeg + "must be 0 or more and 11 or less");
+        throw new Error("_rootKey" + _rootKey + " must be 1 or more and 12 or less");
+    if (_relDeg < 0 || 11 < _relDeg)
+        throw new Error("_reldeg : " + _relDeg + " must be 0 or more and 11 or less");
     const absDeg = 1 + (parseInt(_rootKey) + parseInt(_relDeg) - 1) % 12; // 絶対度数
     return _isToneName ? absDeg2ToneNameDic[absDeg] : relDeg2DegNameDic[_relDeg + 1];
 }

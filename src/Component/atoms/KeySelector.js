@@ -1,12 +1,13 @@
 import React from 'react';
 import NativeSelect from "@mui/material/NativeSelect";
-import InputLabel from "@mui/material/InputLabel"
+import InputLabel from "@mui/material/InputLabel";
+import { Note, Key, Tonal } from "@tonaljs/tonal";
+
 
 const KeySelector = ({ initialKey, rootKey, setRootKey }) => {
-    // const [key, setKey] = useState(initialKey);
 
     const _onChange = (event) => {
-        setRootKey(event.target.value);
+        setRootKey(Key.majorKey(event.target.value));
         console.log(rootKey);
     };
 
@@ -17,18 +18,18 @@ const KeySelector = ({ initialKey, rootKey, setRootKey }) => {
                 defaultValue={initialKey}
                 onChange={_onChange}
             >
-                <option value={1}>C</option>
-                <option value={2}>C♯ / D♭</option>
-                <option value={3}>D</option>
-                <option value={4}>D♯ / E♭</option>
-                <option value={5}>E</option>
-                <option value={6}>F</option>
-                <option value={7}>F♯ / G♭</option>
-                <option value={8}>G</option>
-                <option value={9}>G♯ / A♭</option>
-                <option value={10}>A</option>
-                <option value={11}>A♯ /B♭</option>
-                <option value={12}>B</option>
+                <option value={"C"}>C</option>
+                <option value={"C#"}>C♯ / D♭</option>
+                <option value={"D"}>D</option>
+                <option value={"D#"}>D♯ / E♭</option>
+                <option value={"E"}>E</option>
+                <option value={"F"}>F</option>
+                <option value={"F#"}>F♯ / G♭</option>
+                <option value={"G"}>G</option>
+                <option value={"G#"}>G♯ / A♭</option>
+                <option value={"A"}>A</option>
+                <option value={"A#"}>A♯ /B♭</option>
+                <option value={"B"}>B</option>
             </NativeSelect >
         </>
     )
