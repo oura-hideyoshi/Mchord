@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { KeySelector, ToneAndDegSwitch, MajAndMinSwitch } from "../atoms/index";
 import { RootBtnSet, ChordBtnSet } from "../molecules/index";
-import { Note, Key, Tonal } from "@tonaljs/tonal";
+import { Note, Key, Tonal, Chord } from "@tonaljs/tonal";
 
 const InputChordSet = () => {
     const initialKey = Key.majorKey("C");
     const [rootKey, setRootKey] = useState(initialKey);
     const [isToneName, setIsToneName] = useState(true);
     const [isMajKey, setIsMajKey] = useState(true);
-    // console.log(Key.minorKey("C"))
 
     // debug
     useEffect(() => {
@@ -18,7 +17,7 @@ const InputChordSet = () => {
     return (
         <div>
             <div>
-                <ChordBtnSet isToneName={isToneName} rootKey={rootKey} isMajKey={isMajKey}></ChordBtnSet>
+                <ChordBtnSet isToneName={isToneName} rootKey={rootKey}></ChordBtnSet>
             </div>
             <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey} isMajKey={isMajKey}></KeySelector>
             <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName} ></ToneAndDegSwitch>
