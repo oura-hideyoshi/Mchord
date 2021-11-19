@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Button from '@mui/material/Button';
+import { ButtonBase } from '@mui/material';
 
 const ChordBtn = ({ chord, isToneName, grade }) => {
 
@@ -13,14 +13,14 @@ const ChordBtn = ({ chord, isToneName, grade }) => {
 
     return (
         <>
-            <Button variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+            <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
                 {
                     isToneName ?
                         chord.symbol
                         :
                         chord.symbol.replace(chord.tonic, grade)
                 }
-            </Button>
+            </ButtonBase>
         </>
     )
 

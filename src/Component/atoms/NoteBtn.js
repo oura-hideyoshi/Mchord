@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Button from '@mui/material/Button';
+import { ButtonBase } from '@mui/material';
 
 const NoteBtn = ({ note, isToneName, grade }) => {
 
@@ -13,13 +13,13 @@ const NoteBtn = ({ note, isToneName, grade }) => {
 
     return (
         <>
-            <Button variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+            <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
                 {isToneName ?
                     note.name
                     :
                     grade
                 }
-            </Button>
+            </ButtonBase>
         </>
     )
 
