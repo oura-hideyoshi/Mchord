@@ -6,16 +6,17 @@ import { Progression } from "@tonaljs/tonal";
  * コードを表示するボタン
  * @param {{rootKey:,chord:,isToneName:boolean}}
  */
-const ChordBtn = ({ rootKey, chord, isToneName, changeChord }) => {
+const ChordBtn = ({ rootKey, chord, isToneName, changeChord, setEntryChord }) => {
 
     const _onClick = () => {
-        console.log("clicked > " + chord.symbol, Progression.toRomanNumerals(rootKey.tonic, [chord.symbol])[0], chord);
         if(changeChord!=null)
             changeChord(chord);
     }
 
     const _onDblClick = () => {
-        console.log("double clicked > " + chord.symbol, chord);
+        if(setEntryChord!=null){
+            setEntryChord(chord);
+        }
     }
 
     return (
