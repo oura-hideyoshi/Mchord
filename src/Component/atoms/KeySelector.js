@@ -8,7 +8,7 @@ import { Key } from "@tonaljs/tonal";
  * @param {*} param0 
  * @returns 
  */
-const KeySelector = ({ initialKey, setRootKey, isMajKey }) => {
+const KeySelector = ({ rootKey, setRootKey, isMajKey }) => {
 
     const _onChange = (event) => {
         isMajKey ?
@@ -21,7 +21,7 @@ const KeySelector = ({ initialKey, setRootKey, isMajKey }) => {
         <>
             <InputLabel>Key</InputLabel>
             <NativeSelect
-                defaultValue={initialKey}
+                defaultValue={rootKey}
                 onChange={_onChange}
             >
                 <option value={"C"}>C</option>

@@ -6,10 +6,13 @@ import { Progression } from "@tonaljs/tonal";
  * @param {*} param0 
  * @returns 
  */
-const NoteBtn = ({ rootKey, note, isToneName }) => {
+const NoteBtn = ({ rootKey, note, isToneName, changeTonic }) => {
 
     const _onClick = () => {
         console.log("clicked > " + note.name, note);
+        if (changeTonic != null) {
+            changeTonic(note);
+        }
     }
 
     const _onDblClick = () => {

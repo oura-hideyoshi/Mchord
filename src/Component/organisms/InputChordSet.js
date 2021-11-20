@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { KeySelector, ToneAndDegSwitch, MajAndMinSwitch, ChordBtn } from "../atoms/index";
 import { NoteBtnSet, ChordBtnSet, ChordHoldingBtn } from "../molecules/index";
 import { Note, Key, Chord } from "@tonaljs/tonal";
+import { Stack } from '@mui/material';
 
 const InputChordSet = () => {
     const initialKey = Key.majorKey("C");
@@ -20,13 +21,13 @@ const InputChordSet = () => {
         <div>
             <ChordBtn rootKey={rootKey} chord={holdingChord} isToneName={isToneName}></ChordBtn>
             <div>
-                <ChordBtnSet rootKey={rootKey} isToneName={isToneName} ></ChordBtnSet>
+                <ChordBtnSet rootKey={rootKey} isToneName={isToneName} setHoldingChord={setHoldingChord}></ChordBtnSet>
             </div>
-            <KeySelector initialKey={initialKey} rootKey={rootKey} setRootKey={setRootKey} isMajKey={isMajKey}></KeySelector>
-            <ToneAndDegSwitch isToneName={isToneName} setIsToneName={setIsToneName} rootKey={rootKey} ></ToneAndDegSwitch>
-            <MajAndMinSwitch isMajKey={isMajKey} setIsMajKey={setIsMajKey} rootKey={rootKey} setRootKey={setRootKey}></MajAndMinSwitch>
+            <KeySelector rootKey={rootKey} rootKey={initialKey} setRootKey={setRootKey} isMajKey={isMajKey}></KeySelector>
+            <MajAndMinSwitch rootKey={rootKey} isMajKey={isMajKey} setIsMajKey={setIsMajKey} setRootKey={setRootKey}></MajAndMinSwitch>
+            <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
             <div>
-                <NoteBtnSet rootKey={rootKey} isToneName={isToneName}></NoteBtnSet>
+                <NoteBtnSet rootKey={rootKey} isToneName={isToneName} holdingChord={holdingChord} setHoldingChord={setHoldingChord}></NoteBtnSet>
             </div>
         </div >
     )
