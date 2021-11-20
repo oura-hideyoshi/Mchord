@@ -6,7 +6,6 @@ function App() {
 
   const [chordList, setChordList] = useState([]);
   const [entryChord, setEntryChord] = useState(null)
-  console.log(chordList)
 
   // inputChordSetからentryChordにChordが渡されたのを検知し、どうにかする
   useEffect(() => {

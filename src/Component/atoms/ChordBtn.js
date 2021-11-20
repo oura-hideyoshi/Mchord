@@ -9,26 +9,31 @@ import { Progression } from "@tonaljs/tonal";
 const ChordBtn = ({ rootKey, chord, isToneName, changeChord, setEntryChord }) => {
 
     const _onClick = () => {
-        if(changeChord!=null)
+        if (changeChord != null)
             changeChord(chord);
     }
 
     const _onDblClick = () => {
-        if(setEntryChord!=null){
+        if (setEntryChord != null) {
             setEntryChord(chord);
         }
     }
 
     return (
         <>
-            <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
-                {
-                    isToneName ?
+            {!chord.empty ?
+                <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+                    {isToneName ?
                         chord.symbol
                         :
                         Progression.toRomanNumerals(rootKey.tonic, [chord.symbol])[0]
-                }
-            </ButtonBase>
+                    }
+                </ButtonBase>
+                :
+                <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+                    ?
+                </ButtonBase>
+            }
         </>
     )
 

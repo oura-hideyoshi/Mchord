@@ -1,11 +1,19 @@
 import { ButtonBase } from '@mui/material';
 import { useState } from 'react';
+import { Chord, Interval } from "@tonaljs/tonal";
 
 const DisplayChord = ({ chordList }) => {
+
+    const showLog = () => {
+        console.log(chordList);
+    }
+
+
     return (
         <>
-            {chordList.map((chord) => {
-                return(<ButtonBase>{chord.symbol}</ButtonBase>)
+            <button onClick={showLog}>LOG</button>
+            {chordList.map((chord, idx) => {
+                return (<ButtonBase key={idx}>{chord.symbol}</ButtonBase>)
             })}
         </>
     )
