@@ -8,7 +8,7 @@ import { Key } from "@tonaljs/tonal";
  * @param {*} param0 
  * @returns 
  */
-const KeySelector = ({ rootKey, setRootKey, isMajKey }) => {
+const TonicSelector = ({ rootKey, setRootKey, isMajKey }) => {
 
     const _onChange = (event) => {
         isMajKey ?
@@ -41,4 +41,4 @@ const KeySelector = ({ rootKey, setRootKey, isMajKey }) => {
     )
 }
 
-export default KeySelector;
+export default TonicSelector;

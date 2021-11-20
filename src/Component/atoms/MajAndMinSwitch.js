@@ -10,23 +10,19 @@ import { Key } from "@tonaljs/tonal";
  */
 const MajAndMinSwitch = ({ isMajKey, setIsMajKey, rootKey, setRootKey }) => {
 
-    const _onChane = (event) => {
-        setIsMajKey(event.target.checked);
-        event.target.checked ?
+    const _onClick = (event) => {
+        const oldIsMajKey = isMajKey;
+        setIsMajKey(!oldIsMajKey);
+        !oldIsMajKey ?
             setRootKey(Key.majorKey(rootKey.tonic))
             :
             setRootKey(Key.minorKey(rootKey.tonic).natural)
     }
 
     return (
-        <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>Min</Typography>
-            <Switch
-                checked={isMajKey}
-                onChange={_onChane}
-            />
-            <Typography>Maj</Typography>
-        </Stack>
+        <button onClick={_onClick}>
+            {isMajKey ? "maj" : "min"}
+        </button>
     )
 }
 
