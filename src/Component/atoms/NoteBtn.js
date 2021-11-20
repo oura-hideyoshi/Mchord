@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
 import { ButtonBase } from '@mui/material';
+import { Progression } from "@tonaljs/tonal";
 
 /**
  * 単音を表示するボタン
  * @param {*} param0 
  * @returns 
  */
-const NoteBtn = ({ note, isToneName, grade }) => {
+const NoteBtn = ({ rootKey, note, isToneName }) => {
 
     const _onClick = () => {
         console.log("clicked > " + note.name, note);
@@ -22,7 +22,7 @@ const NoteBtn = ({ note, isToneName, grade }) => {
                 {isToneName ?
                     note.name
                     :
-                    grade
+                    Progression.toRomanNumerals(rootKey.tonic, [note.name])[0]
                 }
             </ButtonBase>
         </>

@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ButtonBase } from '@mui/material';
+import { Progression } from "@tonaljs/tonal";
 
 /**
  * コードを表示するボタン
- * @param {*}} param0 
- * @returns 
+ * @param {{rootKey:,chord:,isToneName:boolean}}
  */
-const ChordBtn = ({ chord, isToneName, grade }) => {
+const ChordBtn = ({ rootKey, chord, isToneName }) => {
 
     const _onClick = () => {
-        console.log("clicked > " + chord.symbol + grade, chord);
+        console.log("clicked > " + chord.symbol, Progression.toRomanNumerals(rootKey.tonic, [chord.symbol])[0], chord);
     }
 
     const _onDblClick = () => {
@@ -23,7 +23,7 @@ const ChordBtn = ({ chord, isToneName, grade }) => {
                     isToneName ?
                         chord.symbol
                         :
-                        chord.symbol.replace(chord.tonic, grade)
+                        Progression.toRomanNumerals(rootKey.tonic, [chord.symbol])[0]
                 }
             </ButtonBase>
         </>

@@ -5,8 +5,8 @@ const ChordBtnSet = ({ isToneName, rootKey }) => {
     return (
         <>
             {
-                rootKey.chords.map((e, idx) => (
-                    <ChordBtn chord={Chord.get(e)} isToneName={isToneName} grade={rootKey.grades[idx]}></ChordBtn>
+                rootKey.chords.map((e) => (
+                    <ChordBtn rootKey={rootKey} chord={Chord.get(e)} isToneName={isToneName}></ChordBtn>
                 ))
             }
         </>

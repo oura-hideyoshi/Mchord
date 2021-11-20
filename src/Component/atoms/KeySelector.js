@@ -1,7 +1,7 @@
 import React from 'react';
 import NativeSelect from "@mui/material/NativeSelect";
 import InputLabel from "@mui/material/InputLabel";
-import { Note, Key, Tonal } from "@tonaljs/tonal";
+import { Key } from "@tonaljs/tonal";
 
 /**
  * キーを選択するボタン
