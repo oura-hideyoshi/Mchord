@@ -3,7 +3,11 @@ import NativeSelect from "@mui/material/NativeSelect";
 import InputLabel from "@mui/material/InputLabel";
 import { Note, Key, Tonal } from "@tonaljs/tonal";
 
-
+/**
+ * キーを選択するボタン
+ * @param {*} param0 
+ * @returns 
+ */
 const KeySelector = ({ initialKey, setRootKey, isMajKey }) => {
 
     const _onChange = (event) => {

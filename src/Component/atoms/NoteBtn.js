@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { ButtonBase } from '@mui/material';
 
+/**
+ * 単音を表示するボタン
+ * @param {*} param0 
+ * @returns 
+ */
 const NoteBtn = ({ note, isToneName, grade }) => {
 
     const _onClick = () => {

@@ -3,7 +3,7 @@ import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-const ToneAndDegSwitch = ({ isToneName, setIsToneName }) => {
+const ToneAndDegSwitch = ({ isToneName, setIsToneName, rootKey }) => {
 
     const _onChane = () => {
         setIsToneName(!isToneName);
@@ -16,7 +16,7 @@ const ToneAndDegSwitch = ({ isToneName, setIsToneName }) => {
                 checked={isToneName}
                 onChange={_onChane}
             />
-            <Typography>C</Typography>
+            <Typography>{rootKey.tonic}</Typography>
         </Stack>
     )
 }

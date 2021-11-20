@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { ButtonBase } from '@mui/material';
 
+/**
+ * コードを表示するボタン
+ * @param {*}} param0 
+ * @returns 
+ */
 const ChordBtn = ({ chord, isToneName, grade }) => {
 
     const _onClick = () => {
