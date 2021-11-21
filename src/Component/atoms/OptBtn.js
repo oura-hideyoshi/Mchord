@@ -71,7 +71,7 @@ function OptBtn({ opt, holdingChord, setHoldingChord }) {
 
     return (
         <FormGroup>
-            <FormControlLabel disabled={!isEnable} control={<Checkbox checked={isChecked} onChange={_onChange} />} label={opt} />
+            <FormControlLabel disabled={!isEnable} control={<Checkbox checked={isChecked} onChange={_onChange} />} label={opt} labelPlacement="top" />
         </FormGroup>
     )
 }

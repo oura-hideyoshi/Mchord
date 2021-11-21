@@ -8,10 +8,19 @@ const DisplayChord = ({ chordList }) => {
         console.log(chordList);
     }
 
+    const toText = () => {
+        let text = "";
+        for (var idx in chordList){
+            text += chordList[idx].symbol + " | ";
+        }
+        console.log(text);
+    }
+
 
     return (
         <>
             <button onClick={showLog}>LOG</button>
+            <button onClick={toText}>TXT</button>
             {chordList.map((chord, idx) => {
                 return (<ButtonBase key={idx}>{chord.symbol}</ButtonBase>)
             })}

@@ -30,7 +30,7 @@ const ChordBtn = ({ rootKey, chord, isToneName, changeChord, setEntryChord }) =>
                     }
                 </ButtonBase>
                 :
-                <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+                <ButtonBase variant="contained" color="primary" onClick={_onClick}>
                     ?
                 </ButtonBase>
             }

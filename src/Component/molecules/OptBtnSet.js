@@ -4,10 +4,9 @@ import { Note, Chord, ChordType } from "@tonaljs/tonal";
 
 function OptBtnSet({ holdingChord, setHoldingChord }) {
 
-    const optList = ["2m", "2M", "3m", "3M", "4p", "5d", "5P", "6m", "6M", "7m", "7M", "9m", "9M", "9A", "11m", "11M", "13M"];
+    const optList = ["2M", "3m", "3M", "4P", "5d", "5P", "6m", "6M", "7m", "7M", "9m", "9M", "9A", "11m", "11M", "13M"];
 
     const showLog = () => {
-        console.log(holdingChord);
     }
 
     return (
@@ -15,7 +14,7 @@ function OptBtnSet({ holdingChord, setHoldingChord }) {
             <button onClick={showLog}>
                 log
             </button>
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" spacing={0} alignItems="center">
                 {optList.map((opt, idx) => <OptBtn opt={opt} holdingChord={holdingChord} setHoldingChord={setHoldingChord} key={idx}></OptBtn>)}
             </Stack>
         </div>
