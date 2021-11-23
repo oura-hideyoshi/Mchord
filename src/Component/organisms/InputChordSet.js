@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from 'react';
 import { ToneAndDegSwitch, ChordBtn, KeySelector } from "../atoms/index";
 import { NoteBtnSet, ChordBtnSet, OptBtnSet } from "../molecules/index";
 import { Key, Note, Chord } from "@tonaljs/tonal";
+import { Grid } from '@mui/material';
 
 export const HoldingChordContext = createContext();
 
@@ -22,7 +23,6 @@ const InputChordSet = ({ setEntryChord }) => {
         isToneName: isToneName,
         setIsToneName: setIsToneName
     };
-    const opts = ["2M", "3m", "3M", "4P", "5d", "5P","5A", "6m", "6M", "7m", "7M", "9m", "9M", "9A", "11P", "11A", "13m", "13M"];
 
     // debug
     useEffect(() => {
@@ -38,16 +38,20 @@ const InputChordSet = ({ setEntryChord }) => {
     return (
         <div>
             <HoldingChordContext.Provider value={inputChordParam} >
-                <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
-                <OptBtnSet opts={opts}></OptBtnSet>
-                <div>
-                    <ChordBtnSet chords={rootKey.chords}></ChordBtnSet>
-                </div>
-                <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
-                <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
-                <div>
-                    <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
-                </div>
+                <Grid container spacing={1}>
+                    <Grid item xs={8} md={3} lg={4}>
+                        <ChordBtnSet chords={rootKey.chords}></ChordBtnSet>
+                    </Grid>
+                    <Grid item xs={8} md={5} lg={4}>
+                        <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
+                        <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
+                        <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
+                        <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
+                    </Grid>
+                    <Grid item xs={8} md={4} lg={4}>
+                        <OptBtnSet ></OptBtnSet>
+                    </Grid>
+                </Grid>
             </HoldingChordContext.Provider>
         </div >
     )
