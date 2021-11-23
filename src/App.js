@@ -1,24 +1,22 @@
 
-import { InputChordSet, DisplayChord } from "./Component/organisms/index";
-import { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home, Test } from "./Component/pages";
+
 
 function App() {
 
-  const [chordList, setChordList] = useState([]);
-  const [entryChord, setEntryChord] = useState(null)
-
-  // inputChordSetからentryChordにChordが渡されたのを検知し、どうにかする
-  useEffect(() => {
-    if (entryChord != null) {
-      setChordList(chordList.concat(entryChord));
-      setEntryChord(null);
-    }
-  }, [entryChord])
-
   return (
     <>
-      <DisplayChord chordList={chordList}></DisplayChord>
-      <InputChordSet setEntryChord={setEntryChord}></InputChordSet>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}>
+
+          </Route>
+          <Route path="/test" element={<Test />}>
+
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

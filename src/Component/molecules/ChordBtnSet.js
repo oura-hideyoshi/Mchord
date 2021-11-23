@@ -1,17 +1,27 @@
+import { useContext } from "react";
 import { ChordBtn } from "../atoms/index";
 import { Chord } from "@tonaljs/tonal";
+import { HoldingChordContext } from "../organisms/InputChordSet";
 
-const ChordBtnSet = ({ isToneName, rootKey, setHoldingChord, setEntryChord }) => {
+/**
+ * @abstract コードのボタンの集合体. ターゲットのコードを変更する. rootKeyの
+ * @param {{chords:Array<string>}} args 
+ * @returns inputChordParam
+ */
+const ChordBtnSet = ({ chords }) => {
+
+    const inputChordParam = useContext(HoldingChordContext);
 
     const changeChord = (chord) => {
-        setHoldingChord({ intervals: chord.intervals, tonic: chord.tonic });
+        inputChordParam.setHoldingChord({ intervals: chord.intervals, tonic: chord.tonic });
     }
     return (
         <>
             {
-                rootKey.chords.map((e, idx) => (
-                    <ChordBtn rootKey={rootKey} chord={Chord.get(e)} isToneName={isToneName} changeChord={changeChord} setEntryChord={setEntryChord} key={idx}></ChordBtn>
-                ))
+                chords.map((e, idx) => {
+                    const chord = Chord.get(e);
+                    return (<ChordBtn rootKey={inputChordParam.rootKey} chord={chord} isToneName={inputChordParam.isToneName} onClick={(e) => changeChord(chord)} key={idx}></ChordBtn>)
+                })
             }
         </>
     )
