@@ -1,4 +1,4 @@
-import { TonicSelector, MajAndMinSwitch } from "../atoms/index";
+import { TonicSelector, MajAndMinSwitch } from "./index";
 import { Stack } from "@mui/material";
 
 function KeySelector({ rootKey, isMajKey, setRootKey, setIsMajKey }) {

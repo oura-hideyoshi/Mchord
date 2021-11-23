@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
-import { ToneAndDegSwitch, ChordBtn } from "../atoms/index";
-import { NoteBtnSet, ChordBtnSet, KeySelector, OptBtnSet } from "../molecules/index";
+import { ToneAndDegSwitch, ChordBtn, KeySelector } from "../atoms/index";
+import { NoteBtnSet, ChordBtnSet, OptBtnSet } from "../molecules/index";
 import { Key, Note, Chord } from "@tonaljs/tonal";
 
 export const HoldingChordContext = createContext();
@@ -22,6 +22,7 @@ const InputChordSet = ({ setEntryChord }) => {
         isToneName: isToneName,
         setIsToneName: setIsToneName
     };
+    const opts = ["2M", "3m", "3M", "4P", "5d", "5P","5A", "6m", "6M", "7m", "7M", "9m", "9M", "9A", "11P", "11A", "13m", "13M"];
 
     // debug
     useEffect(() => {
@@ -38,14 +39,14 @@ const InputChordSet = ({ setEntryChord }) => {
         <div>
             <HoldingChordContext.Provider value={inputChordParam} >
                 <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
-                <OptBtnSet holdingChord={holdingChord} setHoldingChord={setHoldingChord}></OptBtnSet>
+                <OptBtnSet opts={opts}></OptBtnSet>
                 <div>
                     <ChordBtnSet chords={rootKey.chords}></ChordBtnSet>
                 </div>
                 <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
                 <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
                 <div>
-                    <NoteBtnSet rootKey={rootKey} isToneName={isToneName} holdingChord={holdingChord} setHoldingChord={setHoldingChord} setEntryChord={setEntryChord}></NoteBtnSet>
+                    <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
                 </div>
             </HoldingChordContext.Provider>
         </div >

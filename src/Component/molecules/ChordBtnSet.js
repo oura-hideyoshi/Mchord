@@ -20,7 +20,7 @@ const ChordBtnSet = ({ chords }) => {
             {
                 chords.map((e, idx) => {
                     const chord = Chord.get(e);
-                    return (<ChordBtn rootKey={inputChordParam.rootKey} chord={chord} isToneName={inputChordParam.isToneName} onClick={(e) => changeChord(chord)} key={idx}></ChordBtn>)
+                    return (<ChordBtn rootKey={inputChordParam.rootKey} chord={chord} isToneName={inputChordParam.isToneName} onClick={() => changeChord(chord)} key={idx}></ChordBtn>)
                 })
             }
         </>

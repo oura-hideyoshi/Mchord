@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { OptBtn } from "../atoms"
 import { Stack } from "@mui/material";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";
+import { HoldingChordContext } from "../organisms/InputChordSet";
 
-function OptBtnSet({ holdingChord, setHoldingChord }) {
+/**
+ * 
+ * @param {{opts:Array<String>}} args 
+ * @returns 
+ */
+function OptBtnSet({ opts }) {
 
-    const optList = ["2M", "3m", "3M", "4P", "5d", "5P","5A", "6m", "6M", "7m", "7M", "9m", "9M", "9A", "11P", "11A", "13m", "13M"];
+    const inputChordParam = useContext(HoldingChordContext);
 
     const showLog = () => {
         console.log(ChordType.all().map(get => get.intervals));
@@ -16,7 +23,7 @@ function OptBtnSet({ holdingChord, setHoldingChord }) {
                 log
             </button>
             <Stack direction="row" spacing={0} alignItems="center">
-                {optList.map((opt, idx) => <OptBtn opt={opt} holdingChord={holdingChord} setHoldingChord={setHoldingChord} key={idx}></OptBtn>)}
+                {opts.map((opt, idx) => <OptBtn opt={opt} holdingChord={inputChordParam.holdingChord} setHoldingChord={inputChordParam.setHoldingChord} key={idx}></OptBtn>)}
             </Stack>
         </div>
     )
