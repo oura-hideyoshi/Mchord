@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import { ToneAndDegSwitch, ChordBtn, KeySelector } from "../atoms/index";
-import { NoteBtnSet, ChordBtnSet, OptBtnSet } from "../molecules/index";
+import { NoteBtnSet, ChordBtnSet, IntervalBtnSet } from "../molecules/index";
 import { Key, Note, Chord } from "@tonaljs/tonal";
 import { Grid } from '@mui/material';
 
@@ -12,7 +12,7 @@ const InputChordSet = ({ setEntryChord }) => {
     const [isToneName, setIsToneName] = useState(true);
     const [isMajKey, setIsMajKey] = useState(true);
     const initialChord = Chord.get(initialKey.chords[0]);
-    const [holdingChord, setHoldingChord] = useState({ intervals: initialChord.intervals, tonic: initialKey.tonic })
+    const [holdingChord, setHoldingChord] = useState({ intervals: initialChord.intervals, tonic: initialKey.tonic, root:"" })
     const inputChordParam = {
         holdingChord: holdingChord,
         setHoldingChord: setHoldingChord,
@@ -21,7 +21,8 @@ const InputChordSet = ({ setEntryChord }) => {
         isMajKey: isMajKey,
         setIsMajKey: setIsMajKey,
         isToneName: isToneName,
-        setIsToneName: setIsToneName
+        setIsToneName: setIsToneName,
+        setEntryChord: setEntryChord
     };
 
     // debug
@@ -43,7 +44,12 @@ const InputChordSet = ({ setEntryChord }) => {
                         <ChordBtnSet chords={rootKey.chords}></ChordBtnSet>
                     </Grid>
                     <Grid item xs={8} md={5} lg={5}>
-                        <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
+                        <ChordBtn
+                            rootKey={rootKey}
+                            chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)}
+                            isToneName={isToneName}
+                            onClick={() => setEntryChord(detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic))}
+                        ></ChordBtn>
                         <button onClick={() => console.log(holdingChord)}>log</button>
                         <Grid continer>
                             <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
@@ -52,7 +58,7 @@ const InputChordSet = ({ setEntryChord }) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={8} md={4} lg={4}>
-                        <OptBtnSet ></OptBtnSet>
+                        <IntervalBtnSet ></IntervalBtnSet>
                     </Grid>
                 </Grid>
             </HoldingChordContext.Provider>

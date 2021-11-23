@@ -33,6 +33,9 @@ function Home() {
 
     return (
         <>
+            <div>
+                <button onClick={() => console.clear()}>Clear</button>
+            </div>
             <Global
                 styles={{
                     ".MuiDrawer-root > .MuiPaper-root": {
