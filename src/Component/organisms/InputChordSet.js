@@ -45,9 +45,11 @@ const InputChordSet = ({ setEntryChord }) => {
                     <Grid item xs={8} md={5} lg={5}>
                         <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
                         <button onClick={() => console.log(holdingChord)}>log</button>
-                        <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
-                        <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
-                        <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
+                        <Grid continer>
+                            <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
+                            <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
+                            <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
+                        </Grid>
                     </Grid>
                     <Grid item xs={8} md={4} lg={4}>
                         <OptBtnSet ></OptBtnSet>

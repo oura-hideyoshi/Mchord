@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NoteBtn } from "../atoms/index";
 import { Note, Chord } from "@tonaljs/tonal";
 import { HoldingChordContext } from "../organisms/InputChordSet";
+import { Grid } from "@mui/material";
 
 /**
  * 
@@ -24,11 +25,22 @@ const RootBtnSet = ({ tones }) => {
 
     return (
         <>
-            {
-                tones.map((e, idx) => (
-                    <NoteBtn rootKey={inputChordParam.rootKey} note={Note.get(e)} isToneName={inputChordParam.isToneName} onClick={changeTonic} onDoubleClick={setEntryChordFromNote} key={idx}></NoteBtn>
-                ))
-            }
+            <Grid container>
+                {
+                    tones.map((e, idx) => (
+                        <Grid item>
+                            <NoteBtn
+                                rootKey={inputChordParam.rootKey}
+                                note={Note.get(e)}
+                                isToneName={inputChordParam.isToneName}
+                                onClick={changeTonic}
+                                onDoubleClick={setEntryChordFromNote}
+                                key={idx}>
+                            </NoteBtn>
+                        </Grid>
+                    ))
+                }
+            </Grid>
         </>
     )
 }

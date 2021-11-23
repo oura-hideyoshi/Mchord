@@ -19,7 +19,7 @@ function OptBtnSet({ }) {
         console.log(ChordType.all().map(get => get.intervals));
     }
 
-    const row1 = opts.slice(0, 5);
+    const row1 = opts.slice(1, 5);
     const row2 = opts.slice(5, 12);
     const row3 = opts.slice(12, 19);
 
