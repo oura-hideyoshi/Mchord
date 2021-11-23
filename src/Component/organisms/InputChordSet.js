@@ -39,11 +39,12 @@ const InputChordSet = ({ setEntryChord }) => {
         <div>
             <HoldingChordContext.Provider value={inputChordParam} >
                 <Grid container spacing={1}>
-                    <Grid item xs={8} md={3} lg={4}>
+                    <Grid item xs={8} md={3} lg={3}>
                         <ChordBtnSet chords={rootKey.chords}></ChordBtnSet>
                     </Grid>
-                    <Grid item xs={8} md={5} lg={4}>
+                    <Grid item xs={8} md={5} lg={5}>
                         <ChordBtn rootKey={rootKey} chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)} isToneName={isToneName} setEntryChord={setEntryChord}></ChordBtn>
+                        <button onClick={() => console.log(holdingChord)}>log</button>
                         <KeySelector rootKey={rootKey} isMajKey={isMajKey} setRootKey={setRootKey} setIsMajKey={setIsMajKey}></KeySelector>
                         <ToneAndDegSwitch rootKey={rootKey} isToneName={isToneName} setIsToneName={setIsToneName}  ></ToneAndDegSwitch>
                         <NoteBtnSet tones={rootKey.scale}></NoteBtnSet>
