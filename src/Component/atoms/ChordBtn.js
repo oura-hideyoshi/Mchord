@@ -3,26 +3,15 @@ import { ButtonBase } from '@mui/material';
 import { Progression } from "@tonaljs/tonal";
 
 /**
- * コードを表示するボタン
- * @param {{rootKey:,chord:,isToneName:boolean}}
+ * @abstract コードを表示するボタン
+ * @param {{ rootKey:,chord:,isToneName:boolean, onClick:Function, onDoubleClick:Function}} args
  */
-const ChordBtn = ({ rootKey, chord, isToneName, changeChord, setEntryChord }) => {
-
-    const _onClick = () => {
-        if (changeChord != null)
-            changeChord(chord);
-    }
-
-    const _onDblClick = () => {
-        if (setEntryChord != null) {
-            setEntryChord(chord);
-        }
-    }
+const ChordBtn = ({ rootKey, chord, isToneName, onClick, onDoubleClick }) => {
 
     return (
         <>
             {!chord.empty ?
-                <ButtonBase variant="contained" color="primary" onClick={_onClick} onDoubleClick={_onDblClick}>
+                <ButtonBase variant="contained" color="primary" onClick={onClick} onDoubleClick={onDoubleClick}>
                     {isToneName ?
                         chord.symbol
                         :
@@ -30,7 +19,7 @@ const ChordBtn = ({ rootKey, chord, isToneName, changeChord, setEntryChord }) =>
                     }
                 </ButtonBase>
                 :
-                <ButtonBase variant="contained" color="primary" onClick={_onClick}>
+                <ButtonBase variant="contained" color="primary" onClick={onClick} onDoubleClick={onDoubleClick}>
                     ?
                 </ButtonBase>
             }

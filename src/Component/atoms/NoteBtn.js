@@ -6,16 +6,16 @@ import { Progression } from "@tonaljs/tonal";
  * @param {*} param0 
  * @returns 
  */
-const NoteBtn = ({ rootKey, note, isToneName, changeTonic, setEntryChordFromNote }) => {
+const NoteBtn = ({ rootKey, note, isToneName, onClick, onDoubleClick }) => {
 
     const _onClick = () => {
-        if (changeTonic != null) {
-            changeTonic(note);
+        if (onClick != null) {
+            onClick(note);
         }
     }
 
     const _onDblClick = () => {
-        setEntryChordFromNote(note);
+        onDoubleClick(note);
     }
 
     return (

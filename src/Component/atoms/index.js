@@ -4,3 +4,4 @@ export { default as TonicSelector } from "./TonicSelector";
 export { default as ToneAndDegSwitch } from "./ToneAndDegSwitch";
 export { default as MajAndMinSwitch } from "./MajAndMinSwitch";
 export { default as OptBtn } from "./OptBtn";
+export { default as KeySelector } from "./KeySelector";
