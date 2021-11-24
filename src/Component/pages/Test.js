@@ -13,6 +13,7 @@ function Test() {
     const chordDetectName = useRef("");
     const keyMajorName = useRef("");
     const keyMinorName = useRef("");
+    const chordTypeName = useRef("");
 
     return (
         <TableContainer component={Paper}>
@@ -93,6 +94,18 @@ function Test() {
                         </TableCell>
                         <TableCell>
                             <Button onClick={() => console.log(ChordType.all())}>log</Button>
+                        </TableCell>
+                    </TableRow>
+                    {/* chordType.get() */}
+                    <TableRow>
+                        <TableCell>
+                            <Typography variant={"h6"}>ChordType.get()</Typography >
+                        </TableCell>
+                        <TableCell>
+                            <input ref={chordTypeName} />
+                        </TableCell>
+                        <TableCell>
+                            <Button onClick={() => console.log(ChordType.get(chordTypeName.current.value))}>log</Button>
                         </TableCell>
                     </TableRow>
                 </Table>
