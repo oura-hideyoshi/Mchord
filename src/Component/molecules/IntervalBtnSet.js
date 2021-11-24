@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { OptBtn } from "../atoms"
+import { IntervalBtn } from "../atoms"
 import { Stack, Grid } from "@mui/material";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";
 import { HoldingChordContext } from "../organisms/InputChordSet";
@@ -34,13 +34,13 @@ function IntervalBtnSet({ }) {
                     {row1.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
@@ -49,13 +49,13 @@ function IntervalBtnSet({ }) {
                     {row2.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
@@ -64,13 +64,13 @@ function IntervalBtnSet({ }) {
                     {row3.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
