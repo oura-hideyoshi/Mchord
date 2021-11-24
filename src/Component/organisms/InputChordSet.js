@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { ToneAndDegSwitch, ChordBtn, KeySelector } from "../atoms/index";
 import { NoteBtnSet, ChordBtnSet, IntervalBtnSet } from "../molecules/index";
 import { Key, Note, Chord } from "@tonaljs/tonal";
@@ -12,7 +12,7 @@ const InputChordSet = ({ setEntryChord }) => {
     const [isToneName, setIsToneName] = useState(true);
     const [isMajKey, setIsMajKey] = useState(true);
     const initialChord = Chord.get(initialKey.chords[0]);
-    const [holdingChord, setHoldingChord] = useState({ intervals: initialChord.intervals, tonic: initialKey.tonic, root:"" })
+    const [holdingChord, setHoldingChord] = useState({ intervals: initialChord.intervals, tonic: initialKey.tonic, root: "" })
     const inputChordParam = {
         holdingChord: holdingChord,
         setHoldingChord: setHoldingChord,

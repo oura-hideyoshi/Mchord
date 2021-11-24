@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonBase } from '@mui/material';
 import { useState } from 'react';
 import { Chord, Interval } from "@tonaljs/tonal";
@@ -10,7 +11,7 @@ const DisplayChord = ({ chordList }) => {
 
     const toText = () => {
         let text = "";
-        for (var idx in chordList){
+        for (var idx in chordList) {
             text += chordList[idx].symbol + " | ";
         }
         console.log(text);

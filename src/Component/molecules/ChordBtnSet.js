@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ChordBtn } from "../atoms/index";
 import { Chord } from "@tonaljs/tonal";
 import { HoldingChordContext } from "../organisms/InputChordSet";
@@ -24,7 +24,7 @@ const ChordBtnSet = ({ chords }) => {
         <>
             <Grid container>
                 {
-                    chords.slice(0,4).map((e, idx) => {
+                    chords.slice(0, 4).map((e, idx) => {
                         const chord = Chord.get(e);
                         return (
                             <Grid item>
@@ -42,7 +42,7 @@ const ChordBtnSet = ({ chords }) => {
             </Grid>
             <Grid container>
                 {
-                    chords.slice(4,8).map((e, idx) => {
+                    chords.slice(4, 8).map((e, idx) => {
                         const chord = Chord.get(e);
                         return (
                             <Grid item>

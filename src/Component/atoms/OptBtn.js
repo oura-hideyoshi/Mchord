@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import { padding } from "@mui/system";
@@ -76,11 +76,11 @@ function OptBtn({ opt, holdingChord, setHoldingChord }) {
                 disabled={!isEnable}
                 control={<Checkbox checked={isChecked} onChange={_onChange} />}
                 label={opt}
-                labelPlacement="top" 
+                labelPlacement="top"
                 sx={{
-                    padding:"0px",
-                    margin:"0px"
-                }}/>
+                    padding: "0px",
+                    margin: "0px"
+                }} />
         </FormGroup>
     )
 }

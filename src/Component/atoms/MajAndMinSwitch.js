@@ -1,3 +1,4 @@
+import React from 'react';
 import { Key } from "@tonaljs/tonal";
 
 /**

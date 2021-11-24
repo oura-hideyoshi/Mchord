@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { OptBtn } from "../atoms"
 import { Stack, Grid } from "@mui/material";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TonicSelector, MajAndMinSwitch } from "./index";
 import { Stack } from "@mui/material";
 

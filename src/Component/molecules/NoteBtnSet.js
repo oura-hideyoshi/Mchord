@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { NoteBtn } from "../atoms/index";
 import { Note, Chord } from "@tonaljs/tonal";
 import { HoldingChordContext } from "../organisms/InputChordSet";
