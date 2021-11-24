@@ -42,7 +42,7 @@ const InputChordSet = ({ handleEntry }) => {
         return detectedChord;
     }
 
-    const chordTypes = ["M", "m", "sus4"];
+    const chordTypes = ["M", "m", "sus4", "5", "aug", "dim", "Mb5", "m6", "6", "m7", "M7", "m7b5"];
 
     return (
         <div>
@@ -53,10 +53,10 @@ const InputChordSet = ({ handleEntry }) => {
                     </Grid>
                     <Grid item xs={8} md={5} lg={5}>
                         <Grid container>
-                            <Grid item>
+                            <Grid item xs={8}>
                                 <ChordTypeBtnSet chordTypes={chordTypes}></ChordTypeBtnSet>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={4}>
                                 <ChordBtn
                                     rootKey={rootKey}
                                     chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)}
