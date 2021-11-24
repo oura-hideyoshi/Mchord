@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { OptBtn } from "../atoms"
+import { IntervalBtn } from "../atoms"
 import { Stack, Grid } from "@mui/material";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";
 import { HoldingChordContext } from "../organisms/InputChordSet";
@@ -9,7 +9,7 @@ import { HoldingChordContext } from "../organisms/InputChordSet";
  * @param {{opts:Array<String>}} args 
  * @returns 
  */
-function OptBtnSet({ }) {
+function IntervalBtnSet({ }) {
 
     const inputChordParam = useContext(HoldingChordContext);
 
@@ -34,13 +34,13 @@ function OptBtnSet({ }) {
                     {row1.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
@@ -49,13 +49,13 @@ function OptBtnSet({ }) {
                     {row2.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
@@ -64,13 +64,13 @@ function OptBtnSet({ }) {
                     {row3.map((opt, idx) => {
                         return (
                             <Grid item>
-                                <OptBtn
+                                <IntervalBtn
                                     opt={opt}
                                     holdingChord={inputChordParam.holdingChord}
                                     setHoldingChord={inputChordParam.setHoldingChord}
                                     key={idx}>
 
-                                </OptBtn>
+                                </IntervalBtn>
                             </Grid>
                         )
                     })}
@@ -80,4 +80,4 @@ function OptBtnSet({ }) {
     )
 }
 
-export default OptBtnSet
+export default IntervalBtnSet
