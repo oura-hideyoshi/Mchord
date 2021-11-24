@@ -14,6 +14,8 @@ function Home() {
     // inputChordSetからentryChordにChordが渡されたのを検知し、どうにかする
     useEffect(() => {
         if (entryChord != null) {
+            // 現状足すだけ
+            // TODO : 目標コードの変更
             setChordList(chordList.concat(entryChord));
             setEntryChord(null);
         }
@@ -31,10 +33,15 @@ function Home() {
 
     const drawerBleeding = 56;
 
+    const clear = () => {
+        console.clear();
+        setChordList([]);
+    }
+
     return (
         <>
             <div>
-                <button onClick={() => console.clear()}>Clear</button>
+                <button onClick={clear}>Clear</button>
             </div>
             <Global
                 styles={{
@@ -73,7 +80,7 @@ function Home() {
                 >
                     <Puller />
                 </Box>
-                <InputChordSet setEntryChord={setEntryChord}></InputChordSet>
+                <InputChordSet handleEntry={setEntryChord}></InputChordSet>
             </SwipeableDrawer>
 
         </>

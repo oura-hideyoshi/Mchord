@@ -6,7 +6,13 @@ import { Grid } from '@mui/material';
 
 export const HoldingChordContext = createContext();
 
-const InputChordSet = ({ setEntryChord }) => {
+/**
+ * コードの入力を楽に行うのを目的としたコンポーネント
+ * handleEntry このコンポーネントからコードがアウトプットする際、handleEntry(chord)が実行される
+ * @param {{handleEntry:Function}} args
+ * @returns 
+ */
+const InputChordSet = ({ handleEntry }) => {
     const initialKey = Key.majorKey("C");
     const [rootKey, setRootKey] = useState(initialKey);
     const [isToneName, setIsToneName] = useState(true);
@@ -22,7 +28,7 @@ const InputChordSet = ({ setEntryChord }) => {
         setIsMajKey: setIsMajKey,
         isToneName: isToneName,
         setIsToneName: setIsToneName,
-        setEntryChord: setEntryChord
+        setEntryChord: handleEntry
     };
 
     // debug
@@ -48,7 +54,7 @@ const InputChordSet = ({ setEntryChord }) => {
                             rootKey={rootKey}
                             chord={detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic)}
                             isToneName={isToneName}
-                            onClick={() => setEntryChord(detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic))}
+                            onClick={() => handleEntry(detectChordFromIntervals(holdingChord.intervals, holdingChord.tonic))}
                         ></ChordBtn>
                         <button onClick={() => console.log(holdingChord)}>log</button>
                         <Grid continer>
