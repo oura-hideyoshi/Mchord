@@ -24,8 +24,6 @@ function IntervalBtn({ opt, holdingChord, setHoldingChord }) {
             .find(get => isAllIncludes(newIntervals, get.intervals)
             );
         if (flag != undefined) {
-            // if (!isChecked)
-            //     console.log(opt, flag.intervals, flag.aliases);
             return true
         }
         else
