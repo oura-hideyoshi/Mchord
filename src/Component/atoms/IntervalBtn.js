@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Note, Chord, ChordType } from "@tonaljs/tonal";
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
-import { padding } from "@mui/system";
 
 /**
  * 
  * @param {{opt:string,chord:}} arg opt:m2, M2, ...
  * @returns 
  */
-function OptBtn({ opt, holdingChord, setHoldingChord }) {
+function IntervalBtn({ opt, holdingChord, setHoldingChord }) {
 
     const [isChecked, setIsChecked] = useState(holdingChord.intervals.includes(opt));
 
@@ -85,4 +84,4 @@ function OptBtn({ opt, holdingChord, setHoldingChord }) {
     )
 }
 
-export default OptBtn
+export default IntervalBtn

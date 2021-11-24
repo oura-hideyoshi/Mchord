@@ -9,7 +9,7 @@ import { HoldingChordContext } from "../organisms/InputChordSet";
  * @param {{opts:Array<String>}} args 
  * @returns 
  */
-function OptBtnSet({ }) {
+function IntervalBtnSet({ }) {
 
     const inputChordParam = useContext(HoldingChordContext);
 
@@ -80,4 +80,4 @@ function OptBtnSet({ }) {
     )
 }
 
-export default OptBtnSet
+export default IntervalBtnSet
