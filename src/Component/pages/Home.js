@@ -2,7 +2,7 @@ import React from 'react';
 import { Global } from '@emotion/react';
 import { useState, useEffect } from "react";
 import { DisplayChord, InputChordSet } from "../organisms";
-import { SwipeableDrawer, Box, } from "@mui/material";
+import { Drawer, Box, } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
@@ -46,42 +46,40 @@ function Home() {
             <Global
                 styles={{
                     ".MuiDrawer-root > .MuiPaper-root": {
-                        height: `calc(50% - ${drawerBleeding}px)`,
+                        height: `calc(30%)`,
                         overflow: "visible"
                     }
                 }}
             />
             <DisplayChord chordList={chordList}></DisplayChord>
 
-            <div>
-                <button onClick={() => setIsOpen(true)}>open</button>
-            </div>
-            <SwipeableDrawer
+
+            <Drawer
                 anchor="bottom"
+                variant="persistent"
+                hideBackdrop={true}
                 open={isOpen}
                 onClose={() => setIsOpen(false)}
                 onOpen={() => setIsOpen(true)}
-                swipeAreaWidth={drawerBleeding}
-                disableSwipeToOpen={false}
-                ModalProps={{
-                    keepMounted: true,
-                }}
             >
                 <Box
                     sx={{
                         position: 'absolute',
-                        top: -50,
+                        top: -40,
                         borderTopLeftRadius: 8,
                         borderTopRightRadius: 8,
                         visibility: 'visible',
                         right: 0,
                         left: 0,
+                        backgroundColor: "white",
                     }}
                 >
-                    <Puller />
+                    <div onClick={() => setIsOpen(!isOpen)}>
+                        <button onClick={() => setIsOpen(!isOpen)}>open</button>
+                    </div>
+                    <InputChordSet handleEntry={setEntryChord}></InputChordSet>
                 </Box>
-                <InputChordSet handleEntry={setEntryChord}></InputChordSet>
-            </SwipeableDrawer>
+            </Drawer>
 
         </>
     )
