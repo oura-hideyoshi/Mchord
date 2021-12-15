@@ -77,7 +77,7 @@ function Home() {
                     <div onClick={() => setIsOpen(!isOpen)}>
                         <button onClick={() => setIsOpen(!isOpen)}>open</button>
                     </div>
-                    <InputChordSet handleEntry={setEntryChord}></InputChordSet>
+                    <InputChordSet id="InputCodeSet" handleEntry={setEntryChord}></InputChordSet>
                 </Box>
             </Drawer>
 

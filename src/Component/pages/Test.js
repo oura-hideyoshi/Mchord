@@ -10,6 +10,7 @@ function Test() {
 
     const noteName = useRef("");
     const chordName = useRef("");
+    const getChordName = useRef("");
     const chordDetectName = useRef("");
     const keyMajorName = useRef("");
     const keyMinorName = useRef("");

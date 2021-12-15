@@ -1,4 +1,4 @@
 button {
-    min-width: 60px;
-    min-height: 40px;
+    width: clamp(40px, 5vw, 100px);
+    height: clamp(30px, 5vh, 70px);
 }
