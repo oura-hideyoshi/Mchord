@@ -8,19 +8,16 @@ import { Label } from "@material-ui/icons";
 
 function Test() {
 
-    const noteName = useRef("");
-    const chordName = useRef("");
-    const getChordName = useRef("");
-    const chordDetectName = useRef("");
-    const keyMajorName = useRef("");
-    const keyMinorName = useRef("");
-    const chordTypeName = useRef("");
+    let chord = Chord.getChord("M", "C", "G");
+    console.log(`chord`, chord)
+    chord.root = "D"
+    console.log(`chord`, chord)
 
     return (
         <>
             <TableContainer component={Paper}>
-                <TableBody>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableBody>
                         <TableRow>
                             <TableCell>
                                 <Button onClick={() => console.clear()}>Clear</Button>
@@ -32,10 +29,10 @@ function Test() {
                                 <Typography variant={"h6"}>Note.get()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={noteName} />
+                                <input id="note_get" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(Note.get(noteName.current.value))}>log</Button>
+                                <Button onClick={() => console.log(Note.get(document.getElementById("note_get").value))}>log</Button>
                             </TableCell>
                         </TableRow>
                         {/* chord.get */}
@@ -44,10 +41,28 @@ function Test() {
                                 <Typography variant={"h6"}>Chord.get()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={chordName} />
+                                <input id="chord_get" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(Chord.get(chordName.current.value))}>log</Button>
+                                <Button onClick={() => console.log(Chord.get(document.getElementById("chord_get").value))}>log</Button>
+                            </TableCell>
+                        </TableRow>
+                        {/* chord.getChord */}
+                        <TableRow>
+                            <TableCell>
+                                <Typography variant={"h6"}>chord.getChord()</Typography>
+                            </TableCell>
+                            <TableCell>
+                                <input id="chord_getChord1"></input>
+                            </TableCell>
+                            <TableCell>
+                                <input id="chord_getChord2"></input>
+                            </TableCell>
+                            <TableCell>
+                                <input id="chord_getChord3"></input>
+                            </TableCell>
+                            <TableCell>
+                                <Button onClick={() => console.log(Chord.getChord(document.getElementById("chord_getChord1").value, document.getElementById("chord_getChord2").value, document.getElementById("chord_getChord3").value))}>log</Button>
                             </TableCell>
                         </TableRow>
                         {/* chord.detect */}
@@ -56,10 +71,10 @@ function Test() {
                                 <Typography variant={"h6"}>Chord.detect()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={chordDetectName} />
+                                <input id="chord_detect" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(Chord.detect(chordDetectName.current.value.split(",")), chordDetectName.current.value.split(","))}>log</Button>
+                                <Button onClick={() => { console.log(Chord.detect(document.getElementById("chord_detect").value.split(" "))) }}>log</Button>
                             </TableCell>
                         </TableRow>
                         {/* key.majorKey */}
@@ -68,10 +83,10 @@ function Test() {
                                 <Typography variant={"h6"}>Key.majorKey()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={keyMajorName} />
+                                <input id="key_majorKey" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(Key.majorKey(keyMajorName.current.value))}>log</Button>
+                                <Button onClick={() => console.log(Key.majorKey(document.getElementById("key_majorKey").value))}>log</Button>
                             </TableCell>
                         </TableRow>
                         {/* key.minorKey */}
@@ -80,10 +95,10 @@ function Test() {
                                 <Typography variant={"h6"}>Key.minorKey()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={keyMinorName} />
+                                <input id="key_minorKey" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(Key.minorKey(keyMinorName.current.value))}>log</Button>
+                                <Button onClick={() => console.log(Key.minorKey(document.getElementById("key_minorKey").value))}>log</Button>
                             </TableCell>
                         </TableRow>
                         {/* chordType.all*() */}
@@ -104,14 +119,14 @@ function Test() {
                                 <Typography variant={"h6"}>ChordType.get()</Typography >
                             </TableCell>
                             <TableCell>
-                                <input ref={chordTypeName} />
+                                <input id="chordType_get" />
                             </TableCell>
                             <TableCell>
-                                <Button onClick={() => console.log(ChordType.get(chordTypeName.current.value))}>log</Button>
+                                <Button onClick={() => console.log(ChordType.get(document.getElementById("chordType_get").value))}>log</Button>
                             </TableCell>
                         </TableRow>
-                    </Table>
-                </TableBody>
+                    </TableBody>
+                </Table>
             </TableContainer>
 
         </>
