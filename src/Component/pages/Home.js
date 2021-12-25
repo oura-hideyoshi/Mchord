@@ -8,6 +8,7 @@ function Home() {
     const [chordList, setChordList] = useState([]);
     const [entryChord, setEntryChord] = useState(null);
 
+
     // inputChordSetからentryChordにChordが渡されたのを検知し、どうにかする
     useEffect(() => {
         if (entryChord != null) {
@@ -40,8 +41,11 @@ function Home() {
             />
             <DisplayChord chordList={chordList}></DisplayChord>
 
-            <InputChordSet id="InputCodeSet" handleEntry={setEntryChord}></InputChordSet>
-            <Footer></Footer>
+
+            <footer>
+                <InputChordSet id="InputCodeSet" handleEntry={setEntryChord}></InputChordSet>
+                <Footer></Footer>
+            </footer>
 
 
         </>

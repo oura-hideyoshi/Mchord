@@ -2,3 +2,11 @@ button {
     width: clamp(40px, 5vw, 100px);
     height: clamp(30px, 5vh, 70px);
 }
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    z-index: 1000;
+}
