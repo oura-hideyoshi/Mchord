@@ -7,8 +7,7 @@ import ReactFlow from 'react-flow-renderer';
 export interface IMapProps {
 }
 
-const Map = ({ }: IMapProps): JSX.Element => {
-    console.log(mapData)
+const CanonMap = ({ }: IMapProps): JSX.Element => {
     const elements = initializeMap({ dataJSON: mapData })
 
     return (
@@ -18,4 +17,4 @@ const Map = ({ }: IMapProps): JSX.Element => {
     )
 }
 
-export default Map
+export default CanonMap
