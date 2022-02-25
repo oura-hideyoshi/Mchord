@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "type": "input",
+        "data": {
+            "label": "An input node"
+        },
+        "position": {
+            "x": 0,
+            "y": 50
+        },
+        "sourcePosition": "right"
+    },
+    {
+        "id": "2",
+        "type": "default",
+        "data": {
+            "label": " node"
+        },
+        "position": {
+            "x": 50,
+            "y": 100
+        },
+        "sourcePosition": "right"
+    }
+]
