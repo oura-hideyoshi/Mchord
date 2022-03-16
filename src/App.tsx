@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import CanonMap from './components/map/canon/Map'
+import { Top } from './components/pages/Top'
+
 
 function App() {
 
   return (
-    <CanonMap />
+    <Top />
   )
 }
 
