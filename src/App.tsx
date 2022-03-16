@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
-import CanonMap from './components/map/canon/map'
+import CanonMap from './components/map/canon/Map'
 
 function App() {
 
