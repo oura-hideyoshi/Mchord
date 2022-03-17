@@ -4,12 +4,14 @@ import { Key } from '@tonaljs/tonal';
 interface props {
     tonicKey: string;
     minorVariant: 'natural' | 'melodic' | "harmonic";
+    keySignature: string;
 }
 
-export const KeyDebugger = ({ tonicKey, minorVariant }: props) => {
+export const KeyDebugger = ({ tonicKey, minorVariant, keySignature }: props) => {
 
     const majorKey = Key.majorKey(tonicKey);
     const minorKey = Key.minorKey(tonicKey)[minorVariant];
+    const majorTonic = Key.majorTonicFromKeySignature(keySignature);
 
     return (
         <div>
@@ -43,6 +45,10 @@ export const KeyDebugger = ({ tonicKey, minorVariant }: props) => {
                 <button onClick={() => console.log(minorKey.intervals)}>intervals</button>
                 <button onClick={() => console.log(minorKey.scale)}>scale</button>
                 <button onClick={() => console.log(minorKey.tonic)}>tonic</button>
+            </div>
+            <div>
+                <h2>majorTonicFromKeySignature</h2>
+                <p>{majorTonic}</p>
             </div>
         </div>
     )
