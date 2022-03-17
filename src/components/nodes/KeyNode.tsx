@@ -5,19 +5,18 @@ import { Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-
-interface KeyNodeData {
-    initialKey: IKey
-}
+import { KeyNodeObj, keySignature, minorVariant } from '../libs/types';
+import { detectIsMajor, sig2MmKey } from '../libs/utils';
 
 export interface KeyNodeProps {
-    data: KeyNodeData,
+    data: KeyNodeObj["data"],
     isConnectable: boolean
 }
 
 export default memo(({ data, isConnectable }: KeyNodeProps) => {
 
-    const [key, setKey] = useState(data.initialKey);
+    const [key, setKey] = useState(sig2MmKey(data.sig, data.isMajor));
+    const [isMajor, setIsMajor] = useState(data.isMajor);
 
     return (
         <>
@@ -37,15 +36,15 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                 />
                 <select
                     name="key"
-                    value={key.tonic}
-                    onChange={e => setKey(Key.majorKey(e.target.value))}>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
+                    value={key.keySignature}
+                    onChange={e => setKey(sig2MmKey(e.target.value as keySignature, isMajor))}>
+                    <option value="">C</option>
+                    <option value="##">D</option>
+                    <option value="###">E</option>
+                    <option value="b">F</option>
+                    <option value="#">G</option>
+                    <option value="###">A</option>
+                    <option value="#####">B</option>
                 </select>
                 <label className={css({
                     marginLeft: "10px",

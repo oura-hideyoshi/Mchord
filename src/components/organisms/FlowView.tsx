@@ -3,7 +3,7 @@ import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Po
 
 import KeyNode from '../nodes/KeyNode';
 import ChordNode from '../nodes/ChordNode';
-import { makeKeyNode, makeChordNode } from '../libs/creator';
+import { makeKeyNodeObj, makeChordNode } from '../libs/creator';
 import { Chord, Key } from '@tonaljs/tonal';
 
 const snapGrid: [number, number] = [20, 20];
@@ -19,7 +19,7 @@ const FlowView = () => {
     useEffect(() => {
 
         setNodes([
-            makeKeyNode("1", { x: 0, y: 0 }, "D"),
+            makeKeyNodeObj("1", { x: 0, y: 0 }, "#", true),
             makeChordNode("2", { x: 200, y: 0 }, Chord.get("C"))
         ]);
 
