@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { ChangeEvent, memo, useState } from 'react';
 
 import { Handle, Position } from 'react-flow-renderer';
 import { Range } from "@tonaljs/tonal";
@@ -16,7 +16,7 @@ export interface KeyNodeProps {
 
 export default memo(({ data, isConnectable }: KeyNodeProps) => {
 
-
+    const [key, setKey] = useState(data.key);
     return (
         <>
             <div className={css({
@@ -33,7 +33,7 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                         transform: "translate(50%, -50%)",
                     })}
                 />
-                <select name="pets" id="pet-select" defaultValue={data.key.tonic}>
+                <select name="key" defaultValue={data.key.tonic} onChange={e => console.log('e', e.target.value)}>
                     <option value="C">C</option>
                     <option value="D">D</option>
                     <option value="E">E</option>

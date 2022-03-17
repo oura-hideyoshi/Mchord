@@ -1,8 +1,8 @@
 import React from 'react'
 import { Chord } from '@tonaljs/chord'
-import { Key } from '@tonaljs/key'
 import { Node } from 'react-flow-renderer'
 import { css } from '@emotion/css'
+import { Key } from '@tonaljs/tonal'
 
 export function makeChordNode(id: Node["id"], position: Node["position"], chord: Chord,): Node {
 
@@ -13,12 +13,19 @@ export function makeChordNode(id: Node["id"], position: Node["position"], chord:
         type: "ChordNode",
     }
 }
-export function makeKeyNode(id: Node["id"], position: Node["position"], key: Key): Node {
+
+export interface makeKeyNodeProps {
+    id: Node["id"],
+    position: Node["position"],
+    key: string
+}
+
+export function makeKeyNode(id: makeKeyNodeProps["id"], position: makeKeyNodeProps["position"], key: makeKeyNodeProps["key"]): Node {
 
     return {
         id: id,
         position: position,
-        data: { key: key },
+        data: { key: Key.majorKey(key) },
         type: "KeyNode",
     }
 }

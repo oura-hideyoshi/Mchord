@@ -19,7 +19,7 @@ const FlowView = () => {
     useEffect(() => {
 
         setNodes([
-            makeKeyNode("1", { x: 0, y: 0 }, Key.majorKey("D")),
+            makeKeyNode("1", { x: 0, y: 0 }, "C"),
             makeChordNode("2", { x: 200, y: 0 }, Chord.get("C"))
         ]);
 
@@ -33,22 +33,24 @@ const FlowView = () => {
         []
     );
     return (
-        <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            nodeTypes={nodeTypes}
-            snapToGrid={true}
-            snapGrid={snapGrid}
-            defaultZoom={1.5}
-            fitView
-            attributionPosition="bottom-left"
-        >
-            <MiniMap />
-            <Controls />
-        </ReactFlow>
+        <>
+            <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
+                nodeTypes={nodeTypes}
+                snapToGrid={true}
+                snapGrid={snapGrid}
+                defaultZoom={1.5}
+                fitView
+                attributionPosition="bottom-left"
+            >
+                <MiniMap />
+                <Controls />
+            </ReactFlow>
+        </>
     );
 };
 

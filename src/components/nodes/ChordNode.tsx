@@ -1,18 +1,24 @@
 import React, { memo } from 'react';
 
 import { Handle, Position } from 'react-flow-renderer';
+import { Chord } from '@tonaljs/chord';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 
-interface props {
-    data: any,
+interface ChordNodeData {
+    chord: Chord,
+}
+export interface ChordNodeProps {
+    data: ChordNodeData,
     isConnectable: boolean
 }
 
-export default memo(({ data, isConnectable }: props) => {
+export default memo(({ data, isConnectable }: ChordNodeProps) => {
 
     return (
-        <>
+        <div className={css({
+            border: "solid 1px black"
+        })}>
             <Handle
                 type="target"
                 position={Position.Left}
@@ -25,8 +31,9 @@ export default memo(({ data, isConnectable }: props) => {
                 })}
             />
             <span className={css({
-                border: "solid 1px"
-            })}>chord</span>
+            })}>
+                {data.chord.name}
+            </span>
             <Handle
                 type="source"
                 position={Position.Right}
@@ -38,6 +45,6 @@ export default memo(({ data, isConnectable }: props) => {
                     transform: "translate(50%, -50%)",
                 })}
             />
-        </>
+        </div>
     );
 });
