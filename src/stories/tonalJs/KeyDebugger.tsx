@@ -10,14 +10,15 @@ interface props {
 export const KeyDebugger = ({ tonicKey, minorVariant, keySignature }: props) => {
 
     const majorKey = Key.majorKey(tonicKey);
-    const minorKey = Key.minorKey(tonicKey)[minorVariant];
+    const minorKey = Key.minorKey(tonicKey);
+    const minorVariantKey = Key.minorKey(tonicKey)[minorVariant];
     const majorTonic = Key.majorTonicFromKeySignature(keySignature);
 
     return (
         <div>
             <button onClick={() => console.clear()}>CLEAR</button>
             <div>
-                <h2>{majorKey.tonic}</h2>
+                <h2>Key.majorKey {majorKey.tonic}</h2>
                 <button onClick={() => console.log(majorKey)}>log</button>
                 <button onClick={() => console.log(majorKey.alteration)}>alteration</button>
                 <button onClick={() => console.log(majorKey.chordScales)}>chordScales</button>
@@ -36,19 +37,26 @@ export const KeyDebugger = ({ tonicKey, minorVariant, keySignature }: props) => 
                 <button onClick={() => console.log(majorKey.type)}>type</button>
             </div>
             <div>
-                <h2>{minorKey.tonic}</h2>
+                <h2>Key.minorKey {minorKey.tonic}</h2>
                 <button onClick={() => console.log(minorKey)}>log</button>
-                <button onClick={() => console.log(minorKey.chordScales)}>chordScales</button>
-                <button onClick={() => console.log(minorKey.chords)}>chords</button>
-                <button onClick={() => console.log(minorKey.chordsHarmonicFunction)}>chordsHarmonicFunction</button>
-                <button onClick={() => console.log(minorKey.grades)}>grades</button>
-                <button onClick={() => console.log(minorKey.intervals)}>intervals</button>
-                <button onClick={() => console.log(minorKey.scale)}>scale</button>
+                <button onClick={() => console.log(minorKey.alteration)}>alteration</button>
+                <button onClick={() => console.log(minorKey.keySignature)}>keySignature</button>
                 <button onClick={() => console.log(minorKey.tonic)}>tonic</button>
+                <button onClick={() => console.log(minorKey.type)}>type</button>
             </div>
             <div>
-                <h2>majorTonicFromKeySignature</h2>
-                <p>{majorTonic}</p>
+                <h2>Key.minorKey.keyScale {minorVariantKey.tonic}</h2>
+                <button onClick={() => console.log(minorVariantKey)}>log</button>
+                <button onClick={() => console.log(minorVariantKey.chordScales)}>chordScales</button>
+                <button onClick={() => console.log(minorVariantKey.chords)}>chords</button>
+                <button onClick={() => console.log(minorVariantKey.chordsHarmonicFunction)}>chordsHarmonicFunction</button>
+                <button onClick={() => console.log(minorVariantKey.grades)}>grades</button>
+                <button onClick={() => console.log(minorVariantKey.intervals)}>intervals</button>
+                <button onClick={() => console.log(minorVariantKey.scale)}>scale</button>
+                <button onClick={() => console.log(minorVariantKey.tonic)}>tonic</button>
+            </div>
+            <div>
+                <h2>majorTonicFromKeySignature {majorTonic}</h2>
             </div>
         </div>
     )

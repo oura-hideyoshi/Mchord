@@ -1,12 +1,12 @@
-import React, { ChangeEvent, memo, useState } from 'react';
+import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
 import { Handle, Position } from 'react-flow-renderer';
 import { Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { KeyNodeObj, keySignature, minorVariant } from '../libs/types';
-import { detectIsMajor, sig2MmKey } from '../libs/utils';
+import { KeyNodeObj, keySignature } from '../libs/types';
+import { detectIsMajor, sig2MmKey, tonic2MmKey } from '../libs/utils';
 
 export interface KeyNodeProps {
     data: KeyNodeObj["data"],
@@ -17,6 +17,10 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
 
     const [key, setKey] = useState(sig2MmKey(data.sig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
+    useEffect(() => {
+        console.log("key :", key.tonic, isMajor ? "M" : "m");
+    }, [key, isMajor]);
+
 
     return (
         <>
@@ -36,7 +40,7 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                 />
                 <select
                     name="key"
-                    value={key.keySignature}
+                    value={Key.majorKey(key.tonic).keySignature}
                     onChange={e => setKey(sig2MmKey(e.target.value as keySignature, isMajor))}>
                     <option value="">C</option>
                     <option value="##">D</option>
@@ -46,9 +50,16 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                     <option value="###">A</option>
                     <option value="#####">B</option>
                 </select>
-                <label className={css({
+                <select
+                    name="isMajor"
+                    value={key.type}
+                    onChange={e => { const isM = e.target.value == "major" ? true : false; setIsMajor(isM); setKey(tonic2MmKey(key.tonic, isM)); }}>
+                    <option value="major">M</option>
+                    <option value="minor">m</option>
+                </select>
+                <span className={css({
                     marginLeft: "10px",
-                })}>Key</label>
+                })}>Key</span>
             </div>
         </>
     );
