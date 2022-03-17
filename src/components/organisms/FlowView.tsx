@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls } from 'react-flow-renderer';
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position } from 'react-flow-renderer';
 
-import KeySelectorNode from '../atoms/KeySelectorNode';
-
-const initBgColor = '#1A192B';
+import KeyNode from '../nodes/KeyNode';
+import ChordNode from '../nodes/ChordNode';
+import { makeKeyNode, makeChordNode } from '../libs/creator';
+import { Chord, Key } from '@tonaljs/tonal';
 
 const snapGrid: [number, number] = [20, 20];
 const nodeTypes = {
-    KeySelectorNode: KeySelectorNode,
+    KeyNode: KeyNode,
+    ChordNode: ChordNode
 };
 
 const FlowView = () => {
@@ -17,13 +19,8 @@ const FlowView = () => {
     useEffect(() => {
 
         setNodes([
-            {
-                id: '1',
-                type: 'KeySelectorNode',
-                data: { initKey: "E" },
-                style: { border: '1px solid #777', padding: 10 },
-                position: { x: 300, y: 50 },
-            },
+            makeKeyNode("1", { x: 0, y: 0 }, Key.majorKey("D")),
+            makeChordNode("2", { x: 200, y: 0 }, Chord.get("C"))
         ]);
 
         setEdges([
@@ -32,7 +29,7 @@ const FlowView = () => {
     }, []);
 
     const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge({ ...params, animated: true, style: { stroke: '#fff' } }, eds)),
+        (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
         []
     );
     return (
