@@ -2,11 +2,12 @@ import React, { ChangeEvent, memo, useState } from 'react';
 
 import { Handle, Position } from 'react-flow-renderer';
 import { Range } from "@tonaljs/tonal";
-import { Key } from '@tonaljs/key';
+import { Key as IKey } from '@tonaljs/key';
+import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 
 interface KeyNodeData {
-    key: Key
+    initialKey: IKey
 }
 
 export interface KeyNodeProps {
@@ -16,7 +17,8 @@ export interface KeyNodeProps {
 
 export default memo(({ data, isConnectable }: KeyNodeProps) => {
 
-    const [key, setKey] = useState(data.key);
+    const [key, setKey] = useState(data.initialKey);
+
     return (
         <>
             <div className={css({
@@ -33,7 +35,10 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                         transform: "translate(50%, -50%)",
                     })}
                 />
-                <select name="key" defaultValue={data.key.tonic} onChange={e => console.log('e', e.target.value)}>
+                <select
+                    name="key"
+                    value={key.tonic}
+                    onChange={e => setKey(Key.majorKey(e.target.value))}>
                     <option value="C">C</option>
                     <option value="D">D</option>
                     <option value="E">E</option>

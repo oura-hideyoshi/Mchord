@@ -25,7 +25,7 @@ export function makeKeyNode(id: makeKeyNodeProps["id"], position: makeKeyNodePro
     return {
         id: id,
         position: position,
-        data: { key: Key.majorKey(key) },
+        data: { initialKey: Key.majorKey(key) },
         type: "KeyNode",
     }
 }

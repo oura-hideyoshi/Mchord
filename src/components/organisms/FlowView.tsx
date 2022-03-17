@@ -19,7 +19,7 @@ const FlowView = () => {
     useEffect(() => {
 
         setNodes([
-            makeKeyNode("1", { x: 0, y: 0 }, "C"),
+            makeKeyNode("1", { x: 0, y: 0 }, "D"),
             makeChordNode("2", { x: 200, y: 0 }, Chord.get("C"))
         ]);
 
