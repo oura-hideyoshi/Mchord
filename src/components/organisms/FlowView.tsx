@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position } from 'react-flow-renderer';
 
-import KeyNode from '../nodes/KeyNode';
-import ChordNode from '../nodes/ChordNode';
 import { makeKeyNodeObj, makeChordNode } from '../libs/creator';
-import { Chord, Key } from '@tonaljs/tonal';
+import { nodeTypes } from '../nodes';
+import { Chord } from '@tonaljs/tonal';
 
 const snapGrid: [number, number] = [20, 20];
-const nodeTypes = {
-    KeyNode: KeyNode,
-    ChordNode: ChordNode
-};
 
 const FlowView = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
