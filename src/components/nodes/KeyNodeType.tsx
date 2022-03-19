@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
-import { Handle, Position } from 'react-flow-renderer';
+import { getOutgoers, Handle, Position, useReactFlow, useStore } from 'react-flow-renderer';
 import { Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
@@ -14,9 +14,10 @@ export interface KeyNodeProps {
 }
 
 export default memo(({ data, isConnectable }: KeyNodeProps) => {
-
     const [key, setKey] = useState(sig2MmKey(data.sig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
+    console.log("KeyNodeType excecuted.")
+
     useEffect(() => {
         console.log("key :", key.tonic, isMajor ? "M" : "m");
     }, [key, isMajor]);

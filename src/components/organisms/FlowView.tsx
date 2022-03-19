@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position } from 'react-flow-renderer';
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position, useReactFlow } from 'react-flow-renderer';
 
-import { makeKeyNodeObj, makeChordNode } from '../libs/creator';
+import { makeKeyNode, makeChordNode } from '../libs/creator';
 import { nodeTypes } from '../nodes';
 import { Chord } from '@tonaljs/tonal';
 
@@ -14,13 +14,12 @@ const FlowView = () => {
     useEffect(() => {
 
         setNodes([
-            makeKeyNodeObj("1", { x: 0, y: 0 }, "#", true),
+            makeKeyNode("1", { x: 0, y: 0 }, "#", true),
             makeChordNode("2", { x: 200, y: 0 }, Chord.get("C"))
         ]);
-
         setEdges([
-
         ]);
+
     }, []);
 
     const onConnect = useCallback(

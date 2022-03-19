@@ -1,6 +1,6 @@
 import React from "react";
-import KeyNode from "./KeyNode";
-import ChordNode from "./ChordNode";
+import KeyNode from "./KeyNodeType";
+import ChordNode from "./ChordNodeType";
 
 export const nodeTypes = {
     KeyNode: KeyNode,

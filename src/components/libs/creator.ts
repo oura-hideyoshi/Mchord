@@ -16,7 +16,7 @@ export function makeChordNode(id: Node["id"], position: Node["position"], chord:
 }
 
 
-export function makeKeyNodeObj(id: string, position: XYPosition, initSig: keySignature, isMajor: boolean, minorVariant: minorVariant = "natural"): KeyNodeObj {
+export function makeKeyNode(id: string, position: XYPosition, initSig: keySignature, isMajor: boolean, minorVariant: minorVariant = "natural"): KeyNodeObj {
 
     return {
         id: id,
