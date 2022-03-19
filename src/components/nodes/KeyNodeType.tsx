@@ -26,7 +26,8 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
     return (
         <>
             <div className={css({
-                border: "solid 1px black"
+                border: "solid 1px black",
+                padding: "10px"
             })}>
                 <Handle
                     type="source"

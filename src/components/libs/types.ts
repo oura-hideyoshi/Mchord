@@ -1,5 +1,6 @@
 import { Node } from "react-flow-renderer";
-import { MajorKey, MinorKey } from "@tonaljs/key"
+import { MajorKey, MinorKey } from "@tonaljs/key";
+import { getChord } from "@tonaljs/chord"
 
 export type minorVariant = "natural" | "melodic" | "harmonic";
 
@@ -10,6 +11,13 @@ export interface KeyNodeObj extends Node {
     data: {
         sig: keySignature,
         isMajor: boolean,
-        minorVariant: minorVariant
+        minorVariant?: minorVariant
+    }
+}
+export interface ChordNodeObj extends Node {
+    data: {
+        chord: { typeName: string, optionalTonic: string, optionalRoot?: string },
+        sig: keySignature,
+        isMajor: boolean
     }
 }
