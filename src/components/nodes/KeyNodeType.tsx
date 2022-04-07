@@ -6,7 +6,7 @@ import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { ChordNodeData, KeyNode, KeyNodeData, keySignature } from '../libs/types';
-import { detectIsMajor, sig2MmKey, tonic2MmKey } from '../libs/utils';
+import { detectIsMajor, isChordNode, sig2MmKey, tonic2MmKey } from '../libs/utils';
 import { makeChordNode, makeKeyNode } from '../libs/creator';
 
 export default memo(({ id, data }: KeyNode) => {
@@ -18,10 +18,11 @@ export default memo(({ id, data }: KeyNode) => {
     useEffect(() => {
         setNodes(nds =>
             nds.map(node => {
-                node.data = {
-                    ...node.data,
-                    keySig: key.keySignature as keySignature
-                }
+                if (isChordNode(node))
+                    node.data = {
+                        ...node.data,
+                        keySig: key.keySignature as keySignature
+                    }
                 return node
             }))
         return () => {
