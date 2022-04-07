@@ -1,34 +1,29 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
-import { Handle, Position } from 'react-flow-renderer';
+import { Handle, Position, useReactFlow } from 'react-flow-renderer';
 import { Chord, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { ChordNodeObj } from '../libs/types';
+import { ChordNode, ChordNodeData } from '../libs/types';
 import { sig2MmKey } from '../libs/utils';
 
-export interface ChordNodeProps {
-    data: ChordNodeObj["data"],
-    isConnectable: boolean
-}
+export default memo(({ id, data }: ChordNode) => {
 
-export default memo(({ data, isConnectable }: ChordNodeProps) => {
-
-    const [key, setKey] = useState(sig2MmKey(data.sig, data.isMajor));
-    const [isMajor, setIsMajor] = useState(data.isMajor);
+    console.log("log")
+    const key = sig2MmKey(data.keySig, data.isMajor);
+    const isMajor = data.isMajor;
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
 
     return (
         <div className={css({
             border: "solid 1px black",
-            padding: "10px"
+            padding: "10px",
         })}>
             <Handle
                 type="target"
                 position={Position.Left}
                 onConnect={(params) => console.log('handle onConnect', params)}
-                isConnectable={isConnectable}
                 className={css({
                     width: "20px",
                     height: "20px",
@@ -54,12 +49,12 @@ export default memo(({ data, isConnectable }: ChordNodeProps) => {
             </div>
             <div>
                 <span>{romanNumeral}</span>
+                <span>{data.keySig}</span>
             </div>
             <Handle
                 type="source"
                 position={Position.Right}
                 onConnect={(params) => console.log('handle onConnect', params)}
-                isConnectable={isConnectable}
                 className={css({
                     width: "20px",
                     height: "20px",

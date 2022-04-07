@@ -1,26 +1,33 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
-import { getOutgoers, Handle, Position, useReactFlow, useStore } from 'react-flow-renderer';
-import { Range } from "@tonaljs/tonal";
+import { getOutgoers, Handle, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
+import { ChordType, Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { KeyNodeObj, keySignature } from '../libs/types';
+import { ChordNodeData, KeyNode, KeyNodeData, keySignature } from '../libs/types';
 import { detectIsMajor, sig2MmKey, tonic2MmKey } from '../libs/utils';
+import { makeChordNode, makeKeyNode } from '../libs/creator';
 
-export interface KeyNodeProps {
-    data: KeyNodeObj["data"],
-    isConnectable: boolean
-}
+export default memo(({ id, data }: KeyNode) => {
 
-export default memo(({ data, isConnectable }: KeyNodeProps) => {
-    const [key, setKey] = useState(sig2MmKey(data.sig, data.isMajor));
+    const [key, setKey] = useState(sig2MmKey(data.keySig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
-    console.log("KeyNodeType excecuted.")
 
+    const { setNodes } = useReactFlow<KeyNodeData | ChordNodeData>()
     useEffect(() => {
-        console.log("key :", key.tonic, isMajor ? "M" : "m");
-    }, [key, isMajor]);
+        setNodes(nds =>
+            nds.map(node => {
+                node.data = {
+                    ...node.data,
+                    keySig: key.keySignature as keySignature
+                }
+                return node
+            }))
+        return () => {
+
+        }
+    }, [key, isMajor])
 
 
     return (
@@ -33,7 +40,6 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                     type="source"
                     position={Position.Right}
                     onConnect={(params) => console.log('handle onConnect', params)}
-                    isConnectable={isConnectable}
                     className={css({
                         width: "20px",
                         height: "20px",
@@ -46,7 +52,7 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
                     onChange={e => setKey(sig2MmKey(e.target.value as keySignature, isMajor))}>
                     <option value="">C</option>
                     <option value="##">D</option>
-                    <option value="###">E</option>
+                    <option value="####">E</option>
                     <option value="b">F</option>
                     <option value="#">G</option>
                     <option value="###">A</option>
@@ -66,3 +72,4 @@ export default memo(({ data, isConnectable }: KeyNodeProps) => {
         </>
     );
 });
+

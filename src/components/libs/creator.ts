@@ -3,9 +3,9 @@ import { Chord } from '@tonaljs/chord'
 import { Node, XYPosition } from 'react-flow-renderer'
 import { css } from '@emotion/css'
 import { Key } from '@tonaljs/tonal'
-import { ChordNodeObj, KeyNodeObj, keySignature, minorVariant } from './types'
+import { ChordNode, ChordNodeData, KeyNode, KeyNodeData, keySignature, minorVariant } from './types'
 
-export function makeChordNode(id: Node["id"], position: Node["position"], data: ChordNodeObj["data"],): ChordNodeObj {
+export function makeChordNode(id: Node["id"], position: Node["position"], data: ChordNodeData,): ChordNode {
 
     return {
         id: id,
@@ -16,12 +16,12 @@ export function makeChordNode(id: Node["id"], position: Node["position"], data: 
 }
 
 
-export function makeKeyNode(id: string, position: XYPosition, data: KeyNodeObj["data"]): KeyNodeObj {
+export function makeKeyNode(id: string, position: XYPosition, data: KeyNodeData): KeyNode {
 
     return {
         id: id,
         position: position,
-        data: { sig: data.sig, isMajor: data.isMajor, minorVariant: data.minorVariant || "natural" },
+        data: { keySig: data.keySig, isMajor: data.isMajor, minorVariant: data.minorVariant || "natural" },
         type: "KeyNode",
     }
 }
