@@ -8,7 +8,7 @@ import { ChordNodeData, KeyNodeData, keySignature } from '../libs/types';
 import UUID from "uuidjs";
 
 const snapGrid: [number, number] = [20, 20];
-const init = { sig: "#" as keySignature, isMajor: true }
+const init = { sig: "" as keySignature, isMajor: true }
 
 const FlowView = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState<KeyNodeData | ChordNodeData>([

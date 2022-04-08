@@ -4,6 +4,7 @@ import { makeKeyNode } from '../libs/creator';
 import { keySignature } from '../libs/types';
 import UUID from "uuidjs";
 import { NodeChanger } from './NodeChanger';
+import { IsRomanNumeralChanger } from './IsRomanNumeralChanger';
 
 export const SideBar = () => {
     const init = { sig: "#" as keySignature, isMajor: true }
@@ -35,6 +36,9 @@ export const SideBar = () => {
                 <button onClick={() => setDraggable(false)}>
                     unDraggable
                 </button>
+            </div>
+            <div>
+                <IsRomanNumeralChanger />
             </div>
             <div>
                 <NodeChanger />

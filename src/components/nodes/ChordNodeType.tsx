@@ -16,9 +16,10 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>()
 
-    const { setSelectedNodeId } = useContext(MchordContext);
+    const { setSelectedNodeId, isRomanNumeral } = useContext(MchordContext);
     const handleClick = () => {
         setSelectedNodeId(id);
+        console.log('isRomanNumeral', isRomanNumeral)
     }
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
@@ -41,14 +42,18 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 paddingLeft: 10,
                 paddingRight: 10
             })}>
-                <div>
-                    <span>
-                        {chord.tonic}{chord.type}
-                    </span>
-                </div>
-                <div>
-                    <span>{romanNumeral}{chord.type}</span>
-                </div>
+                {!isRomanNumeral &&
+                    <div>
+                        <span>
+                            {chord.tonic}{chord.type}
+                        </span>
+                    </div>
+                }
+                {isRomanNumeral &&
+                    <div>
+                        <span>{romanNumeral}{chord.type}</span>
+                    </div>
+                }
             </div>
             <Handle
                 type="source"
