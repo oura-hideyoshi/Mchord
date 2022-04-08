@@ -18,11 +18,17 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
 
+    const handleClick = () => {
+        console.log('id', id)
+    }
+
     return (
-        <div className={css({
-            border: "solid 1px black",
-            // padding: "10px",
-        })}>
+        <div
+            onClick={handleClick}
+            className={css({
+                border: "solid 1px black",
+                // padding: "10px",
+            })}>
             <Handle
                 type="target"
                 position={Position.Left}

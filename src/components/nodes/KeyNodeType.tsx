@@ -18,17 +18,22 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
     const [key, setKey] = useState(sig2MmKey(data.keySig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
 
-    const { setNodes } = instance;
     useEffect(() => {
         setNodeKey(instance, key.keySignature as keySignature, isMajor);
     }, [key, isMajor])
 
+    const handleClick = () => {
+        console.log('id', id)
+    }
+
     return (
         <>
-            <div className={css({
-                border: "solid 1px black",
-                padding: "10px"
-            })}>
+            <div
+                onClick={handleClick}
+                className={css({
+                    border: "solid 1px black",
+                    padding: "10px"
+                })}>
                 <Handle
                     type="source"
                     position={Position.Right}
