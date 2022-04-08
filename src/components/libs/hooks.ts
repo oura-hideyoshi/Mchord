@@ -1,4 +1,5 @@
 import { Edge, Node, ReactFlowInstance, useReactFlow } from "react-flow-renderer";
+import { Chord } from "@tonaljs/chord";
 import { makeChordNode } from "./creator";
 import { keySignature, MusicalNode } from "./types";
 import UUID from "uuidjs";
@@ -24,6 +25,22 @@ export function addChordNode(instance: ReactFlowInstance, baseNodeId: string) {
     }
     addNodes(newNode);
     addEdges(newEdge);
+}
+
+export function changeChordNode(instance: ReactFlowInstance, targetNodeId: string, newChord: Chord) {
+    const { setNodes } = instance;
+    console.log("log")
+    setNodes(nds =>
+        nds.map(node => {
+            if (node.id == targetNodeId) {
+                node.data = {
+                    ...node.data,
+                    chord: { typeName: newChord.type, optionalTonic: newChord.tonic, optionalRoot: newChord.root }
+                }
+            }
+            return node;
+        })
+    )
 }
 
 export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, isMajor: boolean) {

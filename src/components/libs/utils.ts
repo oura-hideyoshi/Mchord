@@ -1,3 +1,4 @@
+import { Node } from "react-flow-renderer";
 import { Key } from "@tonaljs/tonal"
 import { ChordNode, KeyNode, keySignature, minorVariant, MmKey, MusicalNode } from "./types"
 
@@ -14,9 +15,9 @@ export function detectIsMajor(key: MmKey) {
     return key.type == "major" ? true : false;
 }
 
-export function isKeyNode(node: MusicalNode): node is KeyNode {
+export function isKeyNode(node: MusicalNode | Node<KeyNode>): node is KeyNode {
     return node.type == "KeyNode"
 }
-export function isChordNode(node: MusicalNode): node is ChordNode {
+export function isChordNode(node: MusicalNode | Node<ChordNode>): node is ChordNode {
     return node.type == "ChordNode"
 }

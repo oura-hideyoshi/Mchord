@@ -15,20 +15,22 @@ import { MchordContext } from '../pages/Top';
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow()
-    const key = sig2MmKey(data.keySig, data.isMajor);
-    const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
-    const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
 
     const { setSelectedNodeId } = useContext(MchordContext);
     const handleClick = () => {
         setSelectedNodeId(id);
     }
 
+    const chord = Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot);
+    const key = sig2MmKey(data.keySig, data.isMajor);
+    const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.chord.optionalTonic])[0]
+
     return (
         <div
             onClick={handleClick}
             className={css({
                 border: "solid 1px black",
+                minWidth: "100px"
                 // padding: "10px",
             })}>
             <Handle
@@ -40,24 +42,12 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 paddingRight: 10
             })}>
                 <div>
-                    <select
-                        name="tonic"
-                        value={chord.tonic as string}
-                        onChange={e => setChord(Chord.getChord(chord.type, e.target.value, chord.root))}>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                    </select>
                     <span>
-                        {chord.type}
+                        {chord.tonic}{chord.type}
                     </span>
                 </div>
                 <div>
-                    <span>{romanNumeral}</span>
+                    <span>{romanNumeral}{chord.type}</span>
                 </div>
             </div>
             <Handle
