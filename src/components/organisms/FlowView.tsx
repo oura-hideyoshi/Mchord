@@ -5,13 +5,14 @@ import { makeKeyNode, makeChordNode } from '../libs/creator';
 import { nodeTypes } from '../nodes';
 import { Chord } from '@tonaljs/tonal';
 import { ChordNodeData, KeyNodeData, keySignature } from '../libs/types';
+import UUID from "uuidjs";
 
 const snapGrid: [number, number] = [20, 20];
 const init = { sig: "#" as keySignature, isMajor: true }
 
 const FlowView = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState<KeyNodeData | ChordNodeData>([
-        makeKeyNode("key_1", { x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
+        makeKeyNode(UUID.generate(), { x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
     ]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 

@@ -8,6 +8,7 @@ import { ChordNode, ChordNodeData, ChordNodeProps, keySignature } from '../libs/
 import { sig2MmKey } from '../libs/utils';
 import { Handle } from './view/Handle';
 import { makeChordNode } from '../libs/creator';
+import UUID from "uuidjs";
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
@@ -18,9 +19,8 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const { addNodes } = useReactFlow()
     const addChordNode = () => {
-        let newNodeId = Number(id.split("_")[1]) + 1
         const newNode = makeChordNode(
-            `chord_${newNodeId}`,
+            UUID.generate(),
             { x: props.xPos + 100, y: props.yPos },
             {
                 chord: {

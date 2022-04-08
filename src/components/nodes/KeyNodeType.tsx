@@ -9,6 +9,7 @@ import { ChordNodeData, KeyNode, KeyNodeData, KeyNodeProps, keySignature } from 
 import { detectIsMajor, isChordNode, sig2MmKey, tonic2MmKey } from '../libs/utils';
 import { makeChordNode, makeKeyNode } from '../libs/creator';
 import { Handle } from './view/Handle';
+import UUID from "uuidjs";
 
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
@@ -32,9 +33,8 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
     }, [key, isMajor])
 
     const addChordNode = () => {
-        let newNodeId = Number(id.split("_")[1]) + 1
         const newNode = makeChordNode(
-            `chord_${newNodeId}`,
+            UUID.generate(),
             { x: props.xPos + 100, y: props.yPos },
             {
                 chord: {
