@@ -6,3 +6,8 @@ export const nodeTypes = {
     KeyNode: KeyNode,
     ChordNode: ChordNode,
 }
+
+export const NodeTypeNames = {
+    KeyNode: "KeyNode",
+    ChordNode: "ChordNode"
+}

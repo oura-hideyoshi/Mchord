@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useEffect, useState } from 'react';
+import React, { ChangeEvent, memo, useContext, useEffect, useState } from 'react';
 
 import { Edge, getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
 import { ChordType, Range } from "@tonaljs/tonal";
@@ -11,6 +11,7 @@ import { makeChordNode, makeKeyNode } from '../libs/creator';
 import { Handle } from './view/Handle';
 import UUID from "uuidjs";
 import { addChordNode, setNodeKey } from '../libs/hooks';
+import { MchordContext } from '../pages/Top';
 
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
@@ -22,8 +23,9 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
         setNodeKey(instance, key.keySignature as keySignature, isMajor);
     }, [key, isMajor])
 
+    const { setSelectedNodeId } = useContext(MchordContext)
     const handleClick = () => {
-        console.log('id', id)
+        setSelectedNodeId(id);
     }
 
     return (

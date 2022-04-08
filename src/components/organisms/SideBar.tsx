@@ -3,6 +3,7 @@ import { useReactFlow } from 'react-flow-renderer'
 import { makeKeyNode } from '../libs/creator';
 import { keySignature } from '../libs/types';
 import UUID from "uuidjs";
+import { NodeChanger } from './NodeChanger';
 
 export const SideBar = () => {
     const init = { sig: "#" as keySignature, isMajor: true }
@@ -21,18 +22,23 @@ export const SideBar = () => {
     }
     return (
         <div>
-            <button onClick={() => console.clear()}>
-                clear console
-            </button>
-            <button onClick={initialize}>
-                init
-            </button>
-            <button onClick={() => setDraggable(true)}>
-                draggable
-            </button>
-            <button onClick={() => setDraggable(false)}>
-                unDraggable
-            </button>
+            <div>
+                <button onClick={() => console.clear()}>
+                    clear console
+                </button>
+                <button onClick={initialize}>
+                    init
+                </button>
+                <button onClick={() => setDraggable(true)}>
+                    draggable
+                </button>
+                <button onClick={() => setDraggable(false)}>
+                    unDraggable
+                </button>
+            </div>
+            <div>
+                <NodeChanger />
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 
 import { Edge, Position, useReactFlow } from 'react-flow-renderer';
 import { Chord, Progression } from '@tonaljs/tonal';
@@ -10,6 +10,7 @@ import { Handle } from './view/Handle';
 import { makeChordNode } from '../libs/creator';
 import UUID from "uuidjs";
 import { addChordNode } from '../libs/hooks';
+import { MchordContext } from '../pages/Top';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
@@ -18,8 +19,9 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
 
+    const { setSelectedNodeId } = useContext(MchordContext);
     const handleClick = () => {
-        console.log('id', id)
+        setSelectedNodeId(id);
     }
 
     return (

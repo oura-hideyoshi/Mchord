@@ -26,3 +26,9 @@ export type ChordNode = Node<ChordNodeData>
 export type ChordNodeProps = NodeProps<ChordNodeData>
 
 export type MusicalNode = KeyNode | ChordNode
+
+export interface MchordContextValue {
+    selectedNodeId: string,
+    setSelectedNodeId: Function
+}
+
