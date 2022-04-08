@@ -24,27 +24,23 @@ const FlowView = () => {
         []
     );
     return (
-        <>
-            <ReactFlowProvider>
-                <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onNodesChange={onNodesChange}
-                    onEdgesChange={onEdgesChange}
-                    onConnect={onConnect}
-                    nodeTypes={nodeTypes}
-                    snapToGrid={true}
-                    snapGrid={snapGrid}
-                    defaultZoom={1.5}
-                    fitView
-                    attributionPosition="bottom-left"
-                >
-                    <MiniMap />
-                    <Controls />
-                    <Background />
-                </ReactFlow>
-            </ReactFlowProvider>
-        </>
+        <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            nodeTypes={nodeTypes}
+            snapToGrid={true}
+            snapGrid={snapGrid}
+            defaultZoom={1.5}
+            fitView
+            attributionPosition="bottom-left"
+        >
+            <MiniMap />
+            <Controls />
+            <Background />
+        </ReactFlow>
     );
 };
 

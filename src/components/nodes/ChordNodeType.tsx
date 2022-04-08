@@ -11,7 +11,6 @@ import { makeChordNode } from '../libs/creator';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
-    console.log("log")
     const key = sig2MmKey(data.keySig, data.isMajor);
     const isMajor = data.isMajor;
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
@@ -34,7 +33,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
         addNodes(newNode);
     }
 
-    console.log(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot))
     return (
         <div className={css({
             border: "solid 1px black",
