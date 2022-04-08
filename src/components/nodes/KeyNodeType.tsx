@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
-import { getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
+import { Edge, getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
 import { ChordType, Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
@@ -16,7 +16,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
     const [key, setKey] = useState(sig2MmKey(data.keySig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
 
-    const { setNodes, addNodes } = useReactFlow<KeyNodeData | ChordNodeData>()
+    const { setNodes, addNodes, addEdges } = useReactFlow<KeyNodeData | ChordNodeData>()
     useEffect(() => {
         setNodes(nds =>
             nds.map(node => {
@@ -27,9 +27,6 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                     }
                 return node
             }))
-        return () => {
-
-        }
     }, [key, isMajor])
 
     const addChordNode = () => {
@@ -43,8 +40,14 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                 },
                 keySig: key.keySignature as keySignature,
                 isMajor: true
-            })
+            });
+        const newEdge: Edge = {
+            id: UUID.generate(),
+            source: id,
+            target: newNode.id
+        }
         addNodes(newNode);
+        addEdges(newEdge);
     }
 
 

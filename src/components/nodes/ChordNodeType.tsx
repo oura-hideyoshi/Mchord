@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 
-import { Position, useReactFlow } from 'react-flow-renderer';
+import { Edge, Position, useReactFlow } from 'react-flow-renderer';
 import { Chord, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
@@ -17,7 +17,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
 
-    const { addNodes } = useReactFlow()
+    const { addNodes, addEdges } = useReactFlow()
     const addChordNode = () => {
         const newNode = makeChordNode(
             UUID.generate(),
@@ -30,7 +30,13 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 keySig: key.keySignature as keySignature,
                 isMajor: true
             })
+        const newEdge: Edge = {
+            id: UUID.generate(),
+            source: id,
+            target: newNode.id
+        }
         addNodes(newNode);
+        addEdges(newEdge);
     }
 
     return (
