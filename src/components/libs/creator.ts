@@ -4,11 +4,12 @@ import { Node, XYPosition } from 'react-flow-renderer'
 import { css } from '@emotion/css'
 import { Key } from '@tonaljs/tonal'
 import { ChordNode, ChordNodeData, KeyNode, KeyNodeData, keySignature, minorVariant } from './types'
+import UUID from "uuidjs";
 
-export function makeChordNode(id: Node["id"], position: Node["position"], data: ChordNodeData,): ChordNode {
+export function makeChordNode(position: Node["position"], data: ChordNodeData,): ChordNode {
 
     return {
-        id: id,
+        id: UUID.generate(),
         position: position,
         data: data,
         type: "ChordNode",
@@ -16,10 +17,10 @@ export function makeChordNode(id: Node["id"], position: Node["position"], data: 
 }
 
 
-export function makeKeyNode(id: string, position: XYPosition, data: KeyNodeData): KeyNode {
+export function makeKeyNode(position: XYPosition, data: KeyNodeData): KeyNode {
 
     return {
-        id: id,
+        id: UUID.generate(),
         position: position,
         data: { keySig: data.keySig, isMajor: data.isMajor, minorVariant: data.minorVariant || "natural" },
         type: "KeyNode",

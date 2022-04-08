@@ -20,7 +20,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const { addNodes, addEdges } = useReactFlow()
     const addChordNode = () => {
         const newNode = makeChordNode(
-            UUID.generate(),
             { x: props.xPos + 100, y: props.yPos },
             {
                 chord: {

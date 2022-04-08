@@ -9,7 +9,7 @@ export const SideBar = () => {
     const { setNodes } = useReactFlow();
     const initialize = () => {
         setNodes([
-            makeKeyNode(UUID.generate(), { x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor })
+            makeKeyNode({ x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor })
         ])
     }
     return (

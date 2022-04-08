@@ -12,7 +12,7 @@ const init = { sig: "#" as keySignature, isMajor: true }
 
 const FlowView = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState<KeyNodeData | ChordNodeData>([
-        makeKeyNode(UUID.generate(), { x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
+        makeKeyNode({ x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
     ]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
