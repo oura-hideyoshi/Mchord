@@ -10,45 +10,18 @@ import { detectIsMajor, isChordNode, sig2MmKey, tonic2MmKey } from '../libs/util
 import { makeChordNode, makeKeyNode } from '../libs/creator';
 import { Handle } from './view/Handle';
 import UUID from "uuidjs";
+import { addChordNode, setNodeKey } from '../libs/hooks';
 
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
+    const instance = useReactFlow();
     const [key, setKey] = useState(sig2MmKey(data.keySig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
 
-    const { setNodes, addNodes, addEdges } = useReactFlow<KeyNodeData | ChordNodeData>()
+    const { setNodes } = instance;
     useEffect(() => {
-        setNodes(nds =>
-            nds.map(node => {
-                if (isChordNode(node))
-                    node.data = {
-                        ...node.data,
-                        keySig: key.keySignature as keySignature
-                    }
-                return node
-            }))
+        setNodeKey(instance, key.keySignature as keySignature, isMajor);
     }, [key, isMajor])
-
-    const addChordNode = () => {
-        const newNode = makeChordNode(
-            { x: props.xPos + 100, y: props.yPos },
-            {
-                chord: {
-                    typeName: '',
-                    optionalTonic: 'C',
-                },
-                keySig: key.keySignature as keySignature,
-                isMajor: true
-            });
-        const newEdge: Edge = {
-            id: UUID.generate(),
-            source: id,
-            target: newNode.id
-        }
-        addNodes(newNode);
-        addEdges(newEdge);
-    }
-
 
     return (
         <>
@@ -59,7 +32,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                 <Handle
                     type="source"
                     position={Position.Right}
-                    onClick={addChordNode}
+                    onClick={() => addChordNode(instance, id)}
                 />
                 <select
                     name="key"

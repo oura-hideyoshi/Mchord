@@ -9,34 +9,14 @@ import { sig2MmKey } from '../libs/utils';
 import { Handle } from './view/Handle';
 import { makeChordNode } from '../libs/creator';
 import UUID from "uuidjs";
+import { addChordNode } from '../libs/hooks';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
+    const instance = useReactFlow()
     const key = sig2MmKey(data.keySig, data.isMajor);
-    const isMajor = data.isMajor;
     const [chord, setChord] = useState(Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot));
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [chord.name])[0]
-
-    const { addNodes, addEdges } = useReactFlow()
-    const addChordNode = () => {
-        const newNode = makeChordNode(
-            { x: props.xPos + 100, y: props.yPos },
-            {
-                chord: {
-                    typeName: '',
-                    optionalTonic: 'C',
-                },
-                keySig: key.keySignature as keySignature,
-                isMajor: true
-            })
-        const newEdge: Edge = {
-            id: UUID.generate(),
-            source: id,
-            target: newNode.id
-        }
-        addNodes(newNode);
-        addEdges(newEdge);
-    }
 
     return (
         <div className={css({
@@ -70,13 +50,12 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 </div>
                 <div>
                     <span>{romanNumeral}</span>
-                    <span>{data.keySig}</span>
                 </div>
             </div>
             <Handle
                 type="source"
                 position={Position.Right}
-                onClick={addChordNode}
+                onClick={() => addChordNode(instance, id)}
             />
         </div>
     );
