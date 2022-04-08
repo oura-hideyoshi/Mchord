@@ -2,7 +2,7 @@ import { Chord, Key } from '@tonaljs/tonal';
 import React, { useContext, useState } from 'react'
 import { useReactFlow, Node } from 'react-flow-renderer';
 import { ChordNodeData, KeyNodeData, keySignature, MusicalNode } from '../libs/types';
-import { isChordNode, isKeyNode, sig2MmKey } from '../libs/utils';
+import { isChordNode, isKeyNode, isNodeChordNodeData, isNodeKeyNodeData, sig2MmKey } from '../libs/utils';
 import { NodeTypeNames } from '../nodes';
 import { MchordContext } from '../pages/Top'
 import { changeChordNode, setNodeKey } from "../libs/hooks";
@@ -11,7 +11,7 @@ export const NodeChanger = () => {
 
     const instance = useReactFlow<ChordNodeData | KeyNodeData>();
     const { selectedNodeId } = useContext(MchordContext);
-    const selectedNode = instance.getNode(selectedNodeId) as Node<ChordNodeData | KeyNodeData>;
+    const selectedNode = instance.getNode(selectedNodeId);
 
     const KeyNodeChanger = ({ selectedNode }: { selectedNode: Node<KeyNodeData> }) => {
         const [keySig, setKeySig] = useState(selectedNode.data.keySig);
@@ -20,8 +20,7 @@ export const NodeChanger = () => {
             setNodeKey(instance, e.target.value as keySignature, selectedNode.data.isMajor as boolean);
             setKeySig(e.target.value as keySignature);
         }
-        const handleChangeIsMajor = (e: any) => {
-            console.log('e.target.value', Boolean(e.target.value))
+        const handleChangeIsMajor: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
             setNodeKey(instance, keySig, e.target.value == "major" ? true : false);
             setIsMajor(e.target.value == "major" ? true : false);
         }
@@ -52,9 +51,13 @@ export const NodeChanger = () => {
     }
 
     const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNodeData> }) => {
-        const [chord, setChord] = useState(Chord.getChord(selectedNode.data.chord.typeName, selectedNode.data.chord.optionalTonic, selectedNode.data.chord.optionalRoot));
-        const handleChangeChordTonic = (e: any) => {
-            changeChordNode(instance, selectedNode.id, Chord.getChord(chord.type, e.target.value));
+        const [chord, setChord] = useState(Chord.getChord(selectedNode.data.getChordProps.typeName, selectedNode.data.getChordProps.optionalTonic, selectedNode.data.getChordProps.optionalRoot));
+        const handleChangeChordTonic: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+            changeChordNode(instance, selectedNode.id, {
+                typeName: chord.type,
+                optionalTonic: e.target.value,
+                optionalRoot: chord.root,
+            });
             setChord(Chord.getChord(chord.type, e.target.value));
         }
         return (
@@ -78,8 +81,8 @@ export const NodeChanger = () => {
             {selectedNode != undefined &&
                 <div>
                     {selectedNode.id}
-                    {isKeyNode(selectedNode) ? <KeyNodeChanger selectedNode={selectedNode} /> : null}
-                    {isChordNode(selectedNode) ? <ChordNodeChanger selectedNode={selectedNode} /> : null}
+                    {isNodeKeyNodeData(selectedNode) ? <KeyNodeChanger selectedNode={selectedNode} /> : null}
+                    {isNodeChordNodeData(selectedNode) ? <ChordNodeChanger selectedNode={selectedNode} /> : null}
                 </div>
             }
         </>

@@ -1,21 +1,16 @@
 import React, { ChangeEvent, memo, useContext, useEffect, useState } from 'react';
 
 import { Edge, getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
-import { ChordType, Range } from "@tonaljs/tonal";
-import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { ChordNodeData, KeyNode, KeyNodeData, KeyNodeProps, keySignature } from '../libs/types';
-import { detectIsMajor, isChordNode, sig2MmKey, tonic2MmKey } from '../libs/utils';
-import { makeChordNode, makeKeyNode } from '../libs/creator';
+import { KeyNodeProps, MusicalNodeData } from '../libs/types';
 import { Handle } from './view/Handle';
-import UUID from "uuidjs";
 import { addChordNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
-    const instance = useReactFlow();
+    const instance = useReactFlow<MusicalNodeData>();
     const { setSelectedNodeId } = useContext(MchordContext)
     const handleClick = () => {
         setSelectedNodeId(id);

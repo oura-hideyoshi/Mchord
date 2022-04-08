@@ -1,41 +1,44 @@
 import { Edge, Node, ReactFlowInstance, useReactFlow } from "react-flow-renderer";
 import { Chord } from "@tonaljs/chord";
 import { makeChordNode } from "./creator";
-import { keySignature, MusicalNode } from "./types";
+import { keySignature, MusicalNode, MusicalNodeData, ChordNodeData } from "./types";
 import UUID from "uuidjs";
 
-export function addChordNode(instance: ReactFlowInstance, baseNodeId: string) {
+export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseNodeId: string) {
     const { getNode, addNodes, addEdges } = instance;
-    const baseNode = getNode(baseNodeId) as MusicalNode;
+    const baseNode = getNode(baseNodeId);
 
+    if (baseNode == undefined)
+        return
+
+    const { id, position, data: { keySig, isMajor } } = baseNode;
     const newNode = makeChordNode(
-        { x: baseNode.position.x + 150, y: baseNode.position.y },
+        { x: position.x + 150, y: position.y },
         {
-            chord: {
+            getChordProps: {
                 typeName: '',
                 optionalTonic: 'C',
             },
-            keySig: baseNode.data.keySig,
-            isMajor: baseNode.data.isMajor
+            keySig: keySig,
+            isMajor: isMajor
         });
     const newEdge: Edge = {
         id: UUID.generate(),
-        source: baseNode.id,
+        source: id,
         target: newNode.id
     }
     addNodes(newNode);
     addEdges(newEdge);
 }
 
-export function changeChordNode(instance: ReactFlowInstance, targetNodeId: string, newChord: Chord) {
+export function changeChordNode(instance: ReactFlowInstance<MusicalNodeData>, targetNodeId: string, newChordProps: ChordNodeData["getChordProps"]) {
     const { setNodes } = instance;
-    console.log("log")
     setNodes(nds =>
         nds.map(node => {
             if (node.id == targetNodeId) {
                 node.data = {
                     ...node.data,
-                    chord: { typeName: newChord.type, optionalTonic: newChord.tonic, optionalRoot: newChord.root }
+                    getChordProps: { ...newChordProps }
                 }
             }
             return node;

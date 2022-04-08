@@ -4,7 +4,7 @@ import { Edge, Position, useReactFlow } from 'react-flow-renderer';
 import { Chord, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { ChordNode, ChordNodeData, ChordNodeProps, keySignature } from '../libs/types';
+import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
 import { sig2MmKey } from '../libs/utils';
 import { Handle } from './view/Handle';
 import { makeChordNode } from '../libs/creator';
@@ -14,16 +14,16 @@ import { MchordContext } from '../pages/Top';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
-    const instance = useReactFlow()
+    const instance = useReactFlow<MusicalNodeData>()
 
     const { setSelectedNodeId } = useContext(MchordContext);
     const handleClick = () => {
         setSelectedNodeId(id);
     }
 
-    const chord = Chord.getChord(data.chord.typeName, data.chord.optionalTonic, data.chord.optionalRoot);
+    const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
-    const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.chord.optionalTonic])[0]
+    const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.getChordProps.optionalTonic])[0]
 
     return (
         <div

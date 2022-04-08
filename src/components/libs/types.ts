@@ -8,17 +8,22 @@ export type keySignature = "" | "#" | "##" | "###" | "####" | "#####" | "######"
 
 export type MmKey = MajorKey | MinorKey;
 
-type MusicalNodeData = {
+type _MusicalNodeData = {
     keySig: keySignature,
     isMajor: boolean,
 }
 
-export interface KeyNodeData extends MusicalNodeData {
+export interface KeyNodeData extends _MusicalNodeData {
     minorVariant?: minorVariant
 }
-export interface ChordNodeData extends MusicalNodeData {
-    chord: { typeName: string, optionalTonic: string, optionalRoot?: string },
+export interface ChordNodeData extends _MusicalNodeData {
+    getChordProps: {
+        typeName: string,
+        optionalTonic: string,
+        optionalRoot?: string
+    },
 }
+export type MusicalNodeData = KeyNodeData | ChordNodeData;
 
 export type KeyNode = Node<KeyNodeData>
 export type KeyNodeProps = NodeProps<KeyNodeData>
