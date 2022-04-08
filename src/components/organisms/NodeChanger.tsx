@@ -33,12 +33,17 @@ export const NodeChanger = () => {
                     style={{ width: "50%", height: "50px" }}
                 >
                     <option value="">C</option>
-                    <option value="##">D</option>
-                    <option value="####">E</option>
-                    <option value="b">F</option>
                     <option value="#">G</option>
+                    <option value="##">D</option>
                     <option value="###">A</option>
+                    <option value="####">E</option>
                     <option value="#####">B</option>
+                    <option value="######">Gb / F#</option>
+                    <option value="b">F</option>
+                    <option value="bb">Bb</option>
+                    <option value="bbb">Eb</option>
+                    <option value="bbbb">Ab</option>
+                    <option value="bbbbb">Db</option>
                 </select>
                 <select
                     name="isMajor"
@@ -62,10 +67,6 @@ export const NodeChanger = () => {
             });
             setChord(Chord.getChord(chord.type, e.target.value));
         }
-
-        Range.chromatic(["C1", "C2"]).map(note => {
-            console.log('note', Note.get(note).pc)
-        })
 
         return (
             <select

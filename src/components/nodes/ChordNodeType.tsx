@@ -1,7 +1,7 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
 
 import { Edge, Position, useReactFlow } from 'react-flow-renderer';
-import { Chord, Progression } from '@tonaljs/tonal';
+import { Chord, Interval, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
@@ -19,7 +19,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const { setSelectedNodeId, isRomanNumeral } = useContext(MchordContext);
     const handleClick = () => {
         setSelectedNodeId(id);
-        console.log('isRomanNumeral', isRomanNumeral)
     }
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
