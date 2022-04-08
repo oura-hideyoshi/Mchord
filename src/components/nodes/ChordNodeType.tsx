@@ -1,7 +1,7 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
 
 import { Edge, Position, useReactFlow } from 'react-flow-renderer';
-import { Chord, Progression } from '@tonaljs/tonal';
+import { Chord, Interval, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
@@ -16,7 +16,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>()
 
-    const { setSelectedNodeId } = useContext(MchordContext);
+    const { setSelectedNodeId, isRomanNumeral } = useContext(MchordContext);
     const handleClick = () => {
         setSelectedNodeId(id);
     }
@@ -28,6 +28,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     return (
         <div
             onClick={handleClick}
+            onTouchStart={handleClick}
             className={css({
                 border: "solid 1px black",
                 minWidth: "100px"
@@ -41,14 +42,18 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 paddingLeft: 10,
                 paddingRight: 10
             })}>
-                <div>
-                    <span>
-                        {chord.tonic}{chord.type}
-                    </span>
-                </div>
-                <div>
-                    <span>{romanNumeral}{chord.type}</span>
-                </div>
+                {!isRomanNumeral &&
+                    <div>
+                        <span>
+                            {chord.tonic}{chord.type}
+                        </span>
+                    </div>
+                }
+                {isRomanNumeral &&
+                    <div>
+                        <span>{romanNumeral}{chord.type}</span>
+                    </div>
+                }
             </div>
             <Handle
                 type="source"

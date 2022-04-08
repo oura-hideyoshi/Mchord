@@ -34,6 +34,8 @@ export type MusicalNode = KeyNode | ChordNode
 
 export interface MchordContextValue {
     selectedNodeId: string,
-    setSelectedNodeId: Function
+    setSelectedNodeId: Function,
+    isRomanNumeral: boolean,
+    setIsRomanNumeral: Function,
 }
 

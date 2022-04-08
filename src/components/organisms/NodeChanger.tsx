@@ -1,4 +1,4 @@
-import { Chord, Key } from '@tonaljs/tonal';
+import { Chord, Key, Note, Range } from '@tonaljs/tonal';
 import React, { useContext, useState } from 'react'
 import { useReactFlow, Node } from 'react-flow-renderer';
 import { ChordNodeData, KeyNodeData, keySignature, MusicalNode } from '../libs/types';
@@ -28,21 +28,28 @@ export const NodeChanger = () => {
             <div>
                 <select
                     name="key"
-                    value={selectedNode.data.keySig}
+                    value={keySig}
                     onChange={handelChangeTonic}
+                    style={{ width: "50%", height: "50px" }}
                 >
                     <option value="">C</option>
-                    <option value="##">D</option>
-                    <option value="####">E</option>
-                    <option value="b">F</option>
                     <option value="#">G</option>
+                    <option value="##">D</option>
                     <option value="###">A</option>
+                    <option value="####">E</option>
                     <option value="#####">B</option>
+                    <option value="######">Gb / F#</option>
+                    <option value="b">F</option>
+                    <option value="bb">Bb</option>
+                    <option value="bbb">Eb</option>
+                    <option value="bbbb">Ab</option>
+                    <option value="bbbbb">Db</option>
                 </select>
                 <select
                     name="isMajor"
-                    value={selectedNode.data.isMajor ? "major" : "minor"}
-                    onChange={handleChangeIsMajor}>
+                    value={isMajor ? "major" : "minor"}
+                    onChange={handleChangeIsMajor}
+                    style={{ width: "50%", height: "50px" }}>
                     <option value={"major"}>M</option>
                     <option value={"minor"}>m</option>
                 </select>
@@ -60,18 +67,18 @@ export const NodeChanger = () => {
             });
             setChord(Chord.getChord(chord.type, e.target.value));
         }
+
         return (
             <select
                 name="tonic"
                 value={chord.tonic as string}
-                onChange={handleChangeChordTonic}>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-                <option value="G">G</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
+                onChange={handleChangeChordTonic}
+                style={{ width: "50%", height: "50px" }}>
+                {Range.chromatic(["C1", "B1"], { pitchClass: true, sharps: true }).map(note => {
+                    return (
+                        <option key={note} value={note}>{note}</option>
+                    )
+                })}
             </select>
         )
     }
@@ -80,7 +87,6 @@ export const NodeChanger = () => {
         <>
             {selectedNode != undefined &&
                 <div>
-                    {selectedNode.id}
                     {isNodeKeyNodeData(selectedNode) ? <KeyNodeChanger selectedNode={selectedNode} /> : null}
                     {isNodeChordNodeData(selectedNode) ? <ChordNodeChanger selectedNode={selectedNode} /> : null}
                 </div>

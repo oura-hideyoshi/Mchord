@@ -26,6 +26,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
         <>
             <div
                 onClick={handleClick}
+                onTouchStart={handleClick}
                 className={css({
                     border: "solid 1px black",
                     padding: "10px"

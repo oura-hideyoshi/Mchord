@@ -8,13 +8,17 @@ import { SideBar } from '../organisms/SideBar'
 export const MchordContext = createContext<MchordContextValue>({
     selectedNodeId: "",
     setSelectedNodeId: () => { },
-
+    isRomanNumeral: false,
+    setIsRomanNumeral: () => { }
 });
 export const Top = () => {
     const [selectedNodeId, setSelectedNodeId] = useState("");
-    const mchordValue = {
+    const [isRomanNumeral, setIsRomanNumeral] = useState(false);
+    const mchordValue: MchordContextValue = {
         selectedNodeId: selectedNodeId,
-        setSelectedNodeId: setSelectedNodeId
+        setSelectedNodeId: setSelectedNodeId,
+        isRomanNumeral: isRomanNumeral,
+        setIsRomanNumeral: setIsRomanNumeral
     }
     return (
         <div className={css({
