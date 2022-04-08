@@ -20,17 +20,12 @@ const FlowView = () => {
         console.log('FlowView > useEffect(nodes) > nodes :', nodes)
     }, [nodes]);
 
-    const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
-        []
-    );
     return (
         <ReactFlow
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
             nodeTypes={nodeTypes}
             snapToGrid={true}
             snapGrid={snapGrid}
