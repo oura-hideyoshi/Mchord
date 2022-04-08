@@ -16,9 +16,9 @@ const FlowView = () => {
     ]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-    // useEffect(() => {
-    //     console.log('FlowView > useEffect(nodes) > nodes :', nodes)
-    // }, [nodes]);
+    useEffect(() => {
+        console.log('FlowView > useEffect(nodes) > nodes :', nodes)
+    }, [nodes]);
 
     return (
         <ReactFlow
