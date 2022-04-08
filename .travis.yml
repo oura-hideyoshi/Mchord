@@ -11,7 +11,7 @@ deploy:
   local_dir: dist
   # GitHub で生成されるトークンで、Travis があなたのリポジトリにコードをプッシュすることを許可します。
   # リポジトリの Travis 設定ページで、セキュア変数として設定します。
-  github_token: $GITHUB_TOKEN
+  github_token: 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
   keep_history: true
   on:
     branch: master
