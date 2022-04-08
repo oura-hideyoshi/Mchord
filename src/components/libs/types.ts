@@ -1,4 +1,4 @@
-import { Node } from "react-flow-renderer";
+import { Node, NodeProps } from "react-flow-renderer";
 import { MajorKey, MinorKey } from "@tonaljs/key";
 import { getChord } from "@tonaljs/chord"
 
@@ -21,6 +21,8 @@ export interface ChordNodeData extends MusicalNodeData {
 }
 
 export type KeyNode = Node<KeyNodeData>
+export type KeyNodeProps = NodeProps<KeyNodeData>
 export type ChordNode = Node<ChordNodeData>
+export type ChordNodeProps = NodeProps<ChordNodeData>
 
 export type MusicalNode = KeyNode | ChordNode

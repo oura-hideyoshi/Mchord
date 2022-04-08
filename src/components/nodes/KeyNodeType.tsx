@@ -1,20 +1,21 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 
-import { getOutgoers, Handle, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
+import { getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
 import { ChordType, Range } from "@tonaljs/tonal";
 import { Key as IKey } from '@tonaljs/key';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
-import { ChordNodeData, KeyNode, KeyNodeData, keySignature } from '../libs/types';
+import { ChordNodeData, KeyNode, KeyNodeData, KeyNodeProps, keySignature } from '../libs/types';
 import { detectIsMajor, isChordNode, sig2MmKey, tonic2MmKey } from '../libs/utils';
 import { makeChordNode, makeKeyNode } from '../libs/creator';
+import { Handle } from './view/Handle';
 
-export default memo(({ id, data }: KeyNode) => {
+export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
     const [key, setKey] = useState(sig2MmKey(data.keySig, data.isMajor));
     const [isMajor, setIsMajor] = useState(data.isMajor);
 
-    const { setNodes } = useReactFlow<KeyNodeData | ChordNodeData>()
+    const { setNodes, addNodes } = useReactFlow<KeyNodeData | ChordNodeData>()
     useEffect(() => {
         setNodes(nds =>
             nds.map(node => {
@@ -30,6 +31,22 @@ export default memo(({ id, data }: KeyNode) => {
         }
     }, [key, isMajor])
 
+    const addChordNode = () => {
+        let newNodeId = Number(id.split("_")[1]) + 1
+        const newNode = makeChordNode(
+            `chord_${newNodeId}`,
+            { x: props.xPos + 100, y: props.yPos },
+            {
+                chord: {
+                    typeName: '',
+                    optionalTonic: 'C',
+                },
+                keySig: key.keySignature as keySignature,
+                isMajor: true
+            })
+        addNodes(newNode);
+    }
+
 
     return (
         <>
@@ -40,12 +57,7 @@ export default memo(({ id, data }: KeyNode) => {
                 <Handle
                     type="source"
                     position={Position.Right}
-                    onConnect={(params) => console.log('handle onConnect', params)}
-                    className={css({
-                        width: "20px",
-                        height: "20px",
-                        transform: "translate(50%, -50%)",
-                    })}
+                    onClick={addChordNode}
                 />
                 <select
                     name="key"
