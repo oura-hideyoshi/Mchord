@@ -37,7 +37,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
             <Handle
                 type="target"
                 position={Position.Left}
-                isConnectable={true}
             />
             <div className={css({
                 paddingLeft: 10,
@@ -59,7 +58,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
             <Handle
                 type="source"
                 position={Position.Right}
-                isConnectable={true}
                 onClick={() => addChordNode(instance, id)}
             />
         </div>
