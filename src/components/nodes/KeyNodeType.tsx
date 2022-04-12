@@ -4,9 +4,10 @@ import { Position, useReactFlow } from 'react-flow-renderer';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { KeyNodeProps, MusicalNodeData } from '../libs/types';
-import { Handle } from './view/Handle';
+import { Handle } from './parts/Handle';
 import { addChordNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
+import { NodeEditButton } from './parts/NodeEditButton';
 
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
@@ -42,8 +43,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                     marginLeft: "10px",
                 })}>Key</span>
                 {id == selectedNodeId &&
-                    <button>btn</button>
-                }
+                    <NodeEditButton />}
             </div>
         </>
     );

@@ -6,7 +6,7 @@ import { Range } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
 import { sig2MmKey } from '../libs/utils';
-import { Handle } from './view/Handle';
+import { Handle } from './parts/Handle';
 import { addChordNode } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 
