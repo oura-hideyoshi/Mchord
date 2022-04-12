@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position, useReactFlow, ReactFlowProvider, Background } from 'react-flow-renderer';
+import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position, useReactFlow, ReactFlowProvider, Background, Connection } from 'react-flow-renderer';
 
 import { makeKeyNode, makeChordNode } from '../libs/creator';
 import { nodeTypes } from '../nodes';
@@ -20,12 +20,18 @@ const FlowView = () => {
         console.log('FlowView > useEffect(nodes) > nodes :', nodes)
     }, [nodes]);
 
+    const onConnect = useCallback(
+        (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
+        [setEdges]
+    );
+
     return (
         <ReactFlow
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
             nodeTypes={nodeTypes}
             snapToGrid={true}
             snapGrid={snapGrid}
