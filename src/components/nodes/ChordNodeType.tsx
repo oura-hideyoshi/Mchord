@@ -7,8 +7,6 @@ import { css } from '@emotion/css';
 import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
 import { sig2MmKey } from '../libs/utils';
 import { Handle } from './view/Handle';
-import { makeChordNode } from '../libs/creator';
-import UUID from "uuidjs";
 import { addChordNode } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 
@@ -16,10 +14,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>()
 
-    const { setSelectedNodeId, isRomanNumeral } = useContext(MchordContext);
-    const handleClick = () => {
-        setSelectedNodeId(id);
-    }
+    const { selectedNodeId, isRomanNumeral } = useContext(MchordContext);
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
@@ -27,8 +22,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     return (
         <div
-            onClick={handleClick}
-            onTouchStart={handleClick}
             className={css({
                 backgroundColor: "white",
                 border: "solid 1px black",
@@ -55,6 +48,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                     </div>
                 }
             </div>
+            {id == selectedNodeId && "s"}
             <Handle
                 type="source"
                 position={Position.Right}

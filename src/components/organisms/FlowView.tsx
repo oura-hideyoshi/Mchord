@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Position, useReactFlow, ReactFlowProvider, Background, Connection } from 'react-flow-renderer';
 
 import { makeKeyNode, makeChordNode } from '../libs/creator';
@@ -6,6 +6,7 @@ import { nodeTypes } from '../nodes';
 import { Chord } from '@tonaljs/tonal';
 import { ChordNodeData, KeyNodeData, keySignature } from '../libs/types';
 import UUID from "uuidjs";
+import { MchordContext } from '../pages/Top';
 
 const snapGrid: [number, number] = [20, 20];
 const init = { sig: "" as keySignature, isMajor: true }
@@ -15,9 +16,14 @@ const FlowView = () => {
         makeKeyNode({ x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
     ]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const { selectedNodeId, setSelectedNodeId } = useContext(MchordContext);
 
     useEffect(() => {
-        console.log('FlowView > useEffect(nodes) > nodes :', nodes)
+        console.log('FlowView > useEffect(nodes) > nodes :', nodes);
+
+        // 唯一選択しているとき
+        const selectedNodes = nodes.filter(node => node.selected);
+        setSelectedNodeId(selectedNodes.length == 1 ? selectedNodes[0].id : "");
     }, [nodes]);
 
     const onConnect = useCallback(

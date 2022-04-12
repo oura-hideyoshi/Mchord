@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, useContext, useEffect, useState } from 'react';
 
-import { Edge, getOutgoers, Position, useReactFlow, useStore, useStoreApi } from 'react-flow-renderer';
+import { Position, useReactFlow } from 'react-flow-renderer';
 import { Key } from "@tonaljs/tonal";
 import { css } from '@emotion/css';
 import { KeyNodeProps, MusicalNodeData } from '../libs/types';
@@ -11,10 +11,7 @@ import { MchordContext } from '../pages/Top';
 export default memo(({ id, data, ...props }: KeyNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>();
-    const { setSelectedNodeId } = useContext(MchordContext)
-    const handleClick = () => {
-        setSelectedNodeId(id);
-    }
+
     const handleClickHandle = () => {
         addChordNode(instance, id)
     }
@@ -25,8 +22,6 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
     return (
         <>
             <div
-                onClick={handleClick}
-                onTouchStart={handleClick}
                 className={css({
                     backgroundColor: "white",
                     border: "solid 1px black",
