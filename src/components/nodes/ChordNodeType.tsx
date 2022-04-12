@@ -30,9 +30,9 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
             onClick={handleClick}
             onTouchStart={handleClick}
             className={css({
+                backgroundColor: "white",
                 border: "solid 1px black",
                 minWidth: "100px"
-                // padding: "10px",
             })}>
             <Handle
                 type="target"

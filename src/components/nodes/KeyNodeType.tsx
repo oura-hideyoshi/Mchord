@@ -28,6 +28,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                 onClick={handleClick}
                 onTouchStart={handleClick}
                 className={css({
+                    backgroundColor: "white",
                     border: "solid 1px black",
                     padding: "10px"
                 })}>
