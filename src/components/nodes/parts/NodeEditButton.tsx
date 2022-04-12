@@ -1,17 +1,7 @@
 import { css } from '@emotion/css';
 import React, { MouseEventHandler } from 'react'
 
-const EditButton = ({ onClick }: { onClick?: MouseEventHandler }): JSX.Element => {
-    return (
-        <button
-            onClick={onClick}
-        >
-            edit
-        </button>
-    )
-}
-
-export const NodeEditButton = (): JSX.Element => {
+export const NodeEditButton: React.FC<JSX.IntrinsicElements['button']> = ({ ...props }) => {
     return (
         <span className={css({
             position: "absolute",
@@ -19,6 +9,9 @@ export const NodeEditButton = (): JSX.Element => {
             left: "50%",
             transform: "translate(-50%, -50%)"
         })}>
+            <button
+                {...props}
+            >edit</button>
         </span>
     )
 }

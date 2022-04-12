@@ -46,7 +46,7 @@ export function changeChordNode(instance: ReactFlowInstance<MusicalNodeData>, ta
     )
 }
 
-export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, isMajor: boolean) {
+export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, isMajor: boolean, isDraggable: boolean = true) {
     const { setNodes } = instance;
 
     // TODO rootとなるkeyNodeから繋がっているもののみを変更
@@ -55,8 +55,9 @@ export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, is
             node.data = {
                 ...node.data,
                 keySig: keySig,
-                isMajor: isMajor
+                isMajor: isMajor,
             }
+            node.draggable = isDraggable;
             return node
         }))
 }
