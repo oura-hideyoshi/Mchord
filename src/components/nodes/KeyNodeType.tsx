@@ -48,6 +48,7 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
             {id == selectedNodeId &&
                 <NodeEditButton
                     onClick={setEditable}
+                    onTouchStart={setEditable}
                 />}
         </>
     const EditMode = () =>
