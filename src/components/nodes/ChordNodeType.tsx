@@ -48,7 +48,6 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                     </div>
                 }
             </div>
-            {id == selectedNodeId && "s"}
             <Handle
                 type="source"
                 position={Position.Right}

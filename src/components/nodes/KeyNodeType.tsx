@@ -16,6 +16,8 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
         addChordNode(instance, id)
     }
 
+    const { selectedNodeId } = useContext(MchordContext);
+
     const majorKeyfromKeySig = Key.majorTonicFromKeySignature(data.keySig) || "C";
     const key = data.isMajor ? Key.majorKey(majorKeyfromKeySig as string) : Key.minorKey(majorKeyfromKeySig as string);
 
@@ -39,6 +41,9 @@ export default memo(({ id, data, ...props }: KeyNodeProps) => {
                 <span className={css({
                     marginLeft: "10px",
                 })}>Key</span>
+                {id == selectedNodeId &&
+                    <button>btn</button>
+                }
             </div>
         </>
     );
