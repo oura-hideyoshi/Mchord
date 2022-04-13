@@ -9,7 +9,6 @@ import { sig2MmKey } from '../libs/utils';
 import { Handle } from './parts/Handle';
 import { addChordNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
-import { NodeEditButton } from './parts/NodeEditButton';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
@@ -21,22 +20,18 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
     const key = sig2MmKey(data.keySig, data.isMajor);
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.getChordProps.optionalTonic])[0]
 
-    const [isEditable, setIsEditable] = useState(false);
-    // 編集モード中はドラッグできなくなる
-    const setEditable = () => {
-        setIsEditable(true);
-        setNodeKey(instance, data.keySig, data.isMajor, false);
-    }
-    // 他のものを選択したら編集モード解除
-    useEffect(() => {
-        if (id != selectedNodeId) {
-            setIsEditable(false)
-            setNodeKey(instance, data.keySig, data.isMajor, true);
-        }
-    }, [selectedNodeId])
-
-    const NomalMode = () =>
-        <>
+    return (
+        <div
+            className={css({
+                backgroundColor: "white",
+                border: "solid 1px black",
+                padding: "10px",
+                minWidth: "100px"
+            })}>
+            <Handle
+                type="target"
+                position={Position.Left}
+            />
             <div className={css({
                 paddingLeft: 10,
                 paddingRight: 10
@@ -53,39 +48,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                         <span>{romanNumeral}{chord.type}</span>
                     </div>
                 }
-                {id == selectedNodeId &&
-                    <NodeEditButton
-                        onClick={setEditable}
-                        onTouchStart={setEditable}
-                    />}
             </div>
-        </>
-    const EditMode = () =>
-        <>
-            <span>
-                <button
-                    onClick={() => {
-                        setNodeKey(instance, "b", true)
-                    }}
-                >
-                    btn
-                </button>
-            </span>
-        </>
-
-    return (
-        <div
-            className={css({
-                backgroundColor: "white",
-                border: "solid 1px black",
-                padding: "10px",
-                minWidth: "100px"
-            })}>
-            <Handle
-                type="target"
-                position={Position.Left}
-            />
-            {isEditable ? <EditMode /> : <NomalMode />}
             <Handle
                 type="source"
                 position={Position.Right}
