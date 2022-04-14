@@ -47,7 +47,7 @@ export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
             className={style}>
             <div className={css({
                 padding: 5,
-                fontSize: 1
+                fontSize: "10px"
             })}>
                 <span >
                     {"KEY"}

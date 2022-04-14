@@ -31,7 +31,10 @@ export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ hid
             onTouchStart={props.onClick as React.TouchEventHandler<HTMLButtonElement> | undefined}
             {...props}
         >
-            <span>+</span>
+            <span
+                className={css({
+                    fontSize: "15px"
+                })}>+</span>
         </button>
     )
 }

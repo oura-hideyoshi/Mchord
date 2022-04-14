@@ -33,7 +33,7 @@ export const RemoveNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ hidde
         >
             <span
                 className={css({
-                    fontSize: 1
+                    fontSize: "10px"
                 })}>X</span>
         </button>
     )
