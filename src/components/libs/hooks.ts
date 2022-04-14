@@ -3,9 +3,11 @@ import { Chord } from "@tonaljs/chord";
 import { makeChordNode } from "./creator";
 import { keySignature, MusicalNode, MusicalNodeData, ChordNodeData } from "./types";
 import UUID from "uuidjs";
+import { useContext } from "react";
+import { MchordContext } from "../pages/Top";
 
 export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseNodeId: string) {
-    const { getNode, addNodes, addEdges } = instance;
+    const { setNodes, getNode, getNodes, addNodes, addEdges } = instance;
     const baseNode = getNode(baseNodeId);
 
     if (baseNode == undefined)
@@ -21,13 +23,19 @@ export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseN
             },
             keySig: keySig,
             isMajor: isMajor
-        });
+        },
+        true
+    );
     const newEdge: Edge = {
         id: UUID.generate(),
         source: id,
         target: newNode.id
     }
-    addNodes(newNode);
+    setNodes(nds => nds.map(node => {
+        if (node.id == id)
+            node.selected = false
+        return node
+    }).concat(newNode))
     addEdges(newEdge);
 }
 
@@ -46,7 +54,7 @@ export function changeChordNode(instance: ReactFlowInstance<MusicalNodeData>, ta
     )
 }
 
-export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, isMajor: boolean) {
+export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, isMajor: boolean, isDraggable: boolean = true) {
     const { setNodes } = instance;
 
     // TODO rootとなるkeyNodeから繋がっているもののみを変更
@@ -55,8 +63,14 @@ export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, is
             node.data = {
                 ...node.data,
                 keySig: keySig,
-                isMajor: isMajor
+                isMajor: isMajor,
             }
+            node.draggable = isDraggable;
             return node
         }))
+}
+
+export function removeNode(instance: ReactFlowInstance, removeNodeId: string) {
+    const { setNodes, getNodes } = instance;
+    setNodes(nds => nds.filter(node => node.id != removeNodeId))
 }
