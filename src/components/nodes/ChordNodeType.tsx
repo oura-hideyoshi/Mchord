@@ -28,7 +28,6 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
-    const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.getChordProps.optionalTonic])[0]
 
     const flashAnimation = keyframes`
         0% {
@@ -62,7 +61,7 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
                 alignItems: "center"
             })}>
 
-                <ChordView>{chord}</ChordView>
+                <ChordView MKey={key}>{chord}</ChordView>
             </div>
 
             <AddChordNodeBtn
