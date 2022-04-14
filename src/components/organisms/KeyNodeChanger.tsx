@@ -13,9 +13,10 @@ export const KeyNodeChanger = ({ selectedNode }: { selectedNode: Node<KeyNodeDat
         setNodeKey(instance, e.target.value as keySignature, selectedNode.data.isMajor as boolean);
         setKeySig(e.target.value as keySignature);
     }
-    const handleChangeIsMajor: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        setNodeKey(instance, keySig, e.target.value == "major" ? true : false);
-        setIsMajor(e.target.value == "major" ? true : false);
+    const handleChangeIsMajor = (val: boolean) => {
+        console.log('val', val)
+        setNodeKey(instance, keySig, val);
+        setIsMajor(val);
     }
     return (
         <div>
@@ -38,7 +39,7 @@ export const KeyNodeChanger = ({ selectedNode }: { selectedNode: Node<KeyNodeDat
                 <option value="bbbb">Ab</option>
                 <option value="bbbbb">Db</option>
             </select>
-            <IsMajorChanger isMajor={isMajor} />
+            <IsMajorChanger isMajor={isMajor} onChangeIsMajor={handleChangeIsMajor} />
         </div>
     )
 }
