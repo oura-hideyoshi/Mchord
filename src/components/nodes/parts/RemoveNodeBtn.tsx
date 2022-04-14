@@ -14,6 +14,7 @@ export const RemoveNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ ...pr
                     backgroundColor: "rgba(0,0,0,0.2)"
                 }
             })}
+            onTouchStart={props.onClick as React.TouchEventHandler<HTMLButtonElement> | undefined}
             {...props}
         >x</button>
     )
