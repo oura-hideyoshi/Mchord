@@ -12,6 +12,7 @@ import { MchordContext } from '../pages/Top';
 import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
 import { RemoveNodeBtn } from './parts/RemoveNodeBtn';
 import { color } from '../propaties/color';
+import { ChordView } from './parts/ChordView';
 
 export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
@@ -40,9 +41,10 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
     const style = css({
         backgroundColor: "white",
         border: `solid 1px ${color.gray}`,
-        borderRadius: "5px",
+        borderRadius: "20px",
         padding: "0px",
-        width: "75px",
+        width: "40px",
+        height: "40px",
         position: "relative"
     }, selected && css({
         borderStyle: "dashed",
@@ -53,29 +55,16 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
         <div
             className={style}>
             <div className={css({
-                paddingLeft: 10,
-                paddingRight: 10
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
             })}>
-                {!isRomanNumeral &&
-                    <div>
-                        <span>
-                            {chord.tonic}{chord.type}
-                        </span>
-                    </div>
-                }
-                {isRomanNumeral &&
-                    <div>
-                        <span>{romanNumeral}{chord.type}</span>
-                    </div>
-                }
-                <Handle
-                    type="source"
-                    position={Position.Right}
-                    className={css({
-                        bottom: "20px"
-                    })}
-                />
+
+                <ChordView>{chord}</ChordView>
             </div>
+
             <AddChordNodeBtn
                 onClick={handleAddBtn}
                 hidden={id != selectedNodeId}
@@ -83,6 +72,13 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
             <RemoveNodeBtn
                 onClick={handleRemoveBtn}
                 hidden={id != selectedNodeId}
+            />
+            <Handle
+                type="source"
+                position={Position.Right}
+                className={css({
+                    bottom: "20px"
+                })}
             />
             <Handle
                 type="target"
