@@ -3,35 +3,52 @@ import React, { memo, useContext, useEffect, useState } from 'react';
 import { Edge, Position, useReactFlow } from 'react-flow-renderer';
 import { Chord, Interval, Progression } from '@tonaljs/tonal';
 import { Range } from "@tonaljs/tonal";
-import { css } from '@emotion/css';
+import { css, keyframes } from '@emotion/css';
 import { ChordNode, ChordNodeData, ChordNodeProps, keySignature, MusicalNodeData } from '../libs/types';
 import { sig2MmKey } from '../libs/utils';
 import { Handle } from './parts/Handle';
-import { addChordNode, setNodeKey } from '../libs/hooks';
+import { addChordNode, removeNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
+import { RemoveNodeBtn } from './parts/RemoveNodeBtn';
 
-export default memo(({ id, data, ...props }: ChordNodeProps) => {
+export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>()
     const { selectedNodeId, isRomanNumeral } = useContext(MchordContext);
 
-    const handleClickHandle = () => {
+    const handleAddBtn = () => {
         addChordNode(instance, id)
+    }
+    const handleRemoveBtn = () => {
+        removeNode(instance, id)
     }
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
     const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.getChordProps.optionalTonic])[0]
 
+    const flashAnimation = keyframes`
+        0% {
+            border: 1px dashed black;
+        }
+        100% {
+            border: 1px dashed #efefef;
+        }
+    `
+    const style = css({
+        backgroundColor: "white",
+        border: "solid 1px black",
+        padding: "10px",
+        minWidth: "100px"
+    }, selected && css({
+        borderStyle: "dashed",
+        animation: `${flashAnimation} 0.5s ease infinite alternate`
+    }))
+
     return (
         <div
-            className={css({
-                backgroundColor: "white",
-                border: "solid 1px black",
-                padding: "10px",
-                minWidth: "100px",
-            })}>
+            className={style}>
             <Handle
                 type="target"
                 position={Position.Left}
@@ -54,9 +71,14 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 }
             </div>
             {id == selectedNodeId &&
-                <AddChordNodeBtn
-                    onClick={handleClickHandle}
-                />
+                <>
+                    <AddChordNodeBtn
+                        onClick={handleAddBtn}
+                    />
+                    <RemoveNodeBtn
+                        onClick={handleRemoveBtn}
+                    />
+                </>
             }
             <Handle
                 type="source"

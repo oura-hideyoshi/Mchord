@@ -69,3 +69,8 @@ export function setNodeKey(instance: ReactFlowInstance, keySig: keySignature, is
             return node
         }))
 }
+
+export function removeNode(instance: ReactFlowInstance, removeNodeId: string) {
+    const { setNodes, getNodes } = instance;
+    setNodes(nds => nds.filter(node => node.id != removeNodeId))
+}
