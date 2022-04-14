@@ -6,13 +6,14 @@ import { Key } from '@tonaljs/tonal'
 import { ChordNode, ChordNodeData, KeyNode, KeyNodeData, keySignature, minorVariant } from './types'
 import UUID from "uuidjs";
 
-export function makeChordNode(position: Node["position"], data: ChordNodeData,): ChordNode {
+export function makeChordNode(position: Node["position"], data: ChordNodeData, selected = false): ChordNode {
 
     return {
         id: UUID.generate(),
         position: position,
         data: data,
         type: "ChordNode",
+        selected: selected,
     }
 }
 

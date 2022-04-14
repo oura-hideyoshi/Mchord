@@ -9,12 +9,16 @@ import { sig2MmKey } from '../libs/utils';
 import { Handle } from './parts/Handle';
 import { addChordNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
+import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
 
 export default memo(({ id, data, ...props }: ChordNodeProps) => {
 
     const instance = useReactFlow<MusicalNodeData>()
-
     const { selectedNodeId, isRomanNumeral } = useContext(MchordContext);
+
+    const handleClickHandle = () => {
+        addChordNode(instance, id)
+    }
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
@@ -26,7 +30,7 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                 backgroundColor: "white",
                 border: "solid 1px black",
                 padding: "10px",
-                minWidth: "100px"
+                minWidth: "100px",
             })}>
             <Handle
                 type="target"
@@ -49,10 +53,14 @@ export default memo(({ id, data, ...props }: ChordNodeProps) => {
                     </div>
                 }
             </div>
+            {id == selectedNodeId &&
+                <AddChordNodeBtn
+                    onClick={handleClickHandle}
+                />
+            }
             <Handle
                 type="source"
                 position={Position.Right}
-                onClick={() => addChordNode(instance, id)}
             />
         </div>
     );
