@@ -7,19 +7,12 @@ import { NodeChanger } from './NodeChanger';
 import { IsRomanNumeralChanger } from './IsRomanNumeralChanger';
 
 export const SideBar = () => {
-    const init = { sig: "#" as keySignature, isMajor: true }
+    const init = { sig: "" as keySignature, isMajor: true }
     const { setNodes } = useReactFlow();
     const initialize = () => {
         setNodes([
             makeKeyNode({ x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor })
         ])
-    }
-    const setDraggable = (isDraggable: boolean) => {
-        setNodes(nds =>
-            nds.map(node => {
-                node.draggable = isDraggable
-                return node;
-            }))
     }
     return (
         <div>
@@ -29,12 +22,6 @@ export const SideBar = () => {
                 </button>
                 <button onClick={initialize}>
                     init
-                </button>
-                <button onClick={() => setDraggable(true)}>
-                    draggable
-                </button>
-                <button onClick={() => setDraggable(false)}>
-                    unDraggable
                 </button>
             </div>
             <div>

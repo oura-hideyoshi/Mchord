@@ -12,9 +12,9 @@ export const IsRomanNumeralChanger = () => {
     }
     return (
         <div>
-            <input type={"radio"} name="isRomanNumeral" value={"false"} onChange={handleOnChange} checked={!isRoman} />
+            <input type={"radio"} name="isRomanNumeral" value={"false"} onChange={handleOnChange} checked={!isRoman} style={{ margin: "20px", transform: "scale(3,3)" }} />
             <label htmlFor="isRomanNumeral">C♯</label>
-            <input type={"radio"} name="isRomanNumeral" value={"true"} onChange={handleOnChange} checked={isRoman} />
+            <input type={"radio"} name="isRomanNumeral" value={"true"} onChange={handleOnChange} checked={isRoman} style={{ margin: "20px", transform: "scale(3,3)" }} />
             <label htmlFor="isRomanNumeral">I♯</label>
         </div>
     )

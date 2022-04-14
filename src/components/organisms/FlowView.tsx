@@ -44,6 +44,7 @@ const FlowView = () => {
             defaultZoom={1.5}
             fitView
             attributionPosition="bottom-left"
+            className={"touchdevice-flow"}
         >
             <MiniMap />
             <Controls />

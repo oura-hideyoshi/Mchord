@@ -11,6 +11,8 @@ import { addChordNode, removeNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
 import { RemoveNodeBtn } from './parts/RemoveNodeBtn';
+import { color } from '../propaties/color';
+import { ChordView } from './parts/ChordView';
 
 export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
@@ -26,7 +28,6 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
     const chord = Chord.getChord(data.getChordProps.typeName, data.getChordProps.optionalTonic, data.getChordProps.optionalRoot);
     const key = sig2MmKey(data.keySig, data.isMajor);
-    const romanNumeral = Progression.toRomanNumerals(key.tonic, [data.getChordProps.optionalTonic])[0]
 
     const flashAnimation = keyframes`
         0% {
@@ -38,9 +39,12 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
     `
     const style = css({
         backgroundColor: "white",
-        border: "solid 1px black",
-        padding: "10px",
-        minWidth: "100px"
+        border: `solid 1px ${color.gray}`,
+        borderRadius: "20px",
+        padding: "0px",
+        minWidth: "40px",
+        height: "40px",
+        position: "relative"
     }, selected && css({
         borderStyle: "dashed",
         animation: `${flashAnimation} 0.5s ease infinite alternate`
@@ -49,40 +53,35 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
     return (
         <div
             className={style}>
-            <Handle
-                type="target"
-                position={Position.Left}
-            />
             <div className={css({
-                paddingLeft: 10,
-                paddingRight: 10
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
             })}>
-                {!isRomanNumeral &&
-                    <div>
-                        <span>
-                            {chord.tonic}{chord.type}
-                        </span>
-                    </div>
-                }
-                {isRomanNumeral &&
-                    <div>
-                        <span>{romanNumeral}{chord.type}</span>
-                    </div>
-                }
+
+                <ChordView MKey={key}>{chord}</ChordView>
             </div>
-            {id == selectedNodeId &&
-                <>
-                    <AddChordNodeBtn
-                        onClick={handleAddBtn}
-                    />
-                    <RemoveNodeBtn
-                        onClick={handleRemoveBtn}
-                    />
-                </>
-            }
+
+            <AddChordNodeBtn
+                onClick={handleAddBtn}
+                hidden={id != selectedNodeId}
+            />
+            <RemoveNodeBtn
+                onClick={handleRemoveBtn}
+                hidden={id != selectedNodeId}
+            />
             <Handle
                 type="source"
                 position={Position.Right}
+                className={css({
+                    bottom: "20px"
+                })}
+            />
+            <Handle
+                type="target"
+                position={Position.Left}
             />
         </div>
     );
