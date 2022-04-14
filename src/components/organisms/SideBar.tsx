@@ -7,7 +7,7 @@ import { NodeChanger } from './NodeChanger';
 import { IsRomanNumeralChanger } from './IsRomanNumeralChanger';
 
 export const SideBar = () => {
-    const init = { sig: "#" as keySignature, isMajor: true }
+    const init = { sig: "" as keySignature, isMajor: true }
     const { setNodes } = useReactFlow();
     const initialize = () => {
         setNodes([

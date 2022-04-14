@@ -5,7 +5,7 @@ import { keySignature, MusicalNode, MusicalNodeData, ChordNodeData } from "./typ
 import UUID from "uuidjs";
 import { useContext } from "react";
 import { MchordContext } from "../pages/Top";
-import { isKeyNode } from "./utils";
+import { isKeyNode, sig2MmKey } from "./utils";
 
 export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseNodeId: string) {
 
@@ -22,7 +22,7 @@ export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseN
         {
             getChordProps: {
                 typeName: '',
-                optionalTonic: 'C',
+                optionalTonic: sig2MmKey(keySig, isMajor).tonic,
             },
             keySig: keySig,
             isMajor: isMajor

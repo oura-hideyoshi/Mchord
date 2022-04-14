@@ -5,13 +5,13 @@ interface props extends ComponentProps<React.FC<JSX.IntrinsicElements['select']>
     onChangeIsMajor: (val: boolean) => void
 }
 
-export const IsMajorChanger = ({ isMajor: _isMajor, ...props }: props) => {
+export const IsMajorChanger = ({ isMajor: _isMajor, onChangeIsMajor, ...props }: props) => {
 
     const [isMajor, setIsMajor] = useState(_isMajor);
     const handleOnChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         const val = e.target.value == "major";
         setIsMajor(val)
-        props.onChangeIsMajor(val);
+        onChangeIsMajor(val);
     }
 
     return (
