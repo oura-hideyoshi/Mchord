@@ -15,7 +15,6 @@ interface props {
 
 export const ChordView = ({ MKey, children, ...props }: props) => {
     const { isRomanNumeral } = useContext(MchordContext);
-    console.log('children', children.tonic)
     const romanNumeral = Progression.toRomanNumerals(MKey.tonic, [children.tonic as string])[0]
     return (
         <div>
@@ -24,7 +23,6 @@ export const ChordView = ({ MKey, children, ...props }: props) => {
                     position: "relative",
                 })}
             >
-
                 {isRomanNumeral ? `${romanNumeral}` : `${children.tonic}`}{chooseAliase(children)}
                 <span
                     className={css({
