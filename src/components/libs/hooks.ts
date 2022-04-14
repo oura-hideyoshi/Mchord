@@ -5,17 +5,20 @@ import { keySignature, MusicalNode, MusicalNodeData, ChordNodeData } from "./typ
 import UUID from "uuidjs";
 import { useContext } from "react";
 import { MchordContext } from "../pages/Top";
+import { isKeyNode } from "./utils";
 
 export function addChordNode(instance: ReactFlowInstance<MusicalNodeData>, baseNodeId: string) {
+
     const { setNodes, getNode, getNodes, addNodes, addEdges } = instance;
     const baseNode = getNode(baseNodeId);
 
     if (baseNode == undefined)
         return
 
-    const { id, position, data: { keySig, isMajor } } = baseNode;
+    const { id, position, data: { keySig, isMajor }, type } = baseNode;
+    const newNodeSpace = isKeyNode(baseNode) ? 150 : 80;
     const newNode = makeChordNode(
-        { x: position.x + 150, y: position.y },
+        { x: position.x + newNodeSpace, y: position.y },
         {
             getChordProps: {
                 typeName: '',
