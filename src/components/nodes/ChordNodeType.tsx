@@ -69,6 +69,13 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
                         <span>{romanNumeral}{chord.type}</span>
                     </div>
                 }
+                <Handle
+                    type="source"
+                    position={Position.Right}
+                    className={css({
+                        bottom: "20px"
+                    })}
+                />
             </div>
             {id == selectedNodeId &&
                 <>
@@ -80,10 +87,6 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
                     />
                 </>
             }
-            <Handle
-                type="source"
-                position={Position.Right}
-            />
         </div>
     );
 });

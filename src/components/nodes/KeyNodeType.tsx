@@ -62,14 +62,14 @@ export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
                 <span>
                     {key.tonic} {data.isMajor ? "Major" : "minor"}
                 </span>
+                <Handle
+                    type="source"
+                    position={Position.Right}
+                />
             </div>
             <AddChordNodeBtn
                 onClick={handleAddBtn}
                 hidden={id != selectedNodeId}
-            />
-            <Handle
-                type="source"
-                position={Position.Right}
             />
         </div>
     );
