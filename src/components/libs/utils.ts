@@ -1,6 +1,8 @@
 import { Node } from "react-flow-renderer";
-import { Key } from "@tonaljs/tonal"
+import { Key } from "@tonaljs/tonal";
+import { Chord } from "@tonaljs/chord";
 import { ChordNode, ChordNodeData, KeyNode, KeyNodeData, keySignature, minorVariant, MmKey, MusicalNode, MusicalNodeData } from "./types"
+import { defaultAliases, allAliases } from "../propaties/defaultAliases";
 
 export function sig2MmKey(sig: keySignature, isMajor: boolean): MmKey {
     const majorTonic = sig == "" ? "C" : Key.majorTonicFromKeySignature(sig) as string;
@@ -29,4 +31,8 @@ export function isChordNode(node: MusicalNode): node is ChordNode {
 
 export function isNodeChordNodeData(node: Node<MusicalNodeData>): node is Node<ChordNodeData> {
     return node.type == "ChordNode";
+}
+
+export function chooseAliases(chord: Chord): string {
+    return chord.aliases[defaultAliases[chord.type as allAliases]]
 }
