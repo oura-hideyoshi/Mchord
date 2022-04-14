@@ -2,7 +2,7 @@ import { css } from '@emotion/css'
 import React from 'react'
 import { color } from '../../../components/propaties/color'
 
-export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ ...props }) => {
+export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ hidden, ...props }) => {
     return (
         <button
             className={css(
@@ -12,6 +12,9 @@ export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ ...
                     top: "50%",
                     right: "-50px",
                     transform: "translate(-50%, -50%)",
+                    display: `${hidden ? "none" : "flex"}`,
+                    justifyContent: "center",
+                    alignItems: "center"
                 }),
                 // size
                 css({
@@ -27,6 +30,8 @@ export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ ...
             )}
             onTouchStart={props.onClick as React.TouchEventHandler<HTMLButtonElement> | undefined}
             {...props}
-        >+</button>
+        >
+            <span>+</span>
+        </button>
     )
 }

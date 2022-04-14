@@ -40,7 +40,8 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
         backgroundColor: "white",
         border: "solid 1px black",
         padding: "10px",
-        minWidth: "100px"
+        width: "80px",
+        position: "relative"
     }, selected && css({
         borderStyle: "dashed",
         animation: `${flashAnimation} 0.5s ease infinite alternate`
