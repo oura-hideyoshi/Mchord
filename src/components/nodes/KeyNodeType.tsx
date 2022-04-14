@@ -36,7 +36,8 @@ export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
         border: `solid 1px ${color.gray}`,
         borderRadius: "5px",
         padding: "0px",
-        width: "75px"
+        width: "100px",
+        position: "relative"
     }, selected && css({
         borderStyle: "dashed",
         animation: `${flashAnimation} 0.5s ease infinite alternate`

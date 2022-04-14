@@ -10,8 +10,8 @@ export const AddChordNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ hid
                 css({
                     position: "absolute",
                     top: "50%",
-                    right: "-50px",
-                    transform: "translate(-50%, -50%)",
+                    right: "-25px",
+                    transform: "translate(50%, -50%)",
                     display: `${hidden ? "none" : "flex"}`,
                     justifyContent: "center",
                     alignItems: "center"

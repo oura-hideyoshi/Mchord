@@ -11,6 +11,7 @@ import { addChordNode, removeNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
 import { RemoveNodeBtn } from './parts/RemoveNodeBtn';
+import { color } from '../propaties/color';
 
 export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
 
@@ -38,9 +39,10 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
     `
     const style = css({
         backgroundColor: "white",
-        border: "solid 1px black",
-        padding: "10px",
-        width: "80px",
+        border: `solid 1px ${color.gray}`,
+        borderRadius: "5px",
+        padding: "0px",
+        width: "75px",
         position: "relative"
     }, selected && css({
         borderStyle: "dashed",
@@ -50,10 +52,6 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
     return (
         <div
             className={style}>
-            <Handle
-                type="target"
-                position={Position.Left}
-            />
             <div className={css({
                 paddingLeft: 10,
                 paddingRight: 10
@@ -78,16 +76,18 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
                     })}
                 />
             </div>
-            {id == selectedNodeId &&
-                <>
-                    <AddChordNodeBtn
-                        onClick={handleAddBtn}
-                    />
-                    <RemoveNodeBtn
-                        onClick={handleRemoveBtn}
-                    />
-                </>
-            }
+            <AddChordNodeBtn
+                onClick={handleAddBtn}
+                hidden={id != selectedNodeId}
+            />
+            <RemoveNodeBtn
+                onClick={handleRemoveBtn}
+                hidden={id != selectedNodeId}
+            />
+            <Handle
+                type="target"
+                position={Position.Left}
+            />
         </div>
     );
 });

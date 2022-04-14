@@ -9,9 +9,9 @@ export const RemoveNodeBtn: React.FC<JSX.IntrinsicElements['button']> = ({ hidde
                 // position
                 css({
                     position: "absolute",
-                    top: 0,
-                    right: 0,
-                    transform: "translate(-50%, -50%)",
+                    top: -10,
+                    right: -10,
+                    transform: "translate(50%, -50%)",
                     display: `${hidden ? "none" : "flex"}`,
                     justifyContent: "center",
                     alignItems: "center"
