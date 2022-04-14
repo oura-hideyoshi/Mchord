@@ -9,6 +9,7 @@ import { addChordNode, removeNode, setNodeKey } from '../libs/hooks';
 import { MchordContext } from '../pages/Top';
 import { AddChordNodeBtn } from './parts/AddChordNodeBtn';
 import { RemoveNodeBtn } from './parts/RemoveNodeBtn';
+import { color } from '../propaties/color';
 
 export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
 
@@ -32,9 +33,10 @@ export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
     `
     const style = css({
         backgroundColor: "white",
-        border: "solid 1px black",
-        padding: "10px",
-        minWidth: "100px"
+        border: `solid 1px ${color.gray}`,
+        borderRadius: "5px",
+        padding: "0px",
+        width: "75px"
     }, selected && css({
         borderStyle: "dashed",
         animation: `${flashAnimation} 0.5s ease infinite alternate`
@@ -42,24 +44,33 @@ export default memo(({ id, data, selected, ...props }: KeyNodeProps) => {
     return (
         <div
             className={style}>
+            <div className={css({
+                padding: 5,
+                fontSize: 1
+            })}>
+                <span >
+                    {"KEY"}
+                </span>
+            </div>
+            <hr className={css({
+                borderTop: "1px solid #8c8b8b"
+            })} />
+            <div className={css({
+                padding: 5,
+                fontSize: 12
+            })}>
+                <span>
+                    {key.tonic} {data.isMajor ? "Major" : "minor"}
+                </span>
+            </div>
+            <AddChordNodeBtn
+                onClick={handleAddBtn}
+                hidden={id != selectedNodeId}
+            />
             <Handle
                 type="source"
                 position={Position.Right}
             />
-            <span>
-                {key.tonic}
-            </span>
-            {data.isMajor ? "Major" : "minor"}
-            <span className={css({
-                marginLeft: "10px",
-            })}>Key</span>
-            {id == selectedNodeId &&
-                <>
-                    <AddChordNodeBtn
-                        onClick={handleAddBtn}
-                    />
-                </>
-            }
         </div>
     );
 });
