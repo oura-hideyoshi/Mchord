@@ -1,5 +1,5 @@
 import { Node } from "react-flow-renderer";
-import { Key } from "@tonaljs/tonal";
+import { ChordType, Key } from "@tonaljs/tonal";
 import { Chord } from "@tonaljs/chord";
 import { ChordNode, ChordNodeData, KeyNode, KeyNodeData, keySignature, minorVariant, MmKey, MusicalNode, MusicalNodeData } from "./types"
 import { defaultAliases, allAliases } from "../propaties/defaultAliases";
@@ -33,6 +33,15 @@ export function isNodeChordNodeData(node: Node<MusicalNodeData>): node is Node<C
     return node.type == "ChordNode";
 }
 
-export function chooseAliases(chord: Chord): string {
+export function chooseAliase(chord: Chord): string {
     return chord.aliases[defaultAliases[chord.type as allAliases]]
+}
+
+export function allMyAliases(onlyEasy = true) {
+    let all = []
+    for (let k in defaultAliases) {
+        const ct = ChordType.get(k);
+        all.push(ct.aliases[defaultAliases[ct.name as allAliases]])
+    }
+    return all
 }

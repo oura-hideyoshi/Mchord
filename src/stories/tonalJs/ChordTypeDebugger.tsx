@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chord, ChordType, Key } from '@tonaljs/tonal';
-import { chooseAliases } from '../../components/libs/utils';
+import { chooseAliase } from '../../components/libs/utils';
 
 interface props {
     name: string;
@@ -13,7 +13,7 @@ export const ChordTypeDebugger = ({ name }: props) => {
     const onClickCustom = () => {
         const myAllChordType = allChordType.map(chordType => {
             const cho = Chord.get(chordType.name);
-            return [chordType.name || chordType.aliases[0], chooseAliases(cho)]
+            return [chordType.name || chordType.aliases[0], chooseAliase(cho)]
         })
         console.log(myAllChordType)
     }
@@ -21,7 +21,7 @@ export const ChordTypeDebugger = ({ name }: props) => {
         const myAllChordType = allChordType.map(chordType => {
             const cho = Chord.get(chordType.name);
             if (!cho.empty)
-                return [chordType.name, chooseAliases(cho)]
+                return [chordType.name, chooseAliase(cho)]
             else undefined
         })
         console.log(myAllChordType.filter(item => item != undefined))

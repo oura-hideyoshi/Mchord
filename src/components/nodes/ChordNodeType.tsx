@@ -43,7 +43,7 @@ export default memo(({ id, data, selected, ...props }: ChordNodeProps) => {
         border: `solid 1px ${color.gray}`,
         borderRadius: "20px",
         padding: "0px",
-        width: "40px",
+        minWidth: "40px",
         height: "40px",
         position: "relative"
     }, selected && css({
