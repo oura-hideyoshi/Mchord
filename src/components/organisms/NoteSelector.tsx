@@ -1,5 +1,4 @@
 import React, { ReactNode, useState } from 'react'
-import PieMenu, { Slice } from "react-pie-menu";
 import { Chord } from "@tonaljs/chord";
 import { Range } from "@tonaljs/tonal";
 import { ChordView } from '../nodes/parts/ChordView';
@@ -48,18 +47,6 @@ export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: No
             })}
         >
             {children}
-            {showMenu && (
-                <PieMenu
-                    radius="125px"
-                    centerRadius="30px"
-                    centerX={pos.x}
-                    centerY={pos.y}
-                >
-                    {allNotes.map(note =>
-                        <Slice key={note} onSelect={() => { onSelected(note), setShowMenu(false) }}>{note}</Slice>
-                    )}
-                </PieMenu>
-            )}
         </div>
     )
 }
