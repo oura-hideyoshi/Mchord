@@ -5,6 +5,8 @@ import { ChordView } from '../nodes/parts/ChordView';
 import { MmKey } from '../libs/types';
 import { css } from '@emotion/css';
 import { color } from '../propaties/color';
+import { PieMenu as MyPieMenu } from '../module/PieMenu';
+import PieMenu, { Slice } from "react-pie-menu";
 
 export interface NoteSelectorProps {
     chord: Chord,
@@ -46,7 +48,15 @@ export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: No
                 display: "inline-block",
             })}
         >
-            {children}
+            <PieMenu>
+                <Slice>a</Slice>
+                <Slice>a</Slice>
+                <Slice>a</Slice>
+            </PieMenu>
+            {/* {children} */}
+            <MyPieMenu>
+
+            </MyPieMenu>
         </div>
     )
 }
