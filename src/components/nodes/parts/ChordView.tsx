@@ -10,31 +10,36 @@ import { css } from '@emotion/css';
 
 interface props {
     MKey: MmKey,
-    children: Chord
+    children: Chord,
+    scale?: number
 }
 
-export const ChordView = ({ MKey, children, ...props }: props) => {
+const defaultStyle = {
+    tonicFontSize: 20,
+    romanFontSize: 10,
+}
+
+export const ChordView = ({ MKey, children, scale = 1, ...props }: props) => {
     const { isRomanNumeral } = useContext(MchordContext);
     const romanNumeral = Progression.toRomanNumerals(MKey.tonic, [children.tonic as string])[0]
     return (
-        <div>
+        <span
+            className={css({
+                position: "relative",
+                fontSize: `${defaultStyle.tonicFontSize * scale}px`,
+            })}
+        >
+            {isRomanNumeral ? `${romanNumeral}` : `${children.tonic}`}{chooseAliase(children)}
             <span
                 className={css({
-                    position: "relative",
-                })}
-            >
-                {isRomanNumeral ? `${romanNumeral}` : `${children.tonic}`}{chooseAliase(children)}
-                <span
-                    className={css({
-                        position: "absolute",
-                        fontSize: "10px",
-                        bottom: "-18px",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)"
-                    })}>
-                    {isRomanNumeral ? `${children.tonic}` : `${romanNumeral}`}
-                </span>
+                    position: "absolute",
+                    fontSize: `${defaultStyle.romanFontSize * scale}px`,
+                    bottom: `${-15 * scale}px`,
+                    left: "50%",
+                    transform: "translate(-50%, -50%)"
+                })}>
+                {isRomanNumeral ? `${children.tonic}` : `${romanNumeral}`}
             </span>
-        </div>
+        </span>
     )
 }
