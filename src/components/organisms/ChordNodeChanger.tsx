@@ -8,6 +8,7 @@ import { NoteSelector } from './NoteSelector';
 import { ChordView } from '../nodes/parts/ChordView';
 import { css } from '@emotion/css';
 import { color } from '../propaties/color';
+import { ChordTypeSelector } from './ChordTypeSelector';
 
 export const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNodeData> }) => {
     const instance = useReactFlow();
@@ -44,25 +45,19 @@ export const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNod
                             justifyContent: "center",
                             border: `dotted 3px ${color.gray}`,
                             borderRadius: "40px",
-                            width: "80px",
+                            minWidth: "80px",
                             height: "80px"
                         })}
                     >
                         <ChordView MKey={sig2MmKey(selectedNode.data.keySig, selectedNode.data.isMajor)} scale={2.0}>{chord}</ChordView>
                     </div>
                 </NoteSelector>
-                <select
-                    name="type"
-                    value={chooseAliase(chord)}
+                <ChordTypeSelector
                     onChange={handleChangeChordType}
-                    style={{ width: "50%", height: "50px" }}
                 >
-                    {allMyAliases().map(aliase => {
-                        return (
-                            <option key={aliase} value={aliase}>{aliase}</option>
-                        )
-                    })}
-                </select>
+
+                </ChordTypeSelector>
+
             </div>
         </div>
     )

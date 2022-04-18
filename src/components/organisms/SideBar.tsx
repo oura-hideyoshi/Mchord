@@ -17,7 +17,7 @@ export const SideBar = () => {
     }
     return (
         <div className={css({
-            touchAction: "none"
+            touchAction: "none",
         })}>
             <div>
                 <button onClick={() => console.clear()}>
