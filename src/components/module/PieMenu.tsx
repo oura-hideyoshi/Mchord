@@ -1,11 +1,20 @@
 import { css } from '@emotion/css'
-import React, { JSXElementConstructor, ReactElement, ReactNode } from 'react'
+import React, { JSXElementConstructor, ReactElement, ReactNode, useEffect } from 'react'
 import { color } from '../propaties/color'
 
 export interface PieMenuProps {
     x: number,
     y: number,
     children: ReactElement<any, string | JSXElementConstructor<any>>[]
+}
+
+const inputMoveEvents = ['touchmove', 'mousemove'];
+const selectEvents = ['mouseup', 'touchend'];
+const bindEvent = (events: (keyof HTMLElementEventMap)[], target: HTMLElement, listener: EventListenerOrEventListenerObject) => {
+    events.forEach(event => target.addEventListener(event, listener))
+}
+const unbindEvent = (events: (keyof HTMLElementEventMap)[], target: HTMLElement, listener: EventListenerOrEventListenerObject) => {
+    events.forEach(event => target.removeEventListener(event, listener))
 }
 
 export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
@@ -16,7 +25,7 @@ export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
     const oneRotateDeg = 360 / len; // 一つのピースの中心角
     const rotateOverHeadDeg = 90 - oneRotateDeg / 2 // 角のオーバーヘッド
     const oneSkewDeg = 90 - oneRotateDeg; // 90度からの過多角
-    // const ceterRad = 360 /
+
     return (
         <div
             className={css({
@@ -43,6 +52,7 @@ export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
                     const rotateDeg = rotateOverHeadDeg + oneRotateDeg * idx;
                     const skewDeg = oneSkewDeg;
                     const newItem = React.cloneElement(item, {
+                        id: `slice_${idx}`,
                         size: size,
                         rotateDeg: rotateDeg,
                         rotateOverHeadDeg: rotateOverHeadDeg,
@@ -56,15 +66,16 @@ export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
                     )
                 })}
             </ul>
-            <div className={css({
-                position: "absolute",
-                borderRadius: "50%",
-                background: "transparent",
-                top: `calc(50% - ${centerPieSize}px)`,
-                left: `calc(50% - ${centerPieSize}px)`,
-                width: `calc(2 * ${centerPieSize}px)`,
-                height: `calc(2 * ${centerPieSize}px)`
-            })} />
+            <div
+                className={css({
+                    position: "absolute",
+                    borderRadius: "50%",
+                    background: "transparent",
+                    top: `calc(50% - ${centerPieSize}px)`,
+                    left: `calc(50% - ${centerPieSize}px)`,
+                    width: `calc(2 * ${centerPieSize}px)`,
+                    height: `calc(2 * ${centerPieSize}px)`
+                })} />
         </div >
     )
 }

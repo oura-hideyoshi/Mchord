@@ -42,28 +42,37 @@ export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: No
     const clearPositionsMb: React.TouchEventHandler<HTMLDivElement> = (e) => {
         if (EVENT_CODES.includes(e.nativeEvent.which)) {
             setShowMenu(false);
+            const elements = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+            const element = elements.find(element => element.id.startsWith("slice_"));
+            const value = element?.getAttribute("value")
+            value && onSelected(value);
         }
     }
     const clearPositionsPC: React.MouseEventHandler<HTMLDivElement> = (e) => {
         if (EVENT_CODES.includes(e.nativeEvent.which)) {
             setShowMenu(false);
+            console.log('e', e)
+            const elements = document.elementsFromPoint(e.pageX, e.pageY);
+            const element = elements.find(element => element.id.startsWith("slice_"));
+            const value = element?.getAttribute("value")
+            value && onSelected(value);
         }
     }
 
     const allNotes = Range.chromatic(["C1", "B1"], { pitchClass: true, sharps: true });
     return (
-        <div
-            role="presentation"
-            onTouchStart={captureStartPositionMb}
-            onTouchEnd={clearPositionsMb}
-            onMouseDown={captureStartPositionPC}
-            onMouseUp={clearPositionsPC}
-            className={css({
-                display: "inline-block",
-            })}
-        >
-            {showMenu &&
-                <>
+        <>
+            <div
+                role="presentation"
+                onTouchStart={captureStartPositionMb}
+                onTouchEnd={clearPositionsMb}
+                onMouseDown={captureStartPositionPC}
+                onMouseUp={clearPositionsPC}
+                className={css({
+                    display: "inline-block",
+                })}
+            >
+                {showMenu &&
                     <PieMenu
                         x={pos.x}
                         y={pos.y}
@@ -71,14 +80,15 @@ export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: No
                         {allNotes.map(item =>
                             <Slice
                                 onSelect={() => onSelected(item)}
+                                value={item}
                             >
                                 {item}
                             </Slice>
                         )}
                     </PieMenu>
-                </>
-            }
-            {children}
-        </div>
+                }
+                {children}
+            </div>
+        </>
     )
 }

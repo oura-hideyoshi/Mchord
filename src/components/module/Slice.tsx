@@ -4,6 +4,7 @@ import { color } from '../propaties/color'
 import { PieMenuProps } from './PieMenu'
 
 export interface SliceProps {
+    id?: string,
     size?: number,
     rotateDeg?: number,
     rotateOverHeadDeg?: number,
@@ -12,10 +13,12 @@ export interface SliceProps {
     onSelect?: () => void,
     bgColor?: string,
     hoverBgColor?: string,
+    value: string,
     children: ReactNode
 }
 
 export const Slice = ({
+    id = "",
     rotateDeg = 0,
     skewDeg = 0,
     rotateOverHeadDeg = 0,
@@ -25,12 +28,13 @@ export const Slice = ({
     bgColor = "rgba(100, 100, 100, 0.7)",
     hoverBgColor = "rgba(100, 100, 100, 0.9)",
     children,
+    value,
     ...props }: SliceProps) => {
     return (
         <>
             <li
-                onMouseUp={(e) => { onSelect && onSelect() }}
-                onTouchEnd={(e) => { onSelect && onSelect() }}
+                id={id}
+                value={value}
                 className={css({
                     width: "100%",
                     height: "100%",
