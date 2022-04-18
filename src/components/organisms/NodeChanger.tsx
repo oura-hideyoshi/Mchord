@@ -18,10 +18,10 @@ export const NodeChanger = () => {
     return (
         <>
             {selectedNode != undefined &&
-                <div>
+                <>
                     {isNodeKeyNodeData(selectedNode) ? <KeyNodeChanger selectedNode={selectedNode} /> : null}
                     {isNodeChordNodeData(selectedNode) ? <ChordNodeChanger selectedNode={selectedNode} /> : null}
-                </div>
+                </>
             }
         </>
     )

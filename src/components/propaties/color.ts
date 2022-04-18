@@ -1,8 +1,10 @@
 export type colorTypes =
     "black" |
-    "gray"
+    "gray" |
+    "darkgray"
 
 export const color: { [key in colorTypes]: string } = {
     black: "black",
-    gray: "gray"
+    gray: "gray",
+    darkgray: " darkgray"
 }
