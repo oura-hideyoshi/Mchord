@@ -1,15 +1,16 @@
 import { css } from '@emotion/css'
-import React, { ReactNode } from 'react'
+import React, { JSXElementConstructor, ReactElement, ReactNode } from 'react'
 import { color } from '../propaties/color'
 
-interface props {
-    children: ReactNode
+export interface PieMenuProps {
+    x: number,
+    y: number,
+    children: ReactElement<any, string | JSXElementConstructor<any>>[]
 }
 
-const itemList = [1, 2, 3, 4, 5, 6]
-export const PieMenu = ({ }: props): JSX.Element => {
+export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
     // skew : 図形を平行四辺形風に変形させる
-    const len = itemList.length;
+    const len = children.length;
     const size = 150;
     const centerPieSize = 50;
     const oneRotateDeg = 360 / len; // 一つのピースの中心角
@@ -20,9 +21,12 @@ export const PieMenu = ({ }: props): JSX.Element => {
         <div
             className={css({
                 display: "inline-block",
-                position: "relative",
+                position: "absolute",
+                left: `calc(${x}px - ${size}px)`,
+                top: `calc(${y}px - ${size}px)`,
                 borderRadius: "50%",
                 overflow: "hidden",
+                zIndex: 1000
             })}
         >
             <ul
@@ -35,58 +39,27 @@ export const PieMenu = ({ }: props): JSX.Element => {
                     width: `calc(2 * ${size}px)`,
                     height: `calc(2 * ${size}px)`
                 })}>
-                {itemList.map((item, idx) => {
+                {children.map((item, idx) => {
                     const rotateDeg = rotateOverHeadDeg + oneRotateDeg * idx;
                     const skewDeg = oneSkewDeg;
+                    const newItem = React.cloneElement(item, {
+                        size: size,
+                        rotateDeg: rotateDeg,
+                        rotateOverHeadDeg: rotateOverHeadDeg,
+                        skewDeg: skewDeg,
+                        centerPieSize: centerPieSize,
+                    })
                     return (
-                        <li
-                            className={css({
-                                width: "100%",
-                                height: "100%",
-                                bottom: "50%",
-                                right: "50%",
-                                position: "absolute",
-                                transform: `rotate(${rotateDeg}deg) skew(${oneSkewDeg}deg)`,
-                                transformOrigin: "bottom right",
-                                overflow: "hidden"
-                            })}>
-                            <div className={css({
-                                display: "block",
-                                width: "200%",
-                                height: "200%",
-                                transformOrigin: "50% 50%",
-                                borderRadius: "50%",
-                                transform: `skew(${-skewDeg}deg) rotate(${-rotateOverHeadDeg}deg) `,
-                                color: "black",
-                                backgroundColor: "gray",
-                                outline: "none",
-                                ":hover": {
-                                    backgroundColor: color.darkgray,
-                                }
-                            })}>
-                                <div className={css({
-                                    position: "absolute",
-                                    width: "100%",
-                                    textAlign: "center",
-                                    top: `calc((50% + ${size}px - ${centerPieSize}px) / 2 - 2em / 2)`
-                                })}>
-                                    <div className={css({
-                                        display: "inline-block",
-                                        transform: `rotate(${rotateOverHeadDeg - rotateDeg}deg)`,
-                                    })}
-                                    >
-                                        {item}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <>
+                            {newItem}
+                        </>
                     )
                 })}
             </ul>
             <div className={css({
                 position: "absolute",
                 borderRadius: "50%",
-                background: "white",
+                background: "transparent",
                 top: `calc(50% - ${centerPieSize}px)`,
                 left: `calc(50% - ${centerPieSize}px)`,
                 width: `calc(2 * ${centerPieSize}px)`,

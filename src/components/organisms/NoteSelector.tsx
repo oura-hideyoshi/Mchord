@@ -5,8 +5,8 @@ import { ChordView } from '../nodes/parts/ChordView';
 import { MmKey } from '../libs/types';
 import { css } from '@emotion/css';
 import { color } from '../propaties/color';
-import { PieMenu as MyPieMenu } from '../module/PieMenu';
-import PieMenu, { Slice } from "react-pie-menu";
+import { PieMenu } from '../module/PieMenu';
+import { Slice } from '../module/Slice';
 
 export interface NoteSelectorProps {
     chord: Chord,
@@ -18,19 +18,33 @@ export interface NoteSelectorProps {
 const EVENT_CODES = [0, 1];
 
 export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: NoteSelectorProps): JSX.Element => {
-    const [pos, setPos] = useState({ x: "0px", y: "0px" });
+    const [pos, setPos] = useState({ x: 0, y: 0 });
     const [showMenu, setShowMenu] = useState(false);
-    const captureStartPosition = (e: any) => {
+    const captureStartPositionMb: React.TouchEventHandler<HTMLDivElement> = (e) => {
         if (EVENT_CODES.includes(e.nativeEvent.which)) {
             setPos({
-                x: `${e.pageX || e.touches && e.touches[0].clientX}px`,
-                y: `${e.pageY || e.touches && e.touches[0].clientY}px`,
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY,
+            });
+            setShowMenu(true);
+        }
+    }
+    const captureStartPositionPC: React.MouseEventHandler<HTMLDivElement> = (e) => {
+        if (EVENT_CODES.includes(e.nativeEvent.which)) {
+            setPos({
+                x: e.pageX,
+                y: e.pageY,
             });
             setShowMenu(true);
         }
     }
 
-    const clearPositions = (e: any) => {
+    const clearPositionsMb: React.TouchEventHandler<HTMLDivElement> = (e) => {
+        if (EVENT_CODES.includes(e.nativeEvent.which)) {
+            setShowMenu(false);
+        }
+    }
+    const clearPositionsPC: React.MouseEventHandler<HTMLDivElement> = (e) => {
         if (EVENT_CODES.includes(e.nativeEvent.which)) {
             setShowMenu(false);
         }
@@ -40,23 +54,31 @@ export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: No
     return (
         <div
             role="presentation"
-            onTouchStart={captureStartPosition}
-            onTouchEnd={clearPositions}
-            onMouseDown={captureStartPosition}
-            onMouseUp={clearPositions}
+            onTouchStart={captureStartPositionMb}
+            onTouchEnd={clearPositionsMb}
+            onMouseDown={captureStartPositionPC}
+            onMouseUp={clearPositionsPC}
             className={css({
                 display: "inline-block",
             })}
         >
-            <PieMenu>
-                <Slice>a</Slice>
-                <Slice>a</Slice>
-                <Slice>a</Slice>
-            </PieMenu>
-            {/* {children} */}
-            <MyPieMenu>
-
-            </MyPieMenu>
+            {showMenu &&
+                <>
+                    <PieMenu
+                        x={pos.x}
+                        y={pos.y}
+                    >
+                        {allNotes.map(item =>
+                            <Slice
+                                onSelect={() => onSelected(item)}
+                            >
+                                {item}
+                            </Slice>
+                        )}
+                    </PieMenu>
+                </>
+            }
+            {children}
         </div>
     )
 }
