@@ -7,15 +7,14 @@ import { Chord } from '@tonaljs/tonal';
 import { ChordNodeData, KeyNodeData, keySignature } from '../libs/types';
 import UUID from "uuidjs";
 import { MchordContext } from '../pages/Top';
+import { initDataSet } from '../libs/initDataSet';
 
 const snapGrid: [number, number] = [20, 20];
 const init = { sig: "" as keySignature, isMajor: true }
 
 const FlowView = () => {
-    const [nodes, setNodes, onNodesChange] = useNodesState<KeyNodeData | ChordNodeData>([
-        makeKeyNode({ x: 0, y: 0 }, { keySig: init.sig, isMajor: init.isMajor }),
-    ]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState<KeyNodeData | ChordNodeData>(initDataSet.canon.nodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initDataSet.canon.edges);
     const { selectedNodeId, setSelectedNodeId } = useContext(MchordContext);
 
     useEffect(() => {
