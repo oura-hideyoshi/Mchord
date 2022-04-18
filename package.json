@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "serve": "serve dist"
+    "serve": "serve dist -l 1234"
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",

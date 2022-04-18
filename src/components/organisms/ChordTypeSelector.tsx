@@ -19,7 +19,7 @@ export const ChordTypeSelector = ({ onSelect, ...props }: props) => {
 
     const Btn = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) =>
         <button className={css({
-            width: "100%",
+            width: "90%",
             height: "25px",
             margin: "5px",
 

@@ -1,5 +1,5 @@
 import { Chord, Range } from '@tonaljs/tonal';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { changeChordNode } from '../libs/hooks';
 import { ChordNodeData } from '../libs/types';
 import { Node, useReactFlow } from "react-flow-renderer";
@@ -30,6 +30,10 @@ export const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNod
         });
         setChord(Chord.getChord(e, chord.tonic as string));
     }
+
+    useEffect(() => {
+        setChord(Chord.getChord(selectedNode.data.getChordProps.typeName, selectedNode.data.getChordProps.optionalTonic, selectedNode.data.getChordProps.optionalRoot));
+    }, [selectedNode])
 
     return (
         <div
