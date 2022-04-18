@@ -11,6 +11,7 @@ export const PieMenu = ({ }: props): JSX.Element => {
     // skew : 図形を平行四辺形風に変形させる
     const len = itemList.length;
     const size = 150;
+    const centerPieSize = 50;
     const oneRotateDeg = 360 / len; // 一つのピースの中心角
     const rotateOverHeadDeg = 90 - oneRotateDeg / 2 // 角のオーバーヘッド
     const oneSkewDeg = 90 - oneRotateDeg; // 90度からの過多角
@@ -67,7 +68,7 @@ export const PieMenu = ({ }: props): JSX.Element => {
                                     position: "absolute",
                                     width: "100%",
                                     textAlign: "center",
-                                    top: `calc((50% + ${size}px - 50px) / 2 - 2em / 2)`
+                                    top: `calc((50% + ${size}px - ${centerPieSize}px) / 2 - 2em / 2)`
                                 })}>
                                     <div className={css({
                                         display: "inline-block",
@@ -82,6 +83,15 @@ export const PieMenu = ({ }: props): JSX.Element => {
                     )
                 })}
             </ul>
+            <div className={css({
+                position: "absolute",
+                borderRadius: "50%",
+                background: "white",
+                top: `calc(50% - ${centerPieSize}px)`,
+                left: `calc(50% - ${centerPieSize}px)`,
+                width: `calc(2 * ${centerPieSize}px)`,
+                height: `calc(2 * ${centerPieSize}px)`
+            })} />
         </div >
     )
 }
