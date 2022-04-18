@@ -25,7 +25,7 @@ export const Slice = ({
     size = 100,
     centerPieSize = 50,
     onSelect,
-    bgColor = "rgba(100, 100, 100, 0.7)",
+    bgColor = "gray",
     hoverBgColor = "rgba(100, 100, 100, 0.9)",
     children,
     value,

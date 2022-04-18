@@ -1,36 +1,66 @@
+import { css } from '@emotion/css';
 import { ChordType } from '@tonaljs/tonal';
 import React from 'react'
 import { allMyAliases } from '../libs/utils'
+import { PieSelector } from '../module/PieSelector';
 
-interface props extends React.HTMLAttributes<HTMLSelectElement> {
-
+interface props {
+    onSelect: (val: string) => void,
 }
 
 
-export const ChordTypeSelector = ({ ...props }: props) => {
+export const ChordTypeSelector = ({ onSelect, ...props }: props) => {
     const myAliases = allMyAliases();
-    let Unknown = [];
-    let Major = [];
-    let Minor = [];
-    let Augumented = [];
-    let Diminished = [];
-    myAliases.forEach(aliase => {
-        const q = ChordType.get(aliase).quality;
-        q == "Unknown" ? Unknown.push(aliase) :
-            q == "Major" ? Major.push(aliase) :
-                q == "Minor" ? Minor.push(aliase) :
-                    q == "Augmented" ? Augumented.push(aliase) :
-                        Diminished.push(aliase)
-    })
+    const Unknown = myAliases.filter(aliase => ChordType.get(aliase).quality == "Unknown");
+    const Major = myAliases.filter(aliase => ChordType.get(aliase).quality == "Major");
+    const Minor = myAliases.filter(aliase => ChordType.get(aliase).quality == "Minor");
+    const Augumented = myAliases.filter(aliase => ChordType.get(aliase).quality == "Augmented");
+    const Diminished = myAliases.filter(aliase => ChordType.get(aliase).quality == "Diminished");
+
+    const Btn = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) =>
+        <button className={css({
+            width: "100%",
+            height: "25px",
+            margin: "5px",
+
+        })}>
+            {props.children}
+        </button>
     return (
-        <select
-            {...props}
-        >
-            {myAliases.map(aliase => {
-                return (
-                    <option key={aliase} value={aliase}>{aliase}</option>
-                )
-            })}
-        </select>
+        <div className={css({
+            display: "flex",
+            flexDirection: "column"
+        })}>
+            <PieSelector
+                values={Unknown}
+                onSelect={onSelect}
+            >
+                <Btn>Unk</Btn>
+            </PieSelector>
+            <PieSelector
+                values={Major}
+                onSelect={onSelect}
+            >
+                <Btn>Major</Btn>
+            </PieSelector>
+            <PieSelector
+                values={Minor}
+                onSelect={onSelect}
+            >
+                <Btn>Minor</Btn>
+            </PieSelector>
+            <PieSelector
+                values={Augumented}
+                onSelect={onSelect}
+            >
+                <Btn>Augumented</Btn>
+            </PieSelector>
+            <PieSelector
+                values={Diminished}
+                onSelect={onSelect}
+            >
+                <Btn>Diminished</Btn>
+            </PieSelector>
+        </div>
     )
 }

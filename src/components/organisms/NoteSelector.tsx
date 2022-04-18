@@ -7,88 +7,23 @@ import { css } from '@emotion/css';
 import { color } from '../propaties/color';
 import { PieMenu } from '../module/PieMenu';
 import { Slice } from '../module/Slice';
+import { PieSelector } from '../module/PieSelector';
 
 export interface NoteSelectorProps {
     chord: Chord,
     MKey: MmKey,
-    onSelected: (val: string) => void,
+    onSelect: (val: string) => void,
     children: ReactNode
 }
 
-const EVENT_CODES = [0, 1];
-
-export const NoteSelector = ({ chord, MKey, onSelected, children, ...props }: NoteSelectorProps): JSX.Element => {
-    const [pos, setPos] = useState({ x: 0, y: 0 });
-    const [showMenu, setShowMenu] = useState(false);
-    const captureStartPositionMb: React.TouchEventHandler<HTMLDivElement> = (e) => {
-        if (EVENT_CODES.includes(e.nativeEvent.which)) {
-            setPos({
-                x: e.touches[0].clientX,
-                y: e.touches[0].clientY,
-            });
-            setShowMenu(true);
-        }
-    }
-    const captureStartPositionPC: React.MouseEventHandler<HTMLDivElement> = (e) => {
-        if (EVENT_CODES.includes(e.nativeEvent.which)) {
-            setPos({
-                x: e.pageX,
-                y: e.pageY,
-            });
-            setShowMenu(true);
-        }
-    }
-
-    const clearPositionsMb: React.TouchEventHandler<HTMLDivElement> = (e) => {
-        if (EVENT_CODES.includes(e.nativeEvent.which)) {
-            setShowMenu(false);
-            const elements = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-            const element = elements.find(element => element.id.startsWith("slice_"));
-            const value = element?.getAttribute("value")
-            value && onSelected(value);
-        }
-    }
-    const clearPositionsPC: React.MouseEventHandler<HTMLDivElement> = (e) => {
-        if (EVENT_CODES.includes(e.nativeEvent.which)) {
-            setShowMenu(false);
-            console.log('e', e)
-            const elements = document.elementsFromPoint(e.pageX, e.pageY);
-            const element = elements.find(element => element.id.startsWith("slice_"));
-            const value = element?.getAttribute("value")
-            value && onSelected(value);
-        }
-    }
-
+export const NoteSelector = ({ chord, MKey, onSelect, children, ...props }: NoteSelectorProps): JSX.Element => {
     const allNotes = Range.chromatic(["C1", "B1"], { pitchClass: true, sharps: true });
     return (
-        <>
-            <div
-                role="presentation"
-                onTouchStart={captureStartPositionMb}
-                onTouchEnd={clearPositionsMb}
-                onMouseDown={captureStartPositionPC}
-                onMouseUp={clearPositionsPC}
-                className={css({
-                    display: "inline-block",
-                })}
-            >
-                {showMenu &&
-                    <PieMenu
-                        x={pos.x}
-                        y={pos.y}
-                    >
-                        {allNotes.map(item =>
-                            <Slice
-                                onSelect={() => onSelected(item)}
-                                value={item}
-                            >
-                                {item}
-                            </Slice>
-                        )}
-                    </PieMenu>
-                }
-                {children}
-            </div>
-        </>
+        <PieSelector
+            onSelect={onSelect}
+            values={allNotes}
+        >
+            {children}
+        </PieSelector>
     )
 }

@@ -52,6 +52,7 @@ export const PieMenu = ({ x, y, children }: PieMenuProps): JSX.Element => {
                     const rotateDeg = rotateOverHeadDeg + oneRotateDeg * idx;
                     const skewDeg = oneSkewDeg;
                     const newItem = React.cloneElement(item, {
+                        key: item.key,
                         id: `slice_${idx}`,
                         size: size,
                         rotateDeg: rotateDeg,

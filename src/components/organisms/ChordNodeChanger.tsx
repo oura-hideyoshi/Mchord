@@ -9,6 +9,7 @@ import { ChordView } from '../nodes/parts/ChordView';
 import { css } from '@emotion/css';
 import { color } from '../propaties/color';
 import { ChordTypeSelector } from './ChordTypeSelector';
+import { PieSelector } from '../module/PieSelector';
 
 export const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNodeData> }) => {
     const instance = useReactFlow();
@@ -21,44 +22,46 @@ export const ChordNodeChanger = ({ selectedNode }: { selectedNode: Node<ChordNod
         });
         setChord(Chord.getChord(chord.type, e));
     }
-    const handleChangeChordType: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const handleChangeChordType = (e: string) => {
         changeChordNode(instance, selectedNode.id, {
-            typeName: e.target.value,
+            typeName: e,
             optionalTonic: chord.tonic as string,
             optionalRoot: chord.root,
         });
-        setChord(Chord.getChord(e.target.value, chord.tonic as string));
+        setChord(Chord.getChord(e, chord.tonic as string));
     }
 
     return (
-        <div>
-            <div>
-                <NoteSelector
-                    chord={chord}
-                    MKey={sig2MmKey(selectedNode.data.keySig, selectedNode.data.isMajor)}
-                    onSelected={handleChangeTonic}
+        <div
+            className={css({
+                marginTop: "100px",
+                display: "flex",
+                flexDirection: "column"
+            })}
+        >
+            <NoteSelector
+                chord={chord}
+                MKey={sig2MmKey(selectedNode.data.keySig, selectedNode.data.isMajor)}
+                onSelect={handleChangeTonic}
+            >
+                <div
+                    className={css({
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        border: `dotted 3px ${color.gray}`,
+                        borderRadius: "40px",
+                        minWidth: "80px",
+                        height: "80px"
+                    })}
                 >
-                    <div
-                        className={css({
-                            display: "inline-flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: `dotted 3px ${color.gray}`,
-                            borderRadius: "40px",
-                            minWidth: "80px",
-                            height: "80px"
-                        })}
-                    >
-                        <ChordView MKey={sig2MmKey(selectedNode.data.keySig, selectedNode.data.isMajor)} scale={2.0}>{chord}</ChordView>
-                    </div>
-                </NoteSelector>
-                <ChordTypeSelector
-                    onChange={handleChangeChordType}
-                >
+                    <ChordView MKey={sig2MmKey(selectedNode.data.keySig, selectedNode.data.isMajor)} scale={2.0}>{chord}</ChordView>
+                </div>
+            </NoteSelector>
+            <ChordTypeSelector
+                onSelect={handleChangeChordType}
+            />
 
-                </ChordTypeSelector>
-
-            </div>
         </div>
     )
 }
